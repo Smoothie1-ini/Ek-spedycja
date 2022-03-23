@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ek_spedycja.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,8 +21,12 @@ namespace Ek_spedycja {
 
         #region DRIVER
 
-        private void buttonDriverAdd_Click(object sender, EventArgs e) {
+        private void dataGridViewDriver_CellContentClick(object sender, DataGridViewCellEventArgs e) {
 
+        }
+
+        private void buttonDriverAdd_Click(object sender, EventArgs e) {
+            
         }
 
         private void buttonDriverEdit_Click(object sender, EventArgs e) {
@@ -35,6 +40,10 @@ namespace Ek_spedycja {
         #endregion
 
         #region VEHICLE
+
+        private void dataGridViewVehicle_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
 
         private void buttonVehicleAdd_Click(object sender, EventArgs e) {
 
@@ -51,6 +60,10 @@ namespace Ek_spedycja {
         #endregion
 
         #region ROUTE
+
+        private void dataGridViewRoute_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
 
         private void buttonRouteCost_Click(object sender, EventArgs e) {
             Form costsPanel = new CostsPanel();
@@ -69,6 +82,9 @@ namespace Ek_spedycja {
 
         }
 
+
         #endregion
+
+
     }
 }

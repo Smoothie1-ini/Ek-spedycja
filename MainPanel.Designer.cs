@@ -25,6 +25,7 @@ namespace Ek_spedycja {
         /// </summary>
         private void InitializeComponent() {
             this.tabPage = new System.Windows.Forms.TabPage();
+            this.dataGridViewRoute = new System.Windows.Forms.DataGridView();
             this.buttonRouteCost = new System.Windows.Forms.Button();
             this.numericUpDownRouteLength = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@ namespace Ek_spedycja {
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tabPageVehicle = new System.Windows.Forms.TabPage();
+            this.dataGridViewVehicle = new System.Windows.Forms.DataGridView();
             this.radioButtonVehicleNotAvailable = new System.Windows.Forms.RadioButton();
             this.radioButtonVehicleAvailable = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
@@ -76,6 +78,7 @@ namespace Ek_spedycja {
             this.dataGridViewDriver = new System.Windows.Forms.DataGridView();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageCompensation = new System.Windows.Forms.TabPage();
+            this.dataGridViewCompensation = new System.Windows.Forms.DataGridView();
             this.comboBoxCompensationYear = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.comboBoxCompensationMonth = new System.Windows.Forms.ComboBox();
@@ -83,18 +86,15 @@ namespace Ek_spedycja {
             this.label23 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.dataGridViewVehicle = new System.Windows.Forms.DataGridView();
-            this.dataGridViewRoute = new System.Windows.Forms.DataGridView();
-            this.dataGridViewCompensation = new System.Windows.Forms.DataGridView();
             this.tabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRouteLength)).BeginInit();
             this.tabPageVehicle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).BeginInit();
             this.tabPageDriver.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageCompensation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompensation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,6 +125,21 @@ namespace Ek_spedycja {
             this.tabPage.TabIndex = 2;
             this.tabPage.Text = "Kurs";
             this.tabPage.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewRoute
+            // 
+            this.dataGridViewRoute.AllowUserToAddRows = false;
+            this.dataGridViewRoute.AllowUserToDeleteRows = false;
+            this.dataGridViewRoute.AllowUserToResizeRows = false;
+            this.dataGridViewRoute.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewRoute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRoute.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewRoute.Name = "dataGridViewRoute";
+            this.dataGridViewRoute.RowHeadersVisible = false;
+            this.dataGridViewRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewRoute.Size = new System.Drawing.Size(839, 612);
+            this.dataGridViewRoute.TabIndex = 57;
+            this.dataGridViewRoute.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoute_CellContentClick);
             // 
             // buttonRouteCost
             // 
@@ -306,6 +321,21 @@ namespace Ek_spedycja {
             this.tabPageVehicle.TabIndex = 1;
             this.tabPageVehicle.Text = "Pojazd";
             this.tabPageVehicle.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewVehicle
+            // 
+            this.dataGridViewVehicle.AllowUserToAddRows = false;
+            this.dataGridViewVehicle.AllowUserToDeleteRows = false;
+            this.dataGridViewVehicle.AllowUserToResizeRows = false;
+            this.dataGridViewVehicle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVehicle.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewVehicle.Name = "dataGridViewVehicle";
+            this.dataGridViewVehicle.RowHeadersVisible = false;
+            this.dataGridViewVehicle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewVehicle.Size = new System.Drawing.Size(839, 612);
+            this.dataGridViewVehicle.TabIndex = 32;
+            this.dataGridViewVehicle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVehicle_CellContentClick);
             // 
             // radioButtonVehicleNotAvailable
             // 
@@ -604,6 +634,7 @@ namespace Ek_spedycja {
             this.dataGridViewDriver.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDriver.Size = new System.Drawing.Size(839, 612);
             this.dataGridViewDriver.TabIndex = 0;
+            this.dataGridViewDriver.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDriver_CellContentClick);
             // 
             // tabControl
             // 
@@ -635,6 +666,20 @@ namespace Ek_spedycja {
             this.tabPageCompensation.TabIndex = 3;
             this.tabPageCompensation.Text = "Rozliczenie";
             this.tabPageCompensation.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewCompensation
+            // 
+            this.dataGridViewCompensation.AllowUserToAddRows = false;
+            this.dataGridViewCompensation.AllowUserToDeleteRows = false;
+            this.dataGridViewCompensation.AllowUserToResizeRows = false;
+            this.dataGridViewCompensation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewCompensation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCompensation.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewCompensation.Name = "dataGridViewCompensation";
+            this.dataGridViewCompensation.RowHeadersVisible = false;
+            this.dataGridViewCompensation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewCompensation.Size = new System.Drawing.Size(839, 612);
+            this.dataGridViewCompensation.TabIndex = 77;
             // 
             // comboBoxCompensationYear
             // 
@@ -697,48 +742,6 @@ namespace Ek_spedycja {
             this.label26.TabIndex = 58;
             this.label26.Text = "Kierowca";
             // 
-            // dataGridViewVehicle
-            // 
-            this.dataGridViewVehicle.AllowUserToAddRows = false;
-            this.dataGridViewVehicle.AllowUserToDeleteRows = false;
-            this.dataGridViewVehicle.AllowUserToResizeRows = false;
-            this.dataGridViewVehicle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGridViewVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVehicle.Location = new System.Drawing.Point(6, 6);
-            this.dataGridViewVehicle.Name = "dataGridViewVehicle";
-            this.dataGridViewVehicle.RowHeadersVisible = false;
-            this.dataGridViewVehicle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewVehicle.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewVehicle.TabIndex = 32;
-            // 
-            // dataGridViewRoute
-            // 
-            this.dataGridViewRoute.AllowUserToAddRows = false;
-            this.dataGridViewRoute.AllowUserToDeleteRows = false;
-            this.dataGridViewRoute.AllowUserToResizeRows = false;
-            this.dataGridViewRoute.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGridViewRoute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRoute.Location = new System.Drawing.Point(6, 6);
-            this.dataGridViewRoute.Name = "dataGridViewRoute";
-            this.dataGridViewRoute.RowHeadersVisible = false;
-            this.dataGridViewRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRoute.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewRoute.TabIndex = 57;
-            // 
-            // dataGridViewCompensation
-            // 
-            this.dataGridViewCompensation.AllowUserToAddRows = false;
-            this.dataGridViewCompensation.AllowUserToDeleteRows = false;
-            this.dataGridViewCompensation.AllowUserToResizeRows = false;
-            this.dataGridViewCompensation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGridViewCompensation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCompensation.Location = new System.Drawing.Point(6, 6);
-            this.dataGridViewCompensation.Name = "dataGridViewCompensation";
-            this.dataGridViewCompensation.RowHeadersVisible = false;
-            this.dataGridViewCompensation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewCompensation.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewCompensation.TabIndex = 77;
-            // 
             // MainPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -753,17 +756,17 @@ namespace Ek_spedycja {
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabPage.ResumeLayout(false);
             this.tabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRouteLength)).EndInit();
             this.tabPageVehicle.ResumeLayout(false);
             this.tabPageVehicle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).EndInit();
             this.tabPageDriver.ResumeLayout(false);
             this.tabPageDriver.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPageCompensation.ResumeLayout(false);
             this.tabPageCompensation.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompensation)).EndInit();
             this.ResumeLayout(false);
 
