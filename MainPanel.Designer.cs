@@ -78,11 +78,11 @@ namespace Ek_spedycja {
             this.dataGridViewDriver = new System.Windows.Forms.DataGridView();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageCompensation = new System.Windows.Forms.TabPage();
-            this.dataGridViewCompensation = new System.Windows.Forms.DataGridView();
-            this.comboBoxCompensationYear = new System.Windows.Forms.ComboBox();
+            this.dataGridViewSalary = new System.Windows.Forms.DataGridView();
+            this.comboBoxSalaryYear = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.comboBoxCompensationMonth = new System.Windows.Forms.ComboBox();
-            this.comboBoxCompensationDriver = new System.Windows.Forms.ComboBox();
+            this.comboBoxSalaryMonth = new System.Windows.Forms.ComboBox();
+            this.comboBoxSalaryDriver = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
@@ -95,7 +95,7 @@ namespace Ek_spedycja {
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageCompensation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompensation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalary)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage
@@ -651,11 +651,11 @@ namespace Ek_spedycja {
             // 
             // tabPageCompensation
             // 
-            this.tabPageCompensation.Controls.Add(this.dataGridViewCompensation);
-            this.tabPageCompensation.Controls.Add(this.comboBoxCompensationYear);
+            this.tabPageCompensation.Controls.Add(this.dataGridViewSalary);
+            this.tabPageCompensation.Controls.Add(this.comboBoxSalaryYear);
             this.tabPageCompensation.Controls.Add(this.label15);
-            this.tabPageCompensation.Controls.Add(this.comboBoxCompensationMonth);
-            this.tabPageCompensation.Controls.Add(this.comboBoxCompensationDriver);
+            this.tabPageCompensation.Controls.Add(this.comboBoxSalaryMonth);
+            this.tabPageCompensation.Controls.Add(this.comboBoxSalaryDriver);
             this.tabPageCompensation.Controls.Add(this.label23);
             this.tabPageCompensation.Controls.Add(this.label25);
             this.tabPageCompensation.Controls.Add(this.label26);
@@ -667,27 +667,27 @@ namespace Ek_spedycja {
             this.tabPageCompensation.Text = "Rozliczenie";
             this.tabPageCompensation.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewCompensation
+            // dataGridViewSalary
             // 
-            this.dataGridViewCompensation.AllowUserToAddRows = false;
-            this.dataGridViewCompensation.AllowUserToDeleteRows = false;
-            this.dataGridViewCompensation.AllowUserToResizeRows = false;
-            this.dataGridViewCompensation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGridViewCompensation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCompensation.Location = new System.Drawing.Point(6, 6);
-            this.dataGridViewCompensation.Name = "dataGridViewCompensation";
-            this.dataGridViewCompensation.RowHeadersVisible = false;
-            this.dataGridViewCompensation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewCompensation.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewCompensation.TabIndex = 77;
+            this.dataGridViewSalary.AllowUserToAddRows = false;
+            this.dataGridViewSalary.AllowUserToDeleteRows = false;
+            this.dataGridViewSalary.AllowUserToResizeRows = false;
+            this.dataGridViewSalary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewSalary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSalary.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewSalary.Name = "dataGridViewSalary";
+            this.dataGridViewSalary.RowHeadersVisible = false;
+            this.dataGridViewSalary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewSalary.Size = new System.Drawing.Size(839, 612);
+            this.dataGridViewSalary.TabIndex = 77;
             // 
-            // comboBoxCompensationYear
+            // comboBoxSalaryYear
             // 
-            this.comboBoxCompensationYear.FormattingEnabled = true;
-            this.comboBoxCompensationYear.Location = new System.Drawing.Point(888, 287);
-            this.comboBoxCompensationYear.Name = "comboBoxCompensationYear";
-            this.comboBoxCompensationYear.Size = new System.Drawing.Size(297, 28);
-            this.comboBoxCompensationYear.TabIndex = 76;
+            this.comboBoxSalaryYear.FormattingEnabled = true;
+            this.comboBoxSalaryYear.Location = new System.Drawing.Point(888, 287);
+            this.comboBoxSalaryYear.Name = "comboBoxSalaryYear";
+            this.comboBoxSalaryYear.Size = new System.Drawing.Size(297, 28);
+            this.comboBoxSalaryYear.TabIndex = 76;
             // 
             // label15
             // 
@@ -698,21 +698,21 @@ namespace Ek_spedycja {
             this.label15.TabIndex = 75;
             this.label15.Text = "Rok";
             // 
-            // comboBoxCompensationMonth
+            // comboBoxSalaryMonth
             // 
-            this.comboBoxCompensationMonth.FormattingEnabled = true;
-            this.comboBoxCompensationMonth.Location = new System.Drawing.Point(888, 224);
-            this.comboBoxCompensationMonth.Name = "comboBoxCompensationMonth";
-            this.comboBoxCompensationMonth.Size = new System.Drawing.Size(297, 28);
-            this.comboBoxCompensationMonth.TabIndex = 67;
+            this.comboBoxSalaryMonth.FormattingEnabled = true;
+            this.comboBoxSalaryMonth.Location = new System.Drawing.Point(888, 224);
+            this.comboBoxSalaryMonth.Name = "comboBoxSalaryMonth";
+            this.comboBoxSalaryMonth.Size = new System.Drawing.Size(297, 28);
+            this.comboBoxSalaryMonth.TabIndex = 67;
             // 
-            // comboBoxCompensationDriver
+            // comboBoxSalaryDriver
             // 
-            this.comboBoxCompensationDriver.FormattingEnabled = true;
-            this.comboBoxCompensationDriver.Location = new System.Drawing.Point(888, 161);
-            this.comboBoxCompensationDriver.Name = "comboBoxCompensationDriver";
-            this.comboBoxCompensationDriver.Size = new System.Drawing.Size(297, 28);
-            this.comboBoxCompensationDriver.TabIndex = 66;
+            this.comboBoxSalaryDriver.FormattingEnabled = true;
+            this.comboBoxSalaryDriver.Location = new System.Drawing.Point(888, 161);
+            this.comboBoxSalaryDriver.Name = "comboBoxSalaryDriver";
+            this.comboBoxSalaryDriver.Size = new System.Drawing.Size(297, 28);
+            this.comboBoxSalaryDriver.TabIndex = 66;
             // 
             // label23
             // 
@@ -767,7 +767,7 @@ namespace Ek_spedycja {
             this.tabControl.ResumeLayout(false);
             this.tabPageCompensation.ResumeLayout(false);
             this.tabPageCompensation.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompensation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalary)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -826,16 +826,16 @@ namespace Ek_spedycja {
         private System.Windows.Forms.DataGridView dataGridViewDriver;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageCompensation;
-        private System.Windows.Forms.ComboBox comboBoxCompensationMonth;
-        private System.Windows.Forms.ComboBox comboBoxCompensationDriver;
+        private System.Windows.Forms.ComboBox comboBoxSalaryMonth;
+        private System.Windows.Forms.ComboBox comboBoxSalaryDriver;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.ComboBox comboBoxCompensationYear;
+        private System.Windows.Forms.ComboBox comboBoxSalaryYear;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DataGridView dataGridViewRoute;
         private System.Windows.Forms.DataGridView dataGridViewVehicle;
-        private System.Windows.Forms.DataGridView dataGridViewCompensation;
+        private System.Windows.Forms.DataGridView dataGridViewSalary;
     }
 }
 

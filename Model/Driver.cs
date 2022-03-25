@@ -10,17 +10,17 @@ namespace Ek_spedycja.Model {
         string Name { get; set; }
         string Surname { get; set; }
         string Pesel { get; set; }
-        DateTime DateOfBirth { get; set; }
-        DateTime DateOfHire { get; set; }
+        DateTime BirthDate { get; set; }
+        DateTime HireDate { get; set; }
 
         public static List<Driver> Drivers { get; set; }
 
-        public Driver(string name, string surname, string pesel, DateTime dateOfBirth, DateTime dateOfHire) {
+        public Driver(string name, string surname, string pesel, DateTime birthDate, DateTime hireDate) {
             Name = name;
             Surname = surname;
             Pesel = pesel;
-            DateOfBirth = dateOfBirth;
-            DateOfHire = dateOfHire;
+            BirthDate = birthDate;
+            HireDate = hireDate;
         }
     }
 }

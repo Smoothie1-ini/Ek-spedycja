@@ -10,17 +10,17 @@ namespace Ek_spedycja.Model {
         string Brand { get; set; }
         string Model { get; set; }
         string Number { get; set; }
-        DateTime DateOfService { get; set; }
-        bool Available { get; set; }
+        DateTime ServiceDate { get; set; }
+        bool IsAvailable { get; set; }
 
         static List<Vehicle> Vehicles { get; set; }
 
-        public Vehicle(string brand, string model, string number, DateTime dateOfService, bool available) {
+        public Vehicle(string brand, string model, string number, DateTime serviceDate, bool isAvailable) {
             Brand = brand;
             Model = model;
             Number = number;
-            DateOfService = dateOfService;
-            Available = available;
+            ServiceDate = serviceDate;
+            IsAvailable = isAvailable;
         }
     }
 }

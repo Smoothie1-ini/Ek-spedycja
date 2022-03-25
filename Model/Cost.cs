@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace Ek_spedycja.Model {
     class Cost {
         int Id { get; set; }
-        string Name { get; set; }
+        string CostType { get; set; }
         string Description { get; set; }
-        decimal Value { get; set; }
+        decimal Amount { get; set; }
 
-        public Cost(string name, string description, decimal value) {
-            Name = name;
+        public Cost(string costType, string description, decimal amount) {
+            CostType = costType;
             Description = description;
-            Value = value;
+            Amount = amount;
         }
     }
 }

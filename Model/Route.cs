@@ -9,23 +9,24 @@ namespace Ek_spedycja.Model {
         int Id { get; set; }
         Driver Driver { get; set; }
         Vehicle Vehicle { get; set; }
-        List<Cost> Costs { get; set; }
-        DateTime Leave { get; set; }
-        DateTime PlannedArrival { get; set; }
-        DateTime ActualArrival { get; set; }
+        DateTime DepartureDate { get; set; }
+        DateTime PlannedArrivalDate { get; set; }
+        DateTime ActualArrivalDate { get; set; }
         decimal Length { get; set; }
         decimal Compensation { get; set; }
+        List<Cost> Costs { get; set; }
 
         static List<Route> routes { get; set; }
 
-        public Route(Driver driver, Vehicle vehicle, List<Cost> costs, DateTime leave, DateTime plannedArrival, DateTime actualArrival, decimal length) {
+        public Route(Driver driver, Vehicle vehicle, DateTime departureDate, DateTime plannedArrivalDate, DateTime actualArrivalDate, decimal length, decimal compensation, List<Cost> costs) {
             Driver = driver;
             Vehicle = vehicle;
-            Costs = costs;
-            Leave = leave;
-            PlannedArrival = plannedArrival;
-            ActualArrival = actualArrival;
+            DepartureDate = departureDate;
+            PlannedArrivalDate = plannedArrivalDate;
+            ActualArrivalDate = actualArrivalDate;
             Length = length;
+            Compensation = compensation;
+            Costs = costs;
         }
     }
 }
