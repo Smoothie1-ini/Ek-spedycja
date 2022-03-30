@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 namespace Ek_spedycja.Model {
     class Driver {
         int Id { get; set; }
-        string Name { get; set; }
-        string Surname { get; set; }
-        string Pesel { get; set; }
-        DateTime BirthDate { get; set; }
-        DateTime HireDate { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Pesel { get; set; }
+        public DateTime BirthDate { get; set; }
+        public DateTime HireDate { get; set; }
+
+        public readonly string tableName = "driver";
 
         public static List<Driver> Drivers { get; set; }
 

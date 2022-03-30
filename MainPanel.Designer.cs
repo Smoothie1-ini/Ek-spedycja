@@ -68,8 +68,8 @@ namespace Ek_spedycja {
             this.textBoxDriverPesel = new System.Windows.Forms.TextBox();
             this.textBoxDriverSurname = new System.Windows.Forms.TextBox();
             this.textBoxDriverName = new System.Windows.Forms.TextBox();
-            this.dateTimePickerDriverDateOfHire = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerDriverDateOfBirth = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerDriverHireDate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerDriverBirthDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -125,6 +125,7 @@ namespace Ek_spedycja {
             this.tabPage.TabIndex = 2;
             this.tabPage.Text = "Kurs";
             this.tabPage.UseVisualStyleBackColor = true;
+            this.tabPage.Enter += new System.EventHandler(this.tabPage_Enter);
             // 
             // dataGridViewRoute
             // 
@@ -321,6 +322,7 @@ namespace Ek_spedycja {
             this.tabPageVehicle.TabIndex = 1;
             this.tabPageVehicle.Text = "Pojazd";
             this.tabPageVehicle.UseVisualStyleBackColor = true;
+            this.tabPageVehicle.Enter += new System.EventHandler(this.tabPageVehicle_Enter);
             // 
             // dataGridViewVehicle
             // 
@@ -482,8 +484,8 @@ namespace Ek_spedycja {
             this.tabPageDriver.Controls.Add(this.textBoxDriverPesel);
             this.tabPageDriver.Controls.Add(this.textBoxDriverSurname);
             this.tabPageDriver.Controls.Add(this.textBoxDriverName);
-            this.tabPageDriver.Controls.Add(this.dateTimePickerDriverDateOfHire);
-            this.tabPageDriver.Controls.Add(this.dateTimePickerDriverDateOfBirth);
+            this.tabPageDriver.Controls.Add(this.dateTimePickerDriverHireDate);
+            this.tabPageDriver.Controls.Add(this.dateTimePickerDriverBirthDate);
             this.tabPageDriver.Controls.Add(this.label5);
             this.tabPageDriver.Controls.Add(this.label4);
             this.tabPageDriver.Controls.Add(this.label3);
@@ -498,6 +500,7 @@ namespace Ek_spedycja {
             this.tabPageDriver.TabIndex = 0;
             this.tabPageDriver.Text = "Kierowca";
             this.tabPageDriver.UseVisualStyleBackColor = true;
+            this.tabPageDriver.Enter += new System.EventHandler(this.tabPageDriver_Enter);
             // 
             // label6
             // 
@@ -560,21 +563,21 @@ namespace Ek_spedycja {
             this.textBoxDriverName.Size = new System.Drawing.Size(297, 26);
             this.textBoxDriverName.TabIndex = 6;
             // 
-            // dateTimePickerDriverDateOfHire
+            // dateTimePickerDriverHireDate
             // 
-            this.dateTimePickerDriverDateOfHire.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-            this.dateTimePickerDriverDateOfHire.Location = new System.Drawing.Point(888, 408);
-            this.dateTimePickerDriverDateOfHire.Name = "dateTimePickerDriverDateOfHire";
-            this.dateTimePickerDriverDateOfHire.Size = new System.Drawing.Size(297, 26);
-            this.dateTimePickerDriverDateOfHire.TabIndex = 9;
+            this.dateTimePickerDriverHireDate.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dateTimePickerDriverHireDate.Location = new System.Drawing.Point(888, 408);
+            this.dateTimePickerDriverHireDate.Name = "dateTimePickerDriverHireDate";
+            this.dateTimePickerDriverHireDate.Size = new System.Drawing.Size(297, 26);
+            this.dateTimePickerDriverHireDate.TabIndex = 9;
             // 
-            // dateTimePickerDriverDateOfBirth
+            // dateTimePickerDriverBirthDate
             // 
-            this.dateTimePickerDriverDateOfBirth.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-            this.dateTimePickerDriverDateOfBirth.Location = new System.Drawing.Point(888, 347);
-            this.dateTimePickerDriverDateOfBirth.Name = "dateTimePickerDriverDateOfBirth";
-            this.dateTimePickerDriverDateOfBirth.Size = new System.Drawing.Size(297, 26);
-            this.dateTimePickerDriverDateOfBirth.TabIndex = 8;
+            this.dateTimePickerDriverBirthDate.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dateTimePickerDriverBirthDate.Location = new System.Drawing.Point(888, 347);
+            this.dateTimePickerDriverBirthDate.Name = "dateTimePickerDriverBirthDate";
+            this.dateTimePickerDriverBirthDate.Size = new System.Drawing.Size(297, 26);
+            this.dateTimePickerDriverBirthDate.TabIndex = 8;
             // 
             // label5
             // 
@@ -666,6 +669,7 @@ namespace Ek_spedycja {
             this.tabPageCompensation.TabIndex = 3;
             this.tabPageCompensation.Text = "Rozliczenie";
             this.tabPageCompensation.UseVisualStyleBackColor = true;
+            this.tabPageCompensation.Enter += new System.EventHandler(this.tabPageCompensation_Enter);
             // 
             // dataGridViewSalary
             // 
@@ -816,8 +820,8 @@ namespace Ek_spedycja {
         private System.Windows.Forms.TextBox textBoxDriverPesel;
         private System.Windows.Forms.TextBox textBoxDriverSurname;
         private System.Windows.Forms.TextBox textBoxDriverName;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDriverDateOfHire;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDriverDateOfBirth;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDriverHireDate;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDriverBirthDate;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;

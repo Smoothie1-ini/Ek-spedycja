@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 namespace Ek_spedycja.Model {
     class Cost {
         int Id { get; set; }
-        string CostType { get; set; }
-        string Description { get; set; }
-        decimal Amount { get; set; }
+        public string CostType { get; set; }
+        public string Description { get; set; }
+        public decimal Amount { get; set; }
+
+        public readonly string tableName = "cost";
 
         public Cost(string costType, string description, decimal amount) {
             CostType = costType;
