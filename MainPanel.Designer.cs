@@ -632,12 +632,14 @@ namespace Ek_spedycja {
             this.dataGridViewDriver.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridViewDriver.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDriver.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewDriver.MultiSelect = false;
             this.dataGridViewDriver.Name = "dataGridViewDriver";
+            this.dataGridViewDriver.ReadOnly = true;
             this.dataGridViewDriver.RowHeadersVisible = false;
             this.dataGridViewDriver.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDriver.Size = new System.Drawing.Size(839, 612);
             this.dataGridViewDriver.TabIndex = 0;
-            this.dataGridViewDriver.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDriver_CellContentClick);
+            this.dataGridViewDriver.SelectionChanged += new System.EventHandler(this.dataGridViewDriver_SelectionChanged);
             // 
             // tabControl
             // 

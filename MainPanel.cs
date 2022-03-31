@@ -13,6 +13,7 @@ namespace Ek_spedycja {
     public partial class MainPanel : Form {
         private DataAccess dataAccess = new DataAccess();
         Driver driver;
+        int driver_id;
 
         public MainPanel() {
             InitializeComponent();
@@ -28,34 +29,33 @@ namespace Ek_spedycja {
             dataGridViewDriver.DataSource = dataAccess.dataSet.Tables["driver"];
         }
 
-        private void dataGridViewDriver_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            textBoxDriverName.Text = dataGridViewDriver.SelectedRows[0].Cells[1].Value.ToString();
-            textBoxDriverSurname.Text = dataGridViewDriver.SelectedRows[0].Cells[2].Value.ToString();
-            textBoxDriverPesel.Text = dataGridViewDriver.SelectedRows[0].Cells[3].Value.ToString();
-            dateTimePickerDriverBirthDate.Value = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[4].Value.ToString());
-            dateTimePickerDriverHireDate.Value = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[5].Value.ToString());
-        }
-
         private void buttonDriverAdd_Click(object sender, EventArgs e) {
             driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
             dataAccess.InsertData(driver);
         }
 
         private void buttonDriverEdit_Click(object sender, EventArgs e) {
-            int id_driver = int.Parse(dataGridViewDriver.Rows[0].Cells[0].Value.ToString());
-            string name = dataGridViewDriver.SelectedRows[0].Cells[1].Value.ToString();
-            string surname = dataGridViewDriver.SelectedRows[0].Cells[2].Value.ToString();
-            string pesel = dataGridViewDriver.SelectedRows[0].Cells[3].Value.ToString();
-            DateTime birthDate = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[4].Value.ToString());
-            DateTime hireDate = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[5].Value.ToString());
-            driver = new Driver(name, surname, pesel, birthDate, hireDate);
-            driver.Id = id_driver;
-            int selectedDriver = dataGridViewDriver.SelectedRows[0].Index;
-            dataAccess.UpdateData(driver, selectedDriver);
+            driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
+            dataAccess.UpdateData(driver, driver_id);
         }
 
         private void buttonDriverDelete_Click(object sender, EventArgs e) {
+            dataAccess.DeleteData(driver_id);
+        }
+        private void dataGridViewDriver_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewDriver.CurrentCell.RowIndex < 0)
+                return;
 
+            if (dataGridViewDriver.Focused)
+            {
+                driver_id = int.Parse(dataGridViewDriver.SelectedRows[0].Cells[0].Value.ToString());
+                textBoxDriverName.Text = dataGridViewDriver.SelectedRows[0].Cells[1].Value.ToString();
+                textBoxDriverSurname.Text = dataGridViewDriver.SelectedRows[0].Cells[2].Value.ToString();
+                textBoxDriverPesel.Text = dataGridViewDriver.SelectedRows[0].Cells[3].Value.ToString();
+                dateTimePickerDriverBirthDate.Value = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[4].Value.ToString());
+                dateTimePickerDriverHireDate.Value = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[5].Value.ToString());
+            }
         }
 
         #endregion
@@ -121,5 +121,6 @@ namespace Ek_spedycja {
         }
 
         #endregion
+ 
     }
 }
