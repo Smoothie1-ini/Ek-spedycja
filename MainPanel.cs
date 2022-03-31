@@ -12,6 +12,7 @@ using System.Windows.Forms;
 namespace Ek_spedycja {
     public partial class MainPanel : Form {
         private DataAccess dataAccess = new DataAccess();
+        Driver driver;
 
         public MainPanel() {
             InitializeComponent();
@@ -24,20 +25,33 @@ namespace Ek_spedycja {
         #region DRIVER
 
         private void tabPageDriver_Enter(object sender, EventArgs e) {
-            dataGridViewDriver.DataSource = dataAccess.dataSet.Tables["v_driver"];
+            dataGridViewDriver.DataSource = dataAccess.dataSet.Tables["driver"];
         }
 
         private void dataGridViewDriver_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
+            textBoxDriverName.Text = dataGridViewDriver.SelectedRows[0].Cells[1].Value.ToString();
+            textBoxDriverSurname.Text = dataGridViewDriver.SelectedRows[0].Cells[2].Value.ToString();
+            textBoxDriverPesel.Text = dataGridViewDriver.SelectedRows[0].Cells[3].Value.ToString();
+            dateTimePickerDriverBirthDate.Value = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[4].Value.ToString());
+            dateTimePickerDriverHireDate.Value = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[5].Value.ToString());
         }
 
         private void buttonDriverAdd_Click(object sender, EventArgs e) {
-            Driver driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
+            driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
             dataAccess.InsertData(driver);
         }
 
         private void buttonDriverEdit_Click(object sender, EventArgs e) {
-
+            int id_driver = int.Parse(dataGridViewDriver.Rows[0].Cells[0].Value.ToString());
+            string name = dataGridViewDriver.SelectedRows[0].Cells[1].Value.ToString();
+            string surname = dataGridViewDriver.SelectedRows[0].Cells[2].Value.ToString();
+            string pesel = dataGridViewDriver.SelectedRows[0].Cells[3].Value.ToString();
+            DateTime birthDate = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[4].Value.ToString());
+            DateTime hireDate = DateTime.Parse(dataGridViewDriver.SelectedRows[0].Cells[5].Value.ToString());
+            driver = new Driver(name, surname, pesel, birthDate, hireDate);
+            driver.Id = id_driver;
+            int selectedDriver = dataGridViewDriver.SelectedRows[0].Index;
+            dataAccess.UpdateData(driver, selectedDriver);
         }
 
         private void buttonDriverDelete_Click(object sender, EventArgs e) {
@@ -49,7 +63,7 @@ namespace Ek_spedycja {
         #region VEHICLE
 
         private void tabPageVehicle_Enter(object sender, EventArgs e) {
-            dataGridViewVehicle.DataSource = dataAccess.dataSet.Tables["v_vehicle"];
+            dataGridViewVehicle.DataSource = dataAccess.dataSet.Tables["vehicle"];
         }
 
         private void dataGridViewVehicle_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -73,7 +87,7 @@ namespace Ek_spedycja {
         #region ROUTE
 
         private void tabPage_Enter(object sender, EventArgs e) {
-            dataGridViewRoute.DataSource = dataAccess.dataSet.Tables["v_route"];
+            dataGridViewRoute.DataSource = dataAccess.dataSet.Tables["route"];
         }
 
         private void dataGridViewRoute_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -103,7 +117,7 @@ namespace Ek_spedycja {
         #region SALARY
 
         private void tabPageCompensation_Enter(object sender, EventArgs e) {
-            dataGridViewSalary.DataSource = dataAccess.dataSet.Tables["v_salary"];
+            dataGridViewSalary.DataSource = dataAccess.dataSet.Tables["salary"];
         }
 
         #endregion

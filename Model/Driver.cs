@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ek_spedycja.Model {
     class Driver {
-        int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Pesel { get; set; }

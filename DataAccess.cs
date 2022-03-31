@@ -31,20 +31,17 @@ namespace Ek_spedycja {
 
         //DataReader czy DataSet?
         private bool FillDataSet() {
+            string select;
             SqlDataAdapter dataAdapter;
             try {
                 dataSet = new DataSet();
-                List<string> tables = new List<string> { "driver", "vehicle", "route", "salary", "cost" };
-                List<string> views = new List<string> { "v_driver", "v_vehicle", "v_route", "v_salary", "v_cost" };
-                foreach (string table in tables) {
-                    dataAdapter = new SqlDataAdapter($"SELECT * FROM spedycja.{table}", connectionString);
+                List<string> tableNames = new List<string> { "driver", "vehicle", "route", "cost", "salary" };
+
+                foreach (string tableName in tableNames) {
+                    select = $"SELECT * FROM spedycja.{tableName}";
+                    dataAdapter = new SqlDataAdapter(select, connectionString);
                     dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                    dataAdapter.Fill(dataSet, table);
-                }
-                foreach (string view in views) {
-                    dataAdapter = new SqlDataAdapter($"SELECT * FROM spedycja.dbo.{view}", connectionString);
-                    dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                    dataAdapter.Fill(dataSet, view);
+                    dataAdapter.Fill(dataSet, tableName);
                 }
             } catch (Exception) {
                 return false;
@@ -53,21 +50,20 @@ namespace Ek_spedycja {
         }
 
         public bool InsertData(Driver driver) {
-            string select = "SELECT * FROM spedycja.driver";
             string insert = @"INSERT INTO spedycja.driver 
                             (name, surname, pesel, birth_date, hire_date) 
                             VALUES 
-                            ('@name', '@surname', '@pesel', '@birthDate', '@hireDate')";
+                            (@name, @surname, @pesel, @birthDate, @hireDate)";
             try {
                 SqlCommand command = new SqlCommand(insert, connection);
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(select, connection);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
                 DataSet dataSetChanges;
                 dataAdapter.InsertCommand = command;
-                command.Parameters.Add("@name", SqlDbType.VarChar, 100, "name");
-                command.Parameters.Add("@surname", SqlDbType.VarChar, 100, "surname");
-                command.Parameters.Add("@pesel", SqlDbType.VarChar, 100, "pesel");
-                command.Parameters.Add("@birthDate", SqlDbType.Date, 100, "birth_date");
-                command.Parameters.Add("@hireDate", SqlDbType.Date, 100, "hire_date");
+                command.Parameters.AddWithValue("@name", driver.Name);
+                command.Parameters.AddWithValue("@surname", driver.Surname);
+                command.Parameters.AddWithValue("@pesel", driver.Pesel);
+                command.Parameters.AddWithValue("@birthDate", driver.BirthDate);
+                command.Parameters.AddWithValue("@hireDate", driver.HireDate);
 
                 DataRow dataRow = dataSet.Tables[driver.tableName].NewRow();
                 dataRow["name"] = driver.Name;
@@ -91,18 +87,37 @@ namespace Ek_spedycja {
             return true;
         }
 
-        public bool UpdateData(Driver driver) {
-            string select = "";
-            string update = "";
-
+        public bool UpdateData(Driver driver, int selectedDriver) {
+            string update = @"update spedycja.driver
+                              set name = @name, surname = @surname, pesel = @pesel, birth_date = @birthDate, hire_date = @hireDate
+                              where id_driver = @id_driver";
             try {
                 SqlCommand command = new SqlCommand(update, connection);
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(select, connection);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                DataSet dataSetChanges;
                 dataAdapter.UpdateCommand = command;
-                command.Parameters.Add("@name", SqlDbType.VarChar, 100, "name");
-                command.Parameters.Add("@surname", SqlDbType.VarChar, 100, "")
-                SqlParameter sqlParameter = dataAdapter.UpdateCommand.Parameters.Add("@name", SqlDbType.VarChar, 100, "id_driver");
+                command.Parameters.AddWithValue("@name", driver.Name);
+                command.Parameters.AddWithValue("@surname", driver.Surname);
+                command.Parameters.AddWithValue("@pesel", driver.Pesel);
+                command.Parameters.AddWithValue("@birthDate", driver.BirthDate);
+                command.Parameters.AddWithValue("@hireDate", driver.HireDate);
+                SqlParameter sqlParameter = dataAdapter.UpdateCommand.Parameters.AddWithValue("@id_driver", driver.Id);
+                sqlParameter.Direction = ParameterDirection.Input;
+                sqlParameter.SourceVersion = DataRowVersion.Original;
 
+                dataSet.Tables[driver.tableName].Rows[selectedDriver]["name"] = driver.Name;
+                dataSet.Tables[driver.tableName].Rows[selectedDriver]["surname"] = driver.Surname;
+                dataSet.Tables[driver.tableName].Rows[selectedDriver]["pesel"] = driver.Pesel;
+                dataSet.Tables[driver.tableName].Rows[selectedDriver]["birth_date"] = driver.BirthDate;
+                dataSet.Tables[driver.tableName].Rows[selectedDriver]["hire_date"] = driver.HireDate;
+
+                if (dataSet.HasChanges()) {
+                    dataSetChanges = dataSet.GetChanges();
+                    if (dataSet.HasErrors)
+                        dataSet.RejectChanges();
+                    else
+                        dataAdapter.Update(dataSet, driver.tableName);
+                }
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
                 return false;
