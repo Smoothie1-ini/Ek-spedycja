@@ -1,0 +1,52 @@
+	Const STR_CON As String = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source = filmy.mdb"
+        Const STR_SELECT As String = "Select * from filmy"
+        Const STR_INSERT As String = "Insert into filmy (id, tytul, numer_plyty, rodzaj) values (@id, @tyt, @nr, @ro)"
+
+        Dim con As OleDbConnection
+        Dim cmd As OleDbCommand
+        Dim adp As OleDbDataAdapter
+
+        Dim dsB, dsF As DataSet
+
+        Dim dr As DataRow
+
+        con = New OleDbConnection(STR_CON)
+        cmd = New OleDbCommand(STR_INSERT, con)
+
+        adp = New OleDbDataAdapter(STR_SELECT, con)
+
+        adp.InsertCommand = cmd
+
+        cmd.Parameters.Add("@id", OleDbType.VarChar, 100, "id")
+        cmd.Parameters.Add("@tytul", OleDbType.VarChar, 100, "tytul")
+        cmd.Parameters.Add("@nr", OleDbType.VarChar, 100, "numer_plyty")
+        cmd.Parameters.Add("@ro", OleDbType.VarChar, 100, "rodzaj")
+
+        dsB = New DataSet()
+
+        adp.Fill(dsB, "filmy")
+
+        dr = dsB.Tables("filmy").NewRow()
+
+        dr("id") = "21"
+        dr("tytul") = "Tytyul 2020"
+        dr("numer_plyty") = "202"
+        dr("rodzaj") = "1"
+
+        dsB.Tables("filmy").Rows.Add(dr)
+
+        ' sprawdzamy czy data set był modyfikowany
+        If dsB.HasChanges() Then
+            ' zapisujemy zmienione wiersze w nowym data secie
+            dsF = dsB.GetChanges()
+
+            ' sprawdzamy czy zmienione wiersze w nowym data secie zawierają błędy
+            If dsF.HasErrors() Then
+
+                'odrzucamy zmiany
+                dsB.RejectChanges()
+            Else
+                'aktualizujemy źródło danych
+                adp.Update(dsF, "filmy")
+            End If
+        End If

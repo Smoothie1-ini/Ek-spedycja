@@ -1,0 +1,17 @@
+Dim cmd As New OleDbCommand
+
+       
+        Dim adp As OleDbDataAdapter
+        Dim dt As New DataTable()
+        Dim dc As DataColumn
+        Dim con As New OleDbConnection
+
+        con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source = filmy.mdb"
+
+        ' utworzenie obiektu (instancji) klasy OleDbDataAdapter
+        adp = New OleDbDataAdapter("Select * from filmy", con)
+        adp.FillSchema(dt, SchemaType.Source)
+
+        For Each dc In dt.Columns
+            MsgBox(dc.ColumnName)
+        Next

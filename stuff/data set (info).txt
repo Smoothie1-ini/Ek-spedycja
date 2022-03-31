@@ -1,0 +1,15 @@
+Wśród właściwości klasy DataSet występują m.in.:
+- DataSetName
+- HasErrors
+- Prefix
+- Relations
+
+Operacje, które można wykonywać na obiektach DataSet:
+- Clear
+- Reset
+- Clone
+- Copy
+- Getxml
+- Readxml
+- Acceptchanges
+- Rejectchanges

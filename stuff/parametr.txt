@@ -1,0 +1,3 @@
+cmd.CommandText = "Select * from filmy where id=@nr_id and rodzaj=@rd"
+cmd.Parameters.AddWithValue("@nr_id", txt_movie.Text)
+cmd.Parameters.AddWithValue("@rd", txt_movie2.Text)

@@ -1,0 +1,29 @@
+Dim con As New OleDbConnection
+        Dim cmd As New OleDbCommand
+
+        Try
+
+            con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source = filmy.mdb"
+
+            cmd.CommandText = "Select * from filmy"
+            cmd.Connection = con
+
+            con.Open()
+
+            Dim dr As OleDbDataReader = cmd.ExecuteReader()
+
+            While dr.Read()
+                movies.Text += dr.Item(0).ToString + " " + dr.Item(1).ToString + " " + dr.Item(2).ToString + " " + dr.Item(3).ToString + vbCrLf
+            End While
+
+        Catch ex2 As OleDbException
+            Dim er As OleDbError
+            For Each er In ex2.Errors
+                MsgBox(ex2.Message)
+            Next
+
+        Catch ex1 As Exception
+            MsgBox(ex1.Message)
+
+        End Try
+        con.Close()

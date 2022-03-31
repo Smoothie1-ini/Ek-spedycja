@@ -1,0 +1,16 @@
+	Dim adp As OleDbDataAdapter
+        Dim dt As New DataTable
+        Dim con As New OleDbConnection
+
+        con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source = filmy.mdb"
+
+        adp = New OleDbDataAdapter("Select * from filmy", con)
+
+        adp.Fill(dt)
+
+        For i = 0 To dt.Rows.Count - 1
+            For j = 0 To dt.Columns.Count - 1
+                movies.Text += dt.Rows(i).Item(j).ToString + " "
+            Next
+            movies.Text += vbNewLine
+        Next

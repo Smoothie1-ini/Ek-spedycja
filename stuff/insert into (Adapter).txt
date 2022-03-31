@@ -1,0 +1,21 @@
+Dim adp As New OleDbDataAdapter
+        Dim con As New OleDbConnection
+
+        Dim cmd As New OleDbCommand("Insert into filmy (id, tytul, numer_plyty, rodzaj) values (@id, @tyt, @nr, @ro)")
+        cmd.Parameters.AddWithValue("@id", "16")
+        cmd.Parameters.AddWithValue("@tyt", "Algorytmy")
+        cmd.Parameters.AddWithValue("@nr", "12")
+        cmd.Parameters.AddWithValue("@ro", "1")
+
+        con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source = filmy.mdb"
+
+        Try
+            con.Open()
+            adp.InsertCommand = cmd
+            adp.InsertCommand.Connection = con
+            adp.InsertCommand.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        Finally
+            con.Close()
+        End Try

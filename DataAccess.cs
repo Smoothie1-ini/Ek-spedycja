@@ -61,36 +61,50 @@ namespace Ek_spedycja {
             try {
                 SqlCommand command = new SqlCommand(insert, connection);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, connection);
-                DataSet dataSetTable, dataSetChanges;
+                DataSet dataSetChanges;
                 dataAdapter.InsertCommand = command;
-                command.Parameters.Add("@name", SqlDbType.VarChar);
-                command.Parameters.Add("@surname", SqlDbType.VarChar);
-                command.Parameters.Add("@pesel", SqlDbType.VarChar);
-                command.Parameters.Add("@birthDate", SqlDbType.Date);
-                command.Parameters.Add("@hireDate", SqlDbType.Date);
-
-                dataSetTable = new DataSet();
-                //dataAdapter.Fill(dataSet, driver.tableName);
+                command.Parameters.Add("@name", SqlDbType.VarChar, 100, "name");
+                command.Parameters.Add("@surname", SqlDbType.VarChar, 100, "surname");
+                command.Parameters.Add("@pesel", SqlDbType.VarChar, 100, "pesel");
+                command.Parameters.Add("@birthDate", SqlDbType.Date, 100, "birth_date");
+                command.Parameters.Add("@hireDate", SqlDbType.Date, 100, "hire_date");
 
                 DataRow dataRow = dataSet.Tables[driver.tableName].NewRow();
                 dataRow["name"] = driver.Name;
                 dataRow["surname"] = driver.Surname;
                 dataRow["pesel"] = driver.Pesel;
                 dataRow["birth_date"] = driver.BirthDate;
-                dataRow["hire_date"] = DateTime.Now.ToShortDateString();
-
+                dataRow["hire_date"] = driver.HireDate;
                 dataSet.Tables[driver.tableName].Rows.Add(dataRow);
 
-
-                //if (dataSet.HasChanges()) {
-                //    dataSetChanges = dataSet.GetChanges();
-                //    if (dataSet.HasErrors)
-                //        dataSet.RejectChanges();
-                //    else
-                //        dataAdapter.Update(dataSet, driver.tableName);
-                //}
+                if (dataSet.HasChanges()) {
+                    dataSetChanges = dataSet.GetChanges();
+                    if (dataSet.HasErrors)
+                        dataSet.RejectChanges();
+                    else
+                        dataAdapter.Update(dataSet, driver.tableName);
+                }
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error");
+                return false;
+            }
+            return true;
+        }
+
+        public bool UpdateData(Driver driver) {
+            string select = "";
+            string update = "";
+
+            try {
+                SqlCommand command = new SqlCommand(update, connection);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(select, connection);
+                dataAdapter.UpdateCommand = command;
+                command.Parameters.Add("@name", SqlDbType.VarChar, 100, "name");
+                command.Parameters.Add("@surname", SqlDbType.VarChar, 100, "")
+                SqlParameter sqlParameter = dataAdapter.UpdateCommand.Parameters.Add("@name", SqlDbType.VarChar, 100, "id_driver");
+
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
                 return false;
             }
             return true;

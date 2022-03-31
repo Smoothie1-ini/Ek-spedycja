@@ -1,0 +1,44 @@
+ 	'Aktualizacja filmu z Adapterem oraz Data Set
+        Const STR_CON As String = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source = filmy.mdb"
+        Const STR_SELECT As String = "Select * from filmy"
+        Const STR_UPDATE As String = "Update filmy Set tytul = @tytul, numer_plyty = @nr, rodzaj = @ro where id=@id"
+
+        Dim con As OleDbConnection
+        Dim cmd As OleDbCommand
+        Dim adp As OleDbDataAdapter
+
+        Dim prmUpdate As OleDbParameter
+
+        Dim dsB, dsF As DataSet
+
+        con = New OleDbConnection(STR_CON)
+        cmd = New OleDbCommand(STR_UPDATE, con)
+
+        adp = New OleDbDataAdapter(STR_SELECT, con)
+
+        adp.UpdateCommand = cmd
+
+        cmd.Parameters.Add("@tytul", OleDbType.VarChar, 100, "tytul")
+        cmd.Parameters.Add("@nr", OleDbType.VarChar, 100, "numer_plyty")
+        cmd.Parameters.Add("@ro", OleDbType.VarChar, 100, "rodzaj")
+
+        prmUpdate = adp.UpdateCommand.Parameters.Add("@Id", SqlDbType.Int, Nothing, "Id")
+
+        prmUpdate.Direction = ParameterDirection.Input
+        prmUpdate.SourceVersion = DataRowVersion.Original
+
+        dsB = New DataSet()
+
+        adp.Fill(dsB, "filmy")
+
+        'aktualizacja "na sztywno" wiersza czwartego
+        dsB.Tables("filmy").Rows(3)("tytul") = "KKKKK" 'zamiast 3 możemy podać np. wartość z txt_movie2.Text
+
+        If dsB.HasChanges() Then
+            dsF = dsB.GetChanges()
+            If dsF.HasErrors() Then
+                dsB.RejectChanges()
+            Else
+                adp.Update(dsF, "filmy")
+            End If
+        End If

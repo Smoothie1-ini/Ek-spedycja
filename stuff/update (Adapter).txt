@@ -1,0 +1,20 @@
+Dim adp As New OleDbDataAdapter
+        Dim con As New OleDbConnection
+
+        Dim cmd As New OleDbCommand("Update filmy Set tytul = @tytul where id=@id")
+
+        cmd.Parameters.AddWithValue("@tytul", txt_movie.Text)
+        cmd.Parameters.AddWithValue("@id", txt_movie2.Text)
+
+        con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source = filmy.mdb"
+
+        Try
+            con.Open()
+            adp.UpdateCommand = cmd
+            adp.UpdateCommand.Connection = con
+            adp.UpdateCommand.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        Finally
+            con.Close()
+        End Try
