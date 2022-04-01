@@ -31,19 +31,19 @@ namespace Ek_spedycja {
 
         private void buttonDriverAdd_Click(object sender, EventArgs e) {
             driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
-            dataGridViewDriver.DataSource = driverDataAccess.RefreshViewAfterCommand(driverDataAccess.InsertData, driver);
+            dataGridViewDriver.DataSource = driverDataAccess.RunCommandAndRefresh(driverDataAccess.InsertData, driver);
         }
 
         private void buttonDriverEdit_Click(object sender, EventArgs e) {
             driver = new Driver(selectedDriver, textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
             // To musi być ?
             driver.Id = selectedDriver;
-            dataGridViewDriver.DataSource = driverDataAccess.RefreshViewAfterCommand(driverDataAccess.UpdateData, driver);
+            dataGridViewDriver.DataSource = driverDataAccess.RunCommandAndRefresh(driverDataAccess.UpdateData, driver);
         }
 
         private void buttonDriverDelete_Click(object sender, EventArgs e) {
             driver = new Driver(selectedDriver);
-            dataGridViewDriver.DataSource = driverDataAccess.RefreshViewAfterCommand(driverDataAccess.DeleteData, driver);
+            dataGridViewDriver.DataSource = driverDataAccess.RunCommandAndRefresh(driverDataAccess.DeleteData, driver);
         }
         private void dataGridViewDriver_SelectionChanged(object sender, EventArgs e)
         {

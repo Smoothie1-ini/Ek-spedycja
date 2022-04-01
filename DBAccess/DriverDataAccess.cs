@@ -145,7 +145,7 @@ namespace Ek_spedycja.DBAccess
             return driverView;
         }
 
-        public override DataTable RefreshViewAfterCommand(Func<Driver, bool> DriverFunc, Driver driver)
+        public override DataTable RunCommandAndRefresh(Func<Driver, bool> DriverFunc, Driver driver)
         {
             DriverFunc(driver);
             return RefreshView();
