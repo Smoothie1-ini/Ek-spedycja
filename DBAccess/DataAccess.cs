@@ -16,7 +16,6 @@ namespace Ek_spedycja.DBAccess
         internal SqlConnection connection =  new SqlConnection(connectionString);
         public static DataSet dataSet = GetDataSet();
 
-
         private static DataSet GetDataSet() {
             string select;
             SqlDataAdapter dataAdapter;

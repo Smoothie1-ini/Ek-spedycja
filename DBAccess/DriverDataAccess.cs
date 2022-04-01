@@ -148,11 +148,7 @@ namespace Ek_spedycja.DBAccess
         public override DataTable RefreshViewAfterCommand(Func<Driver, bool> DriverFunc, Driver driver)
         {
             DriverFunc(driver);
-            DataTable driverView = new DataTable();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_driver as ID, name as Name, surname as Surname, pesel as PESEL, hire_date as 'Date of employment' , birth_date as 'Date of birth' FROM spedycja.driver", base.connection);
-            dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-            dataAdapter.Fill(driverView);
-            return driverView;
+            return RefreshView();
         }
     }
 }
