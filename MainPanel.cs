@@ -1,4 +1,5 @@
-﻿using Ek_spedycja.Model;
+﻿using Ek_spedycja.DBAccess;
+using Ek_spedycja.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,8 @@ namespace Ek_spedycja {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-
+            DriverDataAccess da = new DriverDataAccess();
+            da.
         }
 
         #region DRIVER
