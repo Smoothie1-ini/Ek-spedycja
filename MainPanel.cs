@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Ek_spedycja {
     public partial class MainPanel : Form {
-        private DataAccess dataAccess = new DataAccess();
+        private DriverDataAccess driverDataAccess = new DriverDataAccess();
         Driver driver;
         int selectedDriver;
 
@@ -21,30 +21,29 @@ namespace Ek_spedycja {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            DriverDataAccess da = new DriverDataAccess();
-            da.
         }
 
         #region DRIVER
 
         private void tabPageDriver_Enter(object sender, EventArgs e) {
-            dataGridViewDriver.DataSource = dataAccess.dataSet.Tables["driver"];
+            dataGridViewDriver.DataSource = driverDataAccess.RefreshView();
         }
 
         private void buttonDriverAdd_Click(object sender, EventArgs e) {
             driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
-            dataAccess.InsertData(driver);
+            dataGridViewDriver.DataSource = driverDataAccess.RefreshViewAfterCommand(driverDataAccess.InsertData, driver);
         }
 
         private void buttonDriverEdit_Click(object sender, EventArgs e) {
             driver = new Driver(selectedDriver, textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
+            // To musi być ?
             driver.Id = selectedDriver;
-            dataAccess.UpdateData(driver);
+            dataGridViewDriver.DataSource = driverDataAccess.RefreshViewAfterCommand(driverDataAccess.UpdateData, driver);
         }
 
         private void buttonDriverDelete_Click(object sender, EventArgs e) {
             driver = new Driver(selectedDriver);
-            dataAccess.DeleteData(driver);
+            dataGridViewDriver.DataSource = driverDataAccess.RefreshViewAfterCommand(driverDataAccess.DeleteData, driver);
         }
         private void dataGridViewDriver_SelectionChanged(object sender, EventArgs e)
         {
@@ -67,7 +66,6 @@ namespace Ek_spedycja {
         #region VEHICLE
 
         private void tabPageVehicle_Enter(object sender, EventArgs e) {
-            dataGridViewVehicle.DataSource = dataAccess.dataSet.Tables["vehicle"];
         }
 
         private void dataGridViewVehicle_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -91,7 +89,6 @@ namespace Ek_spedycja {
         #region ROUTE
 
         private void tabPage_Enter(object sender, EventArgs e) {
-            dataGridViewRoute.DataSource = dataAccess.dataSet.Tables["route"];
         }
 
         private void dataGridViewRoute_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -114,14 +111,11 @@ namespace Ek_spedycja {
         private void buttonRouteDelete_Click(object sender, EventArgs e) {
 
         }
-
-
         #endregion
 
         #region SALARY
 
         private void tabPageCompensation_Enter(object sender, EventArgs e) {
-            dataGridViewSalary.DataSource = dataAccess.dataSet.Tables["salary"];
         }
 
         #endregion

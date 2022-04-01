@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Ek_spedycja.DBAccess
 {
-    abstract class DataAccess
+    abstract class DataAccess<T>
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["Ek-spedycja"].ConnectionString;
-        internal static SqlConnection connection =  new SqlConnection(connectionString);
+        internal SqlConnection connection =  new SqlConnection(connectionString);
         public static DataSet dataSet = GetDataSet();
 
 
@@ -36,9 +36,10 @@ namespace Ek_spedycja.DBAccess
             return dataSet;
         }
 
-
-        public abstract bool InsertData(Object object);
-        public abstract bool UpdateData(Object object);
-        public abstract bool DeleteData(Object object);
+        public abstract bool InsertData(T value);
+        public abstract bool UpdateData(T value);
+        public abstract bool DeleteData(T value);
+        public abstract DataTable RefreshViewAfterCommand(Func<T, bool> Func, T value);
+        public abstract DataTable RefreshView();
     }
 }

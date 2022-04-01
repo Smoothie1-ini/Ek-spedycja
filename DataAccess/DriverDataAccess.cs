@@ -8,46 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ek_spedycja.DBAccess
+namespace Ek_spedycja.DataAccess
 {
-    class DriverDataAccess : DataAccess<Driver>
+    class DriverDataAccess
     {
-        public override bool DeleteData(Driver driver)
-        {
-            string delete = @"DELETE FROM spedycja.driver 
-                            WHERE id_driver = @id_driver";
-            try
-            {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                SqlCommand command = new SqlCommand(delete, connection);
-                DataSet dataSetChanges;
-                dataAdapter.DeleteCommand = command;
-
-                SqlParameter sqlParameter = dataAdapter.DeleteCommand.Parameters.AddWithValue("@id_driver", driver.Id);
-                sqlParameter.Direction = ParameterDirection.Input;
-                sqlParameter.SourceVersion = DataRowVersion.Original;
-
-                DataRow dataRow = dataSet.Tables["driver"].Rows.Find(driver.Id);
-                dataRow.Delete();
-
-                if (dataSet.HasChanges())
-                {
-                    dataSetChanges = dataSet.GetChanges();
-                    if (dataSet.HasErrors)
-                        dataSet.RejectChanges();
-                    else
-                        dataAdapter.Update(dataSet, "driver");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
-                return false;
-            }
-            return true;
-        }
-
-        public override bool InsertData(Driver driver)
+        DataSet dataSet = new DataAccessRaw().dataSet;
+        SqlConnection connection = new DataAccessRaw().connection;
+        public bool InsertData(Driver driver)
         {
             string insert = @"INSERT INTO spedycja.driver 
                             (name, surname, pesel, birth_date, hire_date) 
@@ -90,15 +57,12 @@ namespace Ek_spedycja.DBAccess
             return true;
         }
 
-        public override bool UpdateData(Driver driver)
+        public bool UpdateData(Driver driver, int selectedDriverId)
         {
-            string update = @"UPDATE spedycja.driver 
-                            SET name = @name, surname = @surname, pesel = @pesel, birth_date = @birth_date, hire_date = @hire_date 
-                            WHERE id_driver = @id_driver";
             try
             {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                SqlCommand command = new SqlCommand(update, connection);
+                SqlCommand command = new SqlCommand("UPDATE spedycja.driver SET name = @name, surname = @surname, pesel = @pesel, birth_date = @birth_date, hire_date = @hire_date where id_driver = @id_driver", connection);
                 DataSet dataSetChanges;
                 dataAdapter.UpdateCommand = command;
 
@@ -107,12 +71,12 @@ namespace Ek_spedycja.DBAccess
                 command.Parameters.AddWithValue("@pesel", driver.Pesel);
                 command.Parameters.AddWithValue("@birth_date", driver.BirthDate);
                 command.Parameters.AddWithValue("@hire_date", driver.HireDate);
-                SqlParameter sqlParameter = dataAdapter.UpdateCommand.Parameters.AddWithValue("@id_driver", driver.Id);
+                SqlParameter sqlParameter = dataAdapter.UpdateCommand.Parameters.AddWithValue("@id_driver", selectedDriverId);
 
                 sqlParameter.Direction = ParameterDirection.Input;
                 sqlParameter.SourceVersion = DataRowVersion.Original;
 
-                DataRow dataRow = dataSet.Tables["driver"].Rows.Find(driver.Id);
+                DataRow dataRow = dataSet.Tables["driver"].Rows.Find(selectedDriverId);
                 dataRow["name"] = driver.Name;
                 dataRow["surname"] = driver.Surname;
                 dataRow["pesel"] = driver.Pesel;
@@ -136,23 +100,38 @@ namespace Ek_spedycja.DBAccess
             }
             return true;
         }
-        public override DataTable RefreshView()
+        // Nie przekazuje konstruktora wiec idk jak z przeciążeniem metody
+        public bool DeleteData(int selectedDriverId)
         {
-            DataTable driverView = new DataTable();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_driver as ID, name as Name, surname as Surname, pesel as PESEL, hire_date as 'Date of employment' , birth_date as 'Date of birth' FROM spedycja.driver", base.connection);
-            dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-            dataAdapter.Fill(driverView);
-            return driverView;
-        }
+            try
+            {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                SqlCommand command = new SqlCommand("DELETE FROM spedycja.driver WHERE id_driver = @id_driver", connection);
+                DataSet dataSetChanges;
+                dataAdapter.DeleteCommand = command;
 
-        public override DataTable RefreshViewAfterCommand(Func<Driver, bool> DriverFunc, Driver driver)
-        {
-            DriverFunc(driver);
-            DataTable driverView = new DataTable();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_driver as ID, name as Name, surname as Surname, pesel as PESEL, hire_date as 'Date of employment' , birth_date as 'Date of birth' FROM spedycja.driver", base.connection);
-            dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-            dataAdapter.Fill(driverView);
-            return driverView;
+                SqlParameter sqlParameter = dataAdapter.DeleteCommand.Parameters.AddWithValue("@id_driver", selectedDriverId);
+                sqlParameter.Direction = ParameterDirection.Input;
+                sqlParameter.SourceVersion = DataRowVersion.Original;
+
+                DataRow dataRow = dataSet.Tables["driver"].Rows.Find(selectedDriverId);
+                dataRow.Delete();
+
+                if (dataSet.HasChanges())
+                {
+                    dataSetChanges = dataSet.GetChanges();
+                    if (dataSet.HasErrors)
+                        dataSet.RejectChanges();
+                    else
+                        dataAdapter.Update(dataSet, "driver");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+                return false;
+            }
+            return true;
         }
     }
 }
