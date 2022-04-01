@@ -132,7 +132,7 @@ namespace Ek_spedycja {
             this.dataGridViewRoute.AllowUserToAddRows = false;
             this.dataGridViewRoute.AllowUserToDeleteRows = false;
             this.dataGridViewRoute.AllowUserToResizeRows = false;
-            this.dataGridViewRoute.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewRoute.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewRoute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRoute.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewRoute.Name = "dataGridViewRoute";
@@ -329,7 +329,7 @@ namespace Ek_spedycja {
             this.dataGridViewVehicle.AllowUserToAddRows = false;
             this.dataGridViewVehicle.AllowUserToDeleteRows = false;
             this.dataGridViewVehicle.AllowUserToResizeRows = false;
-            this.dataGridViewVehicle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewVehicle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewVehicle.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewVehicle.Name = "dataGridViewVehicle";
@@ -629,7 +629,7 @@ namespace Ek_spedycja {
             this.dataGridViewDriver.AllowUserToAddRows = false;
             this.dataGridViewDriver.AllowUserToDeleteRows = false;
             this.dataGridViewDriver.AllowUserToResizeRows = false;
-            this.dataGridViewDriver.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewDriver.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewDriver.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDriver.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewDriver.MultiSelect = false;
@@ -678,7 +678,7 @@ namespace Ek_spedycja {
             this.dataGridViewSalary.AllowUserToAddRows = false;
             this.dataGridViewSalary.AllowUserToDeleteRows = false;
             this.dataGridViewSalary.AllowUserToResizeRows = false;
-            this.dataGridViewSalary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewSalary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewSalary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSalary.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewSalary.Name = "dataGridViewSalary";

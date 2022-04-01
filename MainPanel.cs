@@ -13,7 +13,7 @@ namespace Ek_spedycja {
     public partial class MainPanel : Form {
         private DataAccess dataAccess = new DataAccess();
         Driver driver;
-        int driver_id;
+        int selectedDriver;
 
         public MainPanel() {
             InitializeComponent();
@@ -35,12 +35,14 @@ namespace Ek_spedycja {
         }
 
         private void buttonDriverEdit_Click(object sender, EventArgs e) {
-            driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
-            dataAccess.UpdateData(driver, driver_id);
+            driver = new Driver(selectedDriver, textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
+            driver.Id = selectedDriver;
+            dataAccess.UpdateData(driver);
         }
 
         private void buttonDriverDelete_Click(object sender, EventArgs e) {
-            dataAccess.DeleteData(driver_id);
+            driver = new Driver(selectedDriver);
+            dataAccess.DeleteData(driver);
         }
         private void dataGridViewDriver_SelectionChanged(object sender, EventArgs e)
         {
@@ -49,7 +51,7 @@ namespace Ek_spedycja {
 
             if (dataGridViewDriver.Focused)
             {
-                driver_id = int.Parse(dataGridViewDriver.SelectedRows[0].Cells[0].Value.ToString());
+                selectedDriver = int.Parse(dataGridViewDriver.SelectedRows[0].Cells[0].Value.ToString());
                 textBoxDriverName.Text = dataGridViewDriver.SelectedRows[0].Cells[1].Value.ToString();
                 textBoxDriverSurname.Text = dataGridViewDriver.SelectedRows[0].Cells[2].Value.ToString();
                 textBoxDriverPesel.Text = dataGridViewDriver.SelectedRows[0].Cells[3].Value.ToString();

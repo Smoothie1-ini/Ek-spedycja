@@ -17,12 +17,28 @@ namespace Ek_spedycja.Model {
 
         public static List<Driver> Drivers { get; set; }
 
+        //ADD DRIVER
         public Driver(string name, string surname, string pesel, DateTime birthDate, DateTime hireDate) {
             Name = name;
             Surname = surname;
             Pesel = pesel;
             BirthDate = birthDate;
             HireDate = hireDate;
+        }
+
+        //EDIT DRIVER
+        public Driver(int id, string name, string surname, string pesel, DateTime birthDate, DateTime hireDate) : this(id) {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            Pesel = pesel;
+            BirthDate = birthDate;
+            HireDate = hireDate;
+        }
+
+        //DELETE DRIVER
+        public Driver(int id) {
+            Id = id;
         }
     }
 }
