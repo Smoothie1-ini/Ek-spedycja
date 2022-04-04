@@ -20,6 +20,10 @@ namespace Ek_spedycja {
         Vehicle vehicle;
         int selectedVehicle;
 
+        private RouteDataAccess routeDataAccess = new RouteDataAccess();
+        Route route;
+        int selectedRoute;
+
 
         // Bug z data grid view przy wyborze itemu z indexem 0 
 
@@ -110,13 +114,12 @@ namespace Ek_spedycja {
                 }
             }
         }
-    }
+        #endregion
 
-    #endregion
+        #region ROUTE
 
-    #region ROUTE
-
-    private void tabPage_Enter(object sender, EventArgs e) {
+        private void tabPage_Enter(object sender, EventArgs e) {
+            dataGridViewRoute.DataSource = routeDataAccess.RefreshView();
         }
 
         private void dataGridViewRoute_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -129,7 +132,7 @@ namespace Ek_spedycja {
         }
 
         private void buttonRouteAdd_Click(object sender, EventArgs e) {
-
+            dataGridViewRoute.DataSource = routeDataAccess.RunCommandAndRefresh(routeDataAccess.InsertData, route);
         }
 
         private void buttonRouteEdit_Click(object sender, EventArgs e) {
@@ -147,6 +150,6 @@ namespace Ek_spedycja {
         }
 
         #endregion
-
-
+     
+    }
 }
