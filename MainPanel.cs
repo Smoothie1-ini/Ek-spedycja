@@ -147,7 +147,8 @@ namespace Ek_spedycja {
         }
 
         private void comboBoxRouteDriver_SelectedIndexChanged(object sender, EventArgs e) {
-
+            var s = (DataRow)comboBoxRouteDriver.SelectedItem;
+            MessageBox.Show(s[0].ToString());
         }
         #endregion
 
