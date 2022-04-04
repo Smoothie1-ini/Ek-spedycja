@@ -57,7 +57,7 @@ namespace Ek_spedycja {
         private void dataGridViewDriver_SelectionChanged(object sender, EventArgs e)
         {
 
-            if (dataGridViewDriver.Focused)
+            if (dataGridViewDriver.SelectedRows.Count > 0)
             {
                 selectedDriver = int.Parse(dataGridViewDriver.SelectedRows[0].Cells[0].Value.ToString());
                 textBoxDriverName.Text = dataGridViewDriver.SelectedRows[0].Cells[1].Value.ToString();
@@ -98,7 +98,7 @@ namespace Ek_spedycja {
 
         private void dataGridViewVehicle_SelectionChanged(object sender, EventArgs e) {
 
-            if (dataGridViewVehicle.Focused) {
+            if (dataGridViewVehicle.SelectedRows.Count > 0) {
                 selectedVehicle = int.Parse(dataGridViewVehicle.SelectedRows[0].Cells[0].Value.ToString());
                 textBoxVehicleBrand.Text = dataGridViewVehicle.SelectedRows[0].Cells[1].Value.ToString();
                 textBoxVehicleModel.Text = dataGridViewVehicle.SelectedRows[0].Cells[2].Value.ToString();
@@ -134,7 +134,10 @@ namespace Ek_spedycja {
         }
 
         private void buttonRouteAdd_Click(object sender, EventArgs e) {
-
+            driver = driverDataAccess.GetDriverById(new Driver(selectedDriver));
+            vehicle = vehicleDataAccess.GetVehicleById(new Vehicle(selectedVehicle));
+            // TODO zmiana kontrolki z leave na departure
+            route = new Route(driver, vehicle, dateTimePickerRouteLeave.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
             dataGridViewRoute.DataSource = routeDataAccess.RunCommandAndRefresh(routeDataAccess.InsertData, route);
         }
 
@@ -147,15 +150,24 @@ namespace Ek_spedycja {
         }
 
         private void comboBoxRouteDriver_SelectedIndexChanged(object sender, EventArgs e) {
-            var s = (DataRow)comboBoxRouteDriver.SelectedItem;
-            MessageBox.Show(s[0].ToString());
+            if (comboBoxRouteDriver.Items.Count > 0) {
+                DataRowView s = (DataRowView)comboBoxRouteDriver.SelectedItem;
+                selectedDriver = (int)s[0];
+            }
         }
-        #endregion
+        private void comboBoxRouteVehicle_SelectedIndexChanged(object sender, EventArgs e) {
+            if (comboBoxRouteVehicle.Items.Count > 0) {
+                DataRowView s = (DataRowView)comboBoxRouteVehicle.SelectedItem;
+                selectedVehicle = (int)s[0];
+            }
+        }
 
+        #endregion
         #region SALARY
 
         private void tabPageCompensation_Enter(object sender, EventArgs e) {
         }
+
 
         #endregion
 

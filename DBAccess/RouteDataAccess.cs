@@ -18,7 +18,7 @@ namespace Ek_spedycja.DBAccess {
             string insert = @"INSERT INTO [spedycja].[route] ([id_driver], [id_vehicle], [departure_date], 
                             [planed_arrival_date], [actual_arrival_date], [length], [bid])
                             VALUES
-                            (@id_driver, @id_vehicle, @departure_date, @planned_arrival_date, @actual_arrival_date, @length, @bid)";
+                            (@id_driver, @id_vehicle, @departure_date, @planed_arrival_date, @actual_arrival_date, @length, @bid)";
             try {
                 SqlCommand command = new SqlCommand(insert, connection);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter();
@@ -27,7 +27,7 @@ namespace Ek_spedycja.DBAccess {
                 command.Parameters.AddWithValue("@id_driver", route.Driver.Id);
                 command.Parameters.AddWithValue("@id_vehicle", route.Vehicle.Id);
                 command.Parameters.AddWithValue("@departure_date", route.DepartureDate);
-                command.Parameters.AddWithValue("@planned_arrival_date", route.PlannedArrivalDate);
+                command.Parameters.AddWithValue("@planed_arrival_date", route.PlannedArrivalDate);
                 command.Parameters.AddWithValue("@actual_arrival_date", route.ActualArrivalDate);
                 command.Parameters.AddWithValue("@length", route.Length);
                 command.Parameters.AddWithValue("@bid", route.Bid);
@@ -36,7 +36,7 @@ namespace Ek_spedycja.DBAccess {
                 dataRow["id_driver"] = route.Driver.Id;
                 dataRow["id_vehicle"] = route.Vehicle.Id;
                 dataRow["departure_date"] = route.DepartureDate;
-                dataRow["planned_arrival_date"] = route.PlannedArrivalDate;
+                dataRow["planed_arrival_date"] = route.PlannedArrivalDate;
                 dataRow["actual_arrival_date"] = route.ActualArrivalDate;
                 dataRow["length"] = route.Length;
                 dataRow["bid"] = route.Bid;

@@ -154,6 +154,11 @@ namespace Ek_spedycja {
             // numericUpDownRouteLength
             // 
             this.numericUpDownRouteLength.Location = new System.Drawing.Point(888, 473);
+            this.numericUpDownRouteLength.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.numericUpDownRouteLength.Name = "numericUpDownRouteLength";
             this.numericUpDownRouteLength.Size = new System.Drawing.Size(297, 26);
             this.numericUpDownRouteLength.TabIndex = 55;
@@ -169,7 +174,7 @@ namespace Ek_spedycja {
             // 
             // dateTimePickerRouteActualArrival
             // 
-            this.dateTimePickerRouteActualArrival.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dateTimePickerRouteActualArrival.CustomFormat = "MM/dd/yyyy HH:mm:ss tt";
             this.dateTimePickerRouteActualArrival.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerRouteActualArrival.Location = new System.Drawing.Point(888, 411);
             this.dateTimePickerRouteActualArrival.Name = "dateTimePickerRouteActualArrival";
@@ -187,7 +192,7 @@ namespace Ek_spedycja {
             // 
             // dateTimePickerRoutePlannedArrival
             // 
-            this.dateTimePickerRoutePlannedArrival.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dateTimePickerRoutePlannedArrival.CustomFormat = "MM/dd/yyyy HH:mm:ss tt";
             this.dateTimePickerRoutePlannedArrival.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerRoutePlannedArrival.Location = new System.Drawing.Point(888, 350);
             this.dateTimePickerRoutePlannedArrival.Name = "dateTimePickerRoutePlannedArrival";
@@ -210,6 +215,7 @@ namespace Ek_spedycja {
             this.comboBoxRouteVehicle.Name = "comboBoxRouteVehicle";
             this.comboBoxRouteVehicle.Size = new System.Drawing.Size(297, 28);
             this.comboBoxRouteVehicle.TabIndex = 49;
+            this.comboBoxRouteVehicle.SelectedIndexChanged += new System.EventHandler(this.comboBoxRouteVehicle_SelectedIndexChanged);
             // 
             // comboBoxRouteDriver
             // 
@@ -262,7 +268,7 @@ namespace Ek_spedycja {
             // 
             // dateTimePickerRouteLeave
             // 
-            this.dateTimePickerRouteLeave.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dateTimePickerRouteLeave.CustomFormat = "MM/dd/yyyy HH:mm:ss tt";
             this.dateTimePickerRouteLeave.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerRouteLeave.Location = new System.Drawing.Point(888, 288);
             this.dateTimePickerRouteLeave.Name = "dateTimePickerRouteLeave";

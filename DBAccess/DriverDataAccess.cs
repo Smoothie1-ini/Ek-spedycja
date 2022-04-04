@@ -170,5 +170,11 @@ namespace Ek_spedycja.DBAccess
             }
             return driverTable;
         }
+
+        public Driver GetDriverById(Driver driverID) {
+            DataRow dataRow = dataSet.Tables[driverID.tableName].Rows.Find(driverID.Id);
+            Driver driver = new Driver((int)dataRow[0], dataRow[1].ToString(), dataRow[2].ToString(), dataRow[3].ToString(), DateTime.Parse(dataRow[4].ToString()), DateTime.Parse(dataRow[5].ToString()));
+            return driver;
+        }
     }
 }

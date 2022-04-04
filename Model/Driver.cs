@@ -27,7 +27,7 @@ namespace Ek_spedycja.Model {
         }
 
         //EDIT DRIVER
-        public Driver(int id, string name, string surname, string pesel, DateTime birthDate, DateTime hireDate) : this(id) {
+        public Driver(int id, string name, string surname, string pesel, DateTime birthDate, DateTime hireDate) {
             Id = id;
             Name = name;
             Surname = surname;

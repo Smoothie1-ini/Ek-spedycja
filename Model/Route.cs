@@ -41,11 +41,10 @@ namespace Ek_spedycja.Model {
             PlannedArrivalDate = plannedArrivalDate;
             ActualArrivalDate = actualArrivalDate;
             Length = length;
-            Bid = CountBid();
+            Bid = Math.Round(CountBid(),2);
         }
 
         private double CountBid() {
-
             double length_bid = ReturnLengthBid();
             double work_experience_bid = ReturnWorkExperienceBid();
             double hours_drived = ReturnHoursDrived();
@@ -98,18 +97,18 @@ namespace Ek_spedycja.Model {
 
         private double ReturnHoursDrived()
         {
-            return ActualArrivalDate.Subtract(DepartureDate).TotalHours;
+            return Math.Abs(ActualArrivalDate.Subtract(DepartureDate).TotalHours);
         }
 
         private double ReturnHoursPenaltyHours() {
-            double penalty_hours = PlannedArrivalDate.Subtract(ActualArrivalDate).TotalHours;
-            if (penalty_hours <= 0)
+            double penalty_hours = ActualArrivalDate.Subtract(PlannedArrivalDate).TotalHours;
+            if (penalty_hours < 0)
             {
                 return 0;
             }
             else
             {
-                return penalty_hours;
+                return Math.Abs(penalty_hours);
             }
         }
     }

@@ -170,5 +170,11 @@ namespace Ek_spedycja.DBAccess
             }
             return vehicleTable;
         }
+
+        public Vehicle GetVehicleById(Vehicle vehicleID) {
+            DataRow dataRow = dataSet.Tables[vehicleID.tableName].Rows.Find(vehicleID.Id);
+            Vehicle vehicle = new Vehicle((int)dataRow[0], dataRow[1].ToString(), dataRow[2].ToString(), dataRow[3].ToString(), DateTime.Parse(dataRow[4].ToString()), (bool)dataRow[5]);
+            return vehicle;
+        }
     }
 }
