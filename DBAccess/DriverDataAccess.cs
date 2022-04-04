@@ -157,5 +157,18 @@ namespace Ek_spedycja.DBAccess
             Func(driver);
             return RefreshView();
         }
+
+        public DataTable RefreshComboBox()
+        {
+            DataTable driverTable = new DataTable();
+            try {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_driver, name + N' ' + surname as 'driver' FROM spedycja.driver", base.connection);
+                dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                dataAdapter.Fill(driverTable);
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
+            return driverTable;
+        }
     }
 }

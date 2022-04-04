@@ -158,5 +158,17 @@ namespace Ek_spedycja.DBAccess
             }
             return true;
         }
+
+        public DataTable RefreshComboBox() {
+            DataTable vehicleTable = new DataTable();
+            try {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_vehicle, brand + N' ' + model + N' ' + number as 'vehicle' FROM spedycja.vehicle", base.connection);
+                dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                dataAdapter.Fill(vehicleTable);
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
+            return vehicleTable;
+        }
     }
 }

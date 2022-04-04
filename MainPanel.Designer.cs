@@ -140,7 +140,6 @@ namespace Ek_spedycja {
             this.dataGridViewRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewRoute.Size = new System.Drawing.Size(839, 612);
             this.dataGridViewRoute.TabIndex = 57;
-            this.dataGridViewRoute.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoute_CellContentClick);
             // 
             // buttonRouteCost
             // 
@@ -219,6 +218,7 @@ namespace Ek_spedycja {
             this.comboBoxRouteDriver.Name = "comboBoxRouteDriver";
             this.comboBoxRouteDriver.Size = new System.Drawing.Size(297, 28);
             this.comboBoxRouteDriver.TabIndex = 48;
+            this.comboBoxRouteDriver.SelectedIndexChanged += new System.EventHandler(this.comboBoxRouteDriver_SelectedIndexChanged);
             // 
             // label13
             // 

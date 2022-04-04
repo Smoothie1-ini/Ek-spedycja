@@ -120,10 +120,12 @@ namespace Ek_spedycja {
 
         private void tabPage_Enter(object sender, EventArgs e) {
             dataGridViewRoute.DataSource = routeDataAccess.RefreshView();
-        }
 
-        private void dataGridViewRoute_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            comboBoxRouteDriver.DataSource = driverDataAccess.RefreshComboBox();
+            comboBoxRouteDriver.DisplayMember = "driver";
 
+            comboBoxRouteVehicle.DataSource = vehicleDataAccess.RefreshComboBox();
+            comboBoxRouteVehicle.DisplayMember = "vehicle";
         }
 
         private void buttonRouteCost_Click(object sender, EventArgs e) {
@@ -132,6 +134,7 @@ namespace Ek_spedycja {
         }
 
         private void buttonRouteAdd_Click(object sender, EventArgs e) {
+
             dataGridViewRoute.DataSource = routeDataAccess.RunCommandAndRefresh(routeDataAccess.InsertData, route);
         }
 
@@ -142,6 +145,10 @@ namespace Ek_spedycja {
         private void buttonRouteDelete_Click(object sender, EventArgs e) {
 
         }
+
+        private void comboBoxRouteDriver_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
         #endregion
 
         #region SALARY
@@ -150,6 +157,7 @@ namespace Ek_spedycja {
         }
 
         #endregion
-     
+
+
     }
 }
