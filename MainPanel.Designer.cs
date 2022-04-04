@@ -333,11 +333,13 @@ namespace Ek_spedycja {
             this.dataGridViewVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewVehicle.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewVehicle.Name = "dataGridViewVehicle";
+            this.dataGridViewVehicle.ReadOnly = true;
             this.dataGridViewVehicle.RowHeadersVisible = false;
             this.dataGridViewVehicle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewVehicle.Size = new System.Drawing.Size(839, 612);
             this.dataGridViewVehicle.TabIndex = 32;
             this.dataGridViewVehicle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVehicle_CellContentClick);
+            this.dataGridViewVehicle.SelectionChanged += new System.EventHandler(this.dataGridViewVehicle_SelectionChanged);
             // 
             // radioButtonVehicleNotAvailable
             // 
@@ -353,6 +355,7 @@ namespace Ek_spedycja {
             // radioButtonVehicleAvailable
             // 
             this.radioButtonVehicleAvailable.AutoSize = true;
+            this.radioButtonVehicleAvailable.Checked = true;
             this.radioButtonVehicleAvailable.Location = new System.Drawing.Point(888, 408);
             this.radioButtonVehicleAvailable.Name = "radioButtonVehicleAvailable";
             this.radioButtonVehicleAvailable.Size = new System.Drawing.Size(90, 24);

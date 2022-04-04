@@ -27,7 +27,7 @@ namespace Ek_spedycja.DBAccess
                 sqlParameter.Direction = ParameterDirection.Input;
                 sqlParameter.SourceVersion = DataRowVersion.Original;
 
-                DataRow dataRow = dataSet.Tables["driver"].Rows.Find(driver.Id);
+                DataRow dataRow = dataSet.Tables[driver.tableName].Rows.Find(driver.Id);
                 dataRow.Delete();
 
                 if (dataSet.HasChanges())
@@ -36,7 +36,7 @@ namespace Ek_spedycja.DBAccess
                     if (dataSet.HasErrors)
                         dataSet.RejectChanges();
                     else
-                        dataAdapter.Update(dataSet, "driver");
+                        dataAdapter.Update(dataSet, driver.tableName);
                 }
             }
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace Ek_spedycja.DBAccess
                     if (dataSet.HasErrors)
                         dataSet.RejectChanges();
                     else
-                        dataAdapter.Update(dataSet, "driver");
+                        dataAdapter.Update(dataSet, driver.tableName);
                 }
             }
             catch (Exception ex)
@@ -112,7 +112,7 @@ namespace Ek_spedycja.DBAccess
                 sqlParameter.Direction = ParameterDirection.Input;
                 sqlParameter.SourceVersion = DataRowVersion.Original;
 
-                DataRow dataRow = dataSet.Tables["driver"].Rows.Find(driver.Id);
+                DataRow dataRow = dataSet.Tables[driver.tableName].Rows.Find(driver.Id);
                 dataRow["name"] = driver.Name;
                 dataRow["surname"] = driver.Surname;
                 dataRow["pesel"] = driver.Pesel;
@@ -125,7 +125,7 @@ namespace Ek_spedycja.DBAccess
                     if (dataSet.HasErrors)
                         dataSet.RejectChanges();
                     else
-                        dataAdapter.Update(dataSet, "driver");
+                        dataAdapter.Update(dataSet, driver.tableName);
                 }
 
             }
@@ -139,15 +139,22 @@ namespace Ek_spedycja.DBAccess
         public override DataTable RefreshView()
         {
             DataTable driverView = new DataTable();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_driver as ID, name as Name, surname as Surname, pesel as PESEL, hire_date as 'Date of employment' , birth_date as 'Date of birth' FROM spedycja.driver", base.connection);
-            dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-            dataAdapter.Fill(driverView);
+            try
+            {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_driver as ID, name as Name, surname as Surname, pesel as PESEL, hire_date as 'Date of employment' , birth_date as 'Date of birth' FROM spedycja.driver", base.connection);
+                dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                dataAdapter.Fill(driverView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
             return driverView;
         }
 
-        public override DataTable RunCommandAndRefresh(Func<Driver, bool> DriverFunc, Driver driver)
+        public override DataTable RunCommandAndRefresh(Func<Driver, bool> Func, Driver driver)
         {
-            DriverFunc(driver);
+            Func(driver);
             return RefreshView();
         }
     }

@@ -54,9 +54,9 @@
     <Compile Include="CostsPanel.Designer.cs">
       <DependentUpon>CostsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess.cs" />
     <Compile Include="DBAccess\DataAccess.cs" />
     <Compile Include="DBAccess\DriverDataAccess.cs" />
+    <Compile Include="DBAccess\VehicleDataAccess.cs" />
     <Compile Include="MainPanel.cs">
       <SubType>Form</SubType>
     </Compile>

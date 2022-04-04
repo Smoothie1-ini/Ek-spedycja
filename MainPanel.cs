@@ -16,6 +16,13 @@ namespace Ek_spedycja {
         Driver driver;
         int selectedDriver;
 
+        private VehicleDataAccess vehicleDataAccess = new VehicleDataAccess();
+        Vehicle vehicle;
+        int selectedVehicle;
+
+
+        // Bug z data grid view przy wyborze itemu z indexem 0 
+
         public MainPanel() {
             InitializeComponent();
         }
@@ -36,8 +43,6 @@ namespace Ek_spedycja {
 
         private void buttonDriverEdit_Click(object sender, EventArgs e) {
             driver = new Driver(selectedDriver, textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
-            // To musi być ?
-            driver.Id = selectedDriver;
             dataGridViewDriver.DataSource = driverDataAccess.RunCommandAndRefresh(driverDataAccess.UpdateData, driver);
         }
 
@@ -47,8 +52,6 @@ namespace Ek_spedycja {
         }
         private void dataGridViewDriver_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridViewDriver.CurrentCell.RowIndex < 0)
-                return;
 
             if (dataGridViewDriver.Focused)
             {
@@ -66,29 +69,54 @@ namespace Ek_spedycja {
         #region VEHICLE
 
         private void tabPageVehicle_Enter(object sender, EventArgs e) {
+            dataGridViewVehicle.DataSource = vehicleDataAccess.RefreshView();
         }
 
         private void dataGridViewVehicle_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
         }
 
         private void buttonVehicleAdd_Click(object sender, EventArgs e) {
-
+            bool is_available = radioButtonVehicleAvailable.Checked == true ? true : false;
+            vehicle = new Vehicle(textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, is_available);
+            dataGridViewVehicle.DataSource = vehicleDataAccess.RunCommandAndRefresh(vehicleDataAccess.InsertData, vehicle);
         }
 
         private void buttonVehicleEdit_Click(object sender, EventArgs e) {
-
+            bool is_available = radioButtonVehicleAvailable.Checked == true ? true : false;
+            vehicle = new Vehicle(textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, is_available);
+            dataGridViewVehicle.DataSource = vehicleDataAccess.RunCommandAndRefresh(vehicleDataAccess.UpdateData, vehicle);
         }
 
         private void buttonVehicleDelete_Click(object sender, EventArgs e) {
-
+            vehicle = new Vehicle(selectedVehicle);
+            dataGridViewVehicle.DataSource = vehicleDataAccess.RunCommandAndRefresh(vehicleDataAccess.DeleteData, vehicle);
         }
 
-        #endregion
+        private void dataGridViewVehicle_SelectionChanged(object sender, EventArgs e) {
 
-        #region ROUTE
+            if (dataGridViewVehicle.Focused) {
+                selectedVehicle = int.Parse(dataGridViewVehicle.SelectedRows[0].Cells[0].Value.ToString());
+                textBoxVehicleBrand.Text = dataGridViewVehicle.SelectedRows[0].Cells[1].Value.ToString();
+                textBoxVehicleModel.Text = dataGridViewVehicle.SelectedRows[0].Cells[2].Value.ToString();
+                textBoxVehicleNumber.Text = dataGridViewVehicle.SelectedRows[0].Cells[3].Value.ToString();
+                dateTimePickerVehicleService.Value = DateTime.Parse(dataGridViewVehicle.SelectedRows[0].Cells[4].Value.ToString());
 
-        private void tabPage_Enter(object sender, EventArgs e) {
+                if ((bool)dataGridViewVehicle.SelectedRows[0].Cells[5].Value) {
+                    radioButtonVehicleAvailable.Checked = true;
+                    radioButtonVehicleNotAvailable.Checked = false;
+                } else {
+                    radioButtonVehicleAvailable.Checked = false;
+                    radioButtonVehicleNotAvailable.Checked = true;
+                }
+            }
+        }
+    }
+
+    #endregion
+
+    #region ROUTE
+
+    private void tabPage_Enter(object sender, EventArgs e) {
         }
 
         private void dataGridViewRoute_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -119,6 +147,6 @@ namespace Ek_spedycja {
         }
 
         #endregion
- 
-    }
+
+
 }
