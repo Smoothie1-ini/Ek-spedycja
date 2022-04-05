@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ek_spedycja.Model {
+﻿namespace Ek_spedycja.Model {
     class Cost {
         int Id { get; set; }
         public string CostType { get; set; }

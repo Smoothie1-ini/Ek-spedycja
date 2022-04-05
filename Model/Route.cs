@@ -1,39 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ek_spedycja.Model {
     class Route {
-        int Id { get; set; }
+        public int Id { get; set; }
         public Driver Driver { get; set; }
         public Vehicle Vehicle { get; set; }
         public DateTime DepartureDate { get; set; }
         public DateTime PlannedArrivalDate { get; set; }
         public DateTime ActualArrivalDate { get; set; }
         public decimal Length { get; set; }
+        private double _bid;
+        public double Bid { get { return _bid; } set { _bid = value; } }
 
-        public double Bid { get; set; }
+        public const string TABLE_NAME = "route";
 
         private const double const_bid = 23;
         private const double const_penalty = 50;
-        public readonly string tableName = "route";
 
         List<Cost> Costs { get; set; }
         static List<Route> routes { get; set; }
 
-        public Route(Driver driver, Vehicle vehicle, DateTime departureDate, DateTime plannedArrivalDate, DateTime actualArrivalDate, decimal length, double bid, List<Cost> costs) {
-            Driver = driver;
-            Vehicle = vehicle;
-            DepartureDate = departureDate;
-            PlannedArrivalDate = plannedArrivalDate;
-            ActualArrivalDate = actualArrivalDate;
-            Length = length;
-            Bid = bid;
-            Costs = costs;
-        }
-
+        //ADD ROUTE
         public Route(Driver driver, Vehicle vehicle, DateTime departureDate, DateTime plannedArrivalDate, DateTime actualArrivalDate, decimal length) {
             Driver = driver;
             Vehicle = vehicle;
@@ -41,73 +29,69 @@ namespace Ek_spedycja.Model {
             PlannedArrivalDate = plannedArrivalDate;
             ActualArrivalDate = actualArrivalDate;
             Length = length;
-            Bid = Math.Round(CountBid(),2);
+            Bid = CalculateBid();
         }
 
-        private double CountBid() {
-            double length_bid = ReturnLengthBid();
-            double work_experience_bid = ReturnWorkExperienceBid();
-            double hours_drived = ReturnHoursDrived();
-            double penalty_hours = ReturnHoursPenaltyHours();
+        //EDIT ROUTE
+        public Route(int id, Driver driver, Vehicle vehicle, DateTime departureDate, DateTime plannedArrivalDate, DateTime actualArrivalDate, decimal length) {
+            Id = id;
+            Driver = driver;
+            Vehicle = vehicle;
+            DepartureDate = departureDate;
+            PlannedArrivalDate = plannedArrivalDate;
+            ActualArrivalDate = actualArrivalDate;
+            Length = length;
+            Bid = CalculateBid();
+        }
+
+        //DELETE ROUTE
+        public Route(int id) {
+            Id = id;
+        }
+
+        private double CalculateBid() {
+            double length_bid = GetLengthRate();
+            double work_experience_bid = GetWorkExperienceRate();
+            double hours_drived = GetDrivedHours();
+            double penalty_hours = GetPenaltyHours();
             return (const_bid * hours_drived) + ((double)Length * length_bid * work_experience_bid) - penalty_hours * const_penalty;
         }
 
-
-        private double ReturnLengthBid()
-        {
-            if (Length < 400)
-            {
+        private double GetLengthRate() {
+            if (Length < 400) {
                 return 0.6;
-            }
-            else if (Length < 700)
-            {
+            } else if (Length < 700) {
                 return 0.8;
-            }
-            else if (Length < 1300)
-            {
+            } else if (Length < 1300) {
                 return 0.9;
-            }
-            else
-            {
+            } else {
                 return 1;
             }
         }
 
-        private double ReturnWorkExperienceBid()
-        {
+        private double GetWorkExperienceRate() {
             double YearsExperience = DateTime.Today.Subtract(Driver.HireDate).TotalDays;
 
-            if (YearsExperience <= 2)
-            {
+            if (YearsExperience <= 2) {
                 return 0.8;
-            }
-            else if (YearsExperience <= 5)
-            {
+            } else if (YearsExperience <= 5) {
                 return 0.9;
-            }
-            else if (YearsExperience <= 10)
-            {
+            } else if (YearsExperience <= 10) {
                 return 1;
-            }
-            else
-            {
+            } else {
                 return 1.1;
             }
         }
 
-        private double ReturnHoursDrived()
-        {
+        private double GetDrivedHours() {
             return Math.Abs(ActualArrivalDate.Subtract(DepartureDate).TotalHours);
         }
 
-        private double ReturnHoursPenaltyHours() {
+        private double GetPenaltyHours() {
             double penalty_hours = ActualArrivalDate.Subtract(PlannedArrivalDate).TotalHours;
-            if (penalty_hours < 0)
-            {
+            if (penalty_hours < 0) {
                 return 0;
-            }
-            else
-            {
+            } else {
                 return Math.Abs(penalty_hours);
             }
         }

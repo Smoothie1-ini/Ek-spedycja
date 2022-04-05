@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ek_spedycja.Model {
     class Driver {
@@ -13,7 +10,7 @@ namespace Ek_spedycja.Model {
         public DateTime BirthDate { get; set; }
         public DateTime HireDate { get; set; }
 
-        public readonly string tableName = "driver";
+        public const string TABLE_NAME = "driver";
 
         public static List<Driver> Drivers { get; set; }
 

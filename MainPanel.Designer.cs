@@ -24,7 +24,7 @@ namespace Ek_spedycja {
         /// jej zawartości w edytorze kodu.
         /// </summary>
         private void InitializeComponent() {
-            this.tabPage = new System.Windows.Forms.TabPage();
+            this.tabPageRoute = new System.Windows.Forms.TabPage();
             this.dataGridViewRoute = new System.Windows.Forms.DataGridView();
             this.buttonRouteCost = new System.Windows.Forms.Button();
             this.numericUpDownRouteLength = new System.Windows.Forms.NumericUpDown();
@@ -39,7 +39,7 @@ namespace Ek_spedycja {
             this.buttonRouteDelete = new System.Windows.Forms.Button();
             this.buttonRouteEdit = new System.Windows.Forms.Button();
             this.buttonRouteAdd = new System.Windows.Forms.Button();
-            this.dateTimePickerRouteLeave = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerRouteDeparture = new System.Windows.Forms.DateTimePicker();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -77,7 +77,7 @@ namespace Ek_spedycja {
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewDriver = new System.Windows.Forms.DataGridView();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPageCompensation = new System.Windows.Forms.TabPage();
+            this.tabPageSalary = new System.Windows.Forms.TabPage();
             this.dataGridViewSalary = new System.Windows.Forms.DataGridView();
             this.comboBoxSalaryYear = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -86,7 +86,7 @@ namespace Ek_spedycja {
             this.label23 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.tabPage.SuspendLayout();
+            this.tabPageRoute.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRouteLength)).BeginInit();
             this.tabPageVehicle.SuspendLayout();
@@ -94,38 +94,38 @@ namespace Ek_spedycja {
             this.tabPageDriver.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).BeginInit();
             this.tabControl.SuspendLayout();
-            this.tabPageCompensation.SuspendLayout();
+            this.tabPageSalary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalary)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabPage
+            // tabPageRoute
             // 
-            this.tabPage.Controls.Add(this.dataGridViewRoute);
-            this.tabPage.Controls.Add(this.buttonRouteCost);
-            this.tabPage.Controls.Add(this.numericUpDownRouteLength);
-            this.tabPage.Controls.Add(this.label14);
-            this.tabPage.Controls.Add(this.dateTimePickerRouteActualArrival);
-            this.tabPage.Controls.Add(this.label20);
-            this.tabPage.Controls.Add(this.dateTimePickerRoutePlannedArrival);
-            this.tabPage.Controls.Add(this.label19);
-            this.tabPage.Controls.Add(this.comboBoxRouteVehicle);
-            this.tabPage.Controls.Add(this.comboBoxRouteDriver);
-            this.tabPage.Controls.Add(this.label13);
-            this.tabPage.Controls.Add(this.buttonRouteDelete);
-            this.tabPage.Controls.Add(this.buttonRouteEdit);
-            this.tabPage.Controls.Add(this.buttonRouteAdd);
-            this.tabPage.Controls.Add(this.dateTimePickerRouteLeave);
-            this.tabPage.Controls.Add(this.label16);
-            this.tabPage.Controls.Add(this.label17);
-            this.tabPage.Controls.Add(this.label18);
-            this.tabPage.Location = new System.Drawing.Point(4, 29);
-            this.tabPage.Name = "tabPage";
-            this.tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage.Size = new System.Drawing.Size(1232, 624);
-            this.tabPage.TabIndex = 2;
-            this.tabPage.Text = "Kurs";
-            this.tabPage.UseVisualStyleBackColor = true;
-            this.tabPage.Enter += new System.EventHandler(this.tabPage_Enter);
+            this.tabPageRoute.Controls.Add(this.dataGridViewRoute);
+            this.tabPageRoute.Controls.Add(this.buttonRouteCost);
+            this.tabPageRoute.Controls.Add(this.numericUpDownRouteLength);
+            this.tabPageRoute.Controls.Add(this.label14);
+            this.tabPageRoute.Controls.Add(this.dateTimePickerRouteActualArrival);
+            this.tabPageRoute.Controls.Add(this.label20);
+            this.tabPageRoute.Controls.Add(this.dateTimePickerRoutePlannedArrival);
+            this.tabPageRoute.Controls.Add(this.label19);
+            this.tabPageRoute.Controls.Add(this.comboBoxRouteVehicle);
+            this.tabPageRoute.Controls.Add(this.comboBoxRouteDriver);
+            this.tabPageRoute.Controls.Add(this.label13);
+            this.tabPageRoute.Controls.Add(this.buttonRouteDelete);
+            this.tabPageRoute.Controls.Add(this.buttonRouteEdit);
+            this.tabPageRoute.Controls.Add(this.buttonRouteAdd);
+            this.tabPageRoute.Controls.Add(this.dateTimePickerRouteDeparture);
+            this.tabPageRoute.Controls.Add(this.label16);
+            this.tabPageRoute.Controls.Add(this.label17);
+            this.tabPageRoute.Controls.Add(this.label18);
+            this.tabPageRoute.Location = new System.Drawing.Point(4, 29);
+            this.tabPageRoute.Name = "tabPageRoute";
+            this.tabPageRoute.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageRoute.Size = new System.Drawing.Size(1232, 624);
+            this.tabPageRoute.TabIndex = 2;
+            this.tabPageRoute.Text = "Kurs";
+            this.tabPageRoute.UseVisualStyleBackColor = true;
+            this.tabPageRoute.Enter += new System.EventHandler(this.tabPageRoute_Enter);
             // 
             // dataGridViewRoute
             // 
@@ -136,10 +136,12 @@ namespace Ek_spedycja {
             this.dataGridViewRoute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRoute.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewRoute.Name = "dataGridViewRoute";
+            this.dataGridViewRoute.ReadOnly = true;
             this.dataGridViewRoute.RowHeadersVisible = false;
             this.dataGridViewRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewRoute.Size = new System.Drawing.Size(839, 612);
             this.dataGridViewRoute.TabIndex = 57;
+            this.dataGridViewRoute.SelectionChanged += new System.EventHandler(this.dataGridViewRoute_SelectionChanged);
             // 
             // buttonRouteCost
             // 
@@ -266,14 +268,14 @@ namespace Ek_spedycja {
             this.buttonRouteAdd.UseVisualStyleBackColor = true;
             this.buttonRouteAdd.Click += new System.EventHandler(this.buttonRouteAdd_Click);
             // 
-            // dateTimePickerRouteLeave
+            // dateTimePickerRouteDeparture
             // 
-            this.dateTimePickerRouteLeave.CustomFormat = "MM/dd/yyyy HH:mm:ss tt";
-            this.dateTimePickerRouteLeave.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerRouteLeave.Location = new System.Drawing.Point(888, 288);
-            this.dateTimePickerRouteLeave.Name = "dateTimePickerRouteLeave";
-            this.dateTimePickerRouteLeave.Size = new System.Drawing.Size(297, 26);
-            this.dateTimePickerRouteLeave.TabIndex = 40;
+            this.dateTimePickerRouteDeparture.CustomFormat = "MM/dd/yyyy HH:mm:ss tt";
+            this.dateTimePickerRouteDeparture.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerRouteDeparture.Location = new System.Drawing.Point(888, 288);
+            this.dateTimePickerRouteDeparture.Name = "dateTimePickerRouteDeparture";
+            this.dateTimePickerRouteDeparture.Size = new System.Drawing.Size(297, 26);
+            this.dateTimePickerRouteDeparture.TabIndex = 40;
             // 
             // label16
             // 
@@ -654,8 +656,8 @@ namespace Ek_spedycja {
             // 
             this.tabControl.Controls.Add(this.tabPageDriver);
             this.tabControl.Controls.Add(this.tabPageVehicle);
-            this.tabControl.Controls.Add(this.tabPage);
-            this.tabControl.Controls.Add(this.tabPageCompensation);
+            this.tabControl.Controls.Add(this.tabPageRoute);
+            this.tabControl.Controls.Add(this.tabPageSalary);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
@@ -663,24 +665,24 @@ namespace Ek_spedycja {
             this.tabControl.Size = new System.Drawing.Size(1240, 657);
             this.tabControl.TabIndex = 0;
             // 
-            // tabPageCompensation
+            // tabPageSalary
             // 
-            this.tabPageCompensation.Controls.Add(this.dataGridViewSalary);
-            this.tabPageCompensation.Controls.Add(this.comboBoxSalaryYear);
-            this.tabPageCompensation.Controls.Add(this.label15);
-            this.tabPageCompensation.Controls.Add(this.comboBoxSalaryMonth);
-            this.tabPageCompensation.Controls.Add(this.comboBoxSalaryDriver);
-            this.tabPageCompensation.Controls.Add(this.label23);
-            this.tabPageCompensation.Controls.Add(this.label25);
-            this.tabPageCompensation.Controls.Add(this.label26);
-            this.tabPageCompensation.Location = new System.Drawing.Point(4, 29);
-            this.tabPageCompensation.Name = "tabPageCompensation";
-            this.tabPageCompensation.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCompensation.Size = new System.Drawing.Size(1232, 624);
-            this.tabPageCompensation.TabIndex = 3;
-            this.tabPageCompensation.Text = "Rozliczenie";
-            this.tabPageCompensation.UseVisualStyleBackColor = true;
-            this.tabPageCompensation.Enter += new System.EventHandler(this.tabPageCompensation_Enter);
+            this.tabPageSalary.Controls.Add(this.dataGridViewSalary);
+            this.tabPageSalary.Controls.Add(this.comboBoxSalaryYear);
+            this.tabPageSalary.Controls.Add(this.label15);
+            this.tabPageSalary.Controls.Add(this.comboBoxSalaryMonth);
+            this.tabPageSalary.Controls.Add(this.comboBoxSalaryDriver);
+            this.tabPageSalary.Controls.Add(this.label23);
+            this.tabPageSalary.Controls.Add(this.label25);
+            this.tabPageSalary.Controls.Add(this.label26);
+            this.tabPageSalary.Location = new System.Drawing.Point(4, 29);
+            this.tabPageSalary.Name = "tabPageSalary";
+            this.tabPageSalary.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSalary.Size = new System.Drawing.Size(1232, 624);
+            this.tabPageSalary.TabIndex = 3;
+            this.tabPageSalary.Text = "Rozliczenie";
+            this.tabPageSalary.UseVisualStyleBackColor = true;
+            this.tabPageSalary.Enter += new System.EventHandler(this.tabPageSalary_Enter);
             // 
             // dataGridViewSalary
             // 
@@ -691,6 +693,7 @@ namespace Ek_spedycja {
             this.dataGridViewSalary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSalary.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewSalary.Name = "dataGridViewSalary";
+            this.dataGridViewSalary.ReadOnly = true;
             this.dataGridViewSalary.RowHeadersVisible = false;
             this.dataGridViewSalary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewSalary.Size = new System.Drawing.Size(839, 612);
@@ -769,8 +772,8 @@ namespace Ek_spedycja {
             this.Name = "MainPanel";
             this.Text = "Ek-Spedycja FIN_APP";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabPage.ResumeLayout(false);
-            this.tabPage.PerformLayout();
+            this.tabPageRoute.ResumeLayout(false);
+            this.tabPageRoute.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRouteLength)).EndInit();
             this.tabPageVehicle.ResumeLayout(false);
@@ -780,8 +783,8 @@ namespace Ek_spedycja {
             this.tabPageDriver.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).EndInit();
             this.tabControl.ResumeLayout(false);
-            this.tabPageCompensation.ResumeLayout(false);
-            this.tabPageCompensation.PerformLayout();
+            this.tabPageSalary.ResumeLayout(false);
+            this.tabPageSalary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalary)).EndInit();
             this.ResumeLayout(false);
 
@@ -789,7 +792,7 @@ namespace Ek_spedycja {
 
         #endregion
 
-        private System.Windows.Forms.TabPage tabPage;
+        private System.Windows.Forms.TabPage tabPageRoute;
         private System.Windows.Forms.Button buttonRouteCost;
         private System.Windows.Forms.NumericUpDown numericUpDownRouteLength;
         private System.Windows.Forms.Label label14;
@@ -803,7 +806,7 @@ namespace Ek_spedycja {
         private System.Windows.Forms.Button buttonRouteDelete;
         private System.Windows.Forms.Button buttonRouteEdit;
         private System.Windows.Forms.Button buttonRouteAdd;
-        private System.Windows.Forms.DateTimePicker dateTimePickerRouteLeave;
+        private System.Windows.Forms.DateTimePicker dateTimePickerRouteDeparture;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
@@ -840,7 +843,7 @@ namespace Ek_spedycja {
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridViewDriver;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPageCompensation;
+        private System.Windows.Forms.TabPage tabPageSalary;
         private System.Windows.Forms.ComboBox comboBoxSalaryMonth;
         private System.Windows.Forms.ComboBox comboBoxSalaryDriver;
         private System.Windows.Forms.Label label23;

@@ -38,7 +38,7 @@ namespace Ek_spedycja.DBAccess
         public abstract bool InsertData(T value);
         public abstract bool UpdateData(T value);
         public abstract bool DeleteData(T value);
-        public abstract DataTable RunCommandAndRefresh(Func<T, bool> Func, T value);
-        public abstract DataTable RefreshView();
+        public abstract DataTable RunMethodAndRefresh(Func<T, bool> Func, T value);
+        public abstract DataTable GetData();
     }
 }
