@@ -37,5 +37,9 @@ namespace Ek_spedycja.Model {
         public Driver(int id) {
             Id = id;
         }
+
+        public override string ToString() {
+            return $"{Name} {Surname} ({Pesel})";
+        }
     }
 }

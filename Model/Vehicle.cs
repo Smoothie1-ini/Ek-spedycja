@@ -36,5 +36,9 @@ namespace Ek_spedycja.Model {
         public Vehicle(int id) {
             Id = id;
         }
+
+        public override string ToString() {
+            return $"{Brand} {Model} ({Number})";
+        }
     }
 }

@@ -83,14 +83,16 @@ namespace Ek_spedycja.DBAccess {
         }
 
         public override DataTable GetData() {
-            string select = @"SELECT spedycja.route.id_route as ID, 
+            string select = @"SELECT spedycja.route.id_route as id_route, 
                             spedycja.driver.name + N' ' + spedycja.driver.surname AS Driver, 
                             spedycja.vehicle.brand + N' ' + spedycja.vehicle.model + N' ' + spedycja.vehicle.number AS Vehicle, 
                             spedycja.route.departure_date as 'Departure date',
                             spedycja.route.planed_arrival_date as 'Planed arrival date', 
                             spedycja.route.actual_arrival_date as 'Actual arrival date', 
                             spedycja.route.length as Length, 
-                            spedycja.route.bid as Bid
+                            spedycja.route.bid as Bid,
+                            spedycja.route.id_driver as id_driver,
+                            spedycja.route.id_vehicle as id_vehicle
                             FROM spedycja.route 
                             INNER JOIN spedycja.driver ON spedycja.route.id_driver = spedycja.driver.id_driver 
                             INNER JOIN spedycja.vehicle ON spedycja.route.id_vehicle = spedycja.vehicle.id_vehicle";
@@ -129,7 +131,7 @@ namespace Ek_spedycja.DBAccess {
                 command.Parameters.AddWithValue("@actual_arrival_date", route.ActualArrivalDate);
                 command.Parameters.AddWithValue("@length", route.Length);
                 command.Parameters.AddWithValue("@bid", route.Bid);
-                SqlParameter sqlParameter = dataAdapter.UpdateCommand.Parameters.AddWithValue("@id_vehicle", route.Id);
+                SqlParameter sqlParameter = dataAdapter.UpdateCommand.Parameters.AddWithValue("@id_route", route.Id);
 
                 sqlParameter.Direction = ParameterDirection.Input;
                 sqlParameter.SourceVersion = DataRowVersion.Original;

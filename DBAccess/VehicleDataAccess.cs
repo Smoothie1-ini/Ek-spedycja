@@ -1,5 +1,6 @@
 ﻿using Ek_spedycja.Model;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -141,22 +142,20 @@ namespace Ek_spedycja.DBAccess {
             return true;
         }
 
-        public DataTable RefreshComboBox() {
-            DataTable vehicleTable = new DataTable();
-            try {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_vehicle, brand + N' ' + model + N' ' + number as 'vehicle' FROM spedycja.vehicle", base.connection);
-                dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                dataAdapter.Fill(vehicleTable);
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message, "Error");
+        public List<Vehicle> GetVehicles() {
+            DataTable vehicleTable = GetData();
+            List<Vehicle> vehicles = new List<Vehicle>();
+            for (int i = 0; i < vehicleTable.Rows.Count; i++) {
+                vehicles.Add(new Vehicle(
+                    int.Parse(vehicleTable.Rows[i][0].ToString()),
+                    vehicleTable.Rows[i][1].ToString(),
+                    vehicleTable.Rows[i][2].ToString(),
+                    vehicleTable.Rows[i][3].ToString(),
+                    DateTime.Parse(vehicleTable.Rows[i][4].ToString()),
+                    bool.Parse(vehicleTable.Rows[i][5].ToString()))
+                    );
             }
-            return vehicleTable;
-        }
-
-        public Vehicle GetVehicleById(Vehicle vehicleID) {
-            DataRow dataRow = dataSet.Tables[Vehicle.TABLE_NAME].Rows.Find(vehicleID.Id);
-            Vehicle vehicle = new Vehicle((int)dataRow[0], dataRow[1].ToString(), dataRow[2].ToString(), dataRow[3].ToString(), DateTime.Parse(dataRow[4].ToString()), (bool)dataRow[5]);
-            return vehicle;
+            return vehicles;
         }
     }
 }

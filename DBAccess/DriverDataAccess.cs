@@ -1,5 +1,6 @@
 ﻿using Ek_spedycja.Model;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -141,22 +142,20 @@ namespace Ek_spedycja.DBAccess {
             return GetData();
         }
 
-        public DataTable GetDrivers() {
-            DataTable driverTable = new DataTable();
-            try {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT id_driver, name + N' ' + surname as 'driver' FROM spedycja.driver", base.connection);
-                dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                dataAdapter.Fill(driverTable);
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message, "Error");
+        public List<Driver> GetDrivers() {
+             DataTable driverTable = GetData();
+            List<Driver> drivers = new List<Driver>();
+            for (int i = 0; i < driverTable.Rows.Count; i++) {
+                drivers.Add(new Driver(
+                    int.Parse(driverTable.Rows[i][0].ToString()),
+                    driverTable.Rows[i][1].ToString(),
+                    driverTable.Rows[i][2].ToString(),
+                    driverTable.Rows[i][3].ToString(),
+                    DateTime.Parse(driverTable.Rows[i][4].ToString()),
+                    DateTime.Parse(driverTable.Rows[i][5].ToString()))
+                    );
             }
-            return driverTable;
-        }
-
-        public Driver GetDriverById(Driver driverID) {
-            DataRow dataRow = dataSet.Tables[Driver.TABLE_NAME].Rows.Find(driverID.Id);
-            Driver driver = new Driver((int)dataRow[0], dataRow[1].ToString(), dataRow[2].ToString(), dataRow[3].ToString(), DateTime.Parse(dataRow[4].ToString()), DateTime.Parse(dataRow[5].ToString()));
-            return driver;
+            return drivers;
         }
     }
 }
