@@ -156,11 +156,6 @@ namespace Ek_spedycja {
             // numericUpDownRouteLength
             // 
             this.numericUpDownRouteLength.Location = new System.Drawing.Point(888, 473);
-            this.numericUpDownRouteLength.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
             this.numericUpDownRouteLength.Name = "numericUpDownRouteLength";
             this.numericUpDownRouteLength.Size = new System.Drawing.Size(297, 26);
             this.numericUpDownRouteLength.TabIndex = 55;

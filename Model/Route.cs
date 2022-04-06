@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace Ek_spedycja.Model {
-    class Route {
+    public class Route {
         public int Id { get; set; }
         public Driver Driver { get; set; }
         public Vehicle Vehicle { get; set; }

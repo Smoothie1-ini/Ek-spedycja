@@ -21,6 +21,8 @@ namespace Ek_spedycja {
 
         public MainPanel() {
             InitializeComponent();
+            numericUpDownRouteLength.Maximum = decimal.MaxValue;
+            numericUpDownRouteLength.Minimum = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -115,7 +117,7 @@ namespace Ek_spedycja {
         }
 
         private void buttonRouteCost_Click(object sender, EventArgs e) {
-            Form costsPanel = new CostsPanel();
+            Form costsPanel = new CostsPanel(new Route(selectedRouteId));
             costsPanel.Show();
         }
 

@@ -108,7 +108,6 @@ namespace Ek_spedycja.DBAccess {
             return new DataTable();
         }
         
-        //usuwa ale nie odświeża
         public override DataTable RunMethodAndRefresh(Func<Route, bool> Func, Route route) {
             Func(route);
             return GetData();

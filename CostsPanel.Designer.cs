@@ -75,10 +75,14 @@ namespace Ek_spedycja {
             // 
             this.comboBoxCostType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.comboBoxCostType.FormattingEnabled = true;
+            this.comboBoxCostType.Items.AddRange(new object[] {
+            "X",
+            "y"});
             this.comboBoxCostType.Location = new System.Drawing.Point(118, 184);
             this.comboBoxCostType.Name = "comboBoxCostType";
             this.comboBoxCostType.Size = new System.Drawing.Size(197, 28);
             this.comboBoxCostType.TabIndex = 48;
+            this.comboBoxCostType.SelectedIndexChanged += new System.EventHandler(this.comboBoxCostType_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -131,14 +135,16 @@ namespace Ek_spedycja {
             this.dataGridViewCost.AllowUserToAddRows = false;
             this.dataGridViewCost.AllowUserToDeleteRows = false;
             this.dataGridViewCost.AllowUserToResizeRows = false;
-            this.dataGridViewCost.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewCost.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewCost.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCost.Location = new System.Drawing.Point(12, 12);
             this.dataGridViewCost.Name = "dataGridViewCost";
+            this.dataGridViewCost.ReadOnly = true;
             this.dataGridViewCost.RowHeadersVisible = false;
             this.dataGridViewCost.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewCost.Size = new System.Drawing.Size(776, 166);
             this.dataGridViewCost.TabIndex = 55;
+            this.dataGridViewCost.SelectionChanged += new System.EventHandler(this.dataGridViewCost_SelectionChanged);
             // 
             // CostsPanel
             // 
@@ -160,6 +166,7 @@ namespace Ek_spedycja {
             this.MinimumSize = new System.Drawing.Size(816, 384);
             this.Name = "CostsPanel";
             this.Text = "Zarządzanie kosztami kursu";
+            this.Load += new System.EventHandler(this.CostsPanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCost)).EndInit();
             this.ResumeLayout(false);
