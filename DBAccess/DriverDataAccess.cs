@@ -122,7 +122,7 @@ namespace Ek_spedycja.DBAccess {
                             name as Name, 
                             surname as Surname, 
                             pesel as PESEL, 
-                            hire_date as 'Date of employment' , 
+                            hire_date as 'Date of hire' , 
                             birth_date as 'Date of birth' 
                             FROM spedycja.driver";
             try {

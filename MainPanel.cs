@@ -1,6 +1,8 @@
 ﻿using Ek_spedycja.DBAccess;
 using Ek_spedycja.Model;
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Ek_spedycja {
@@ -19,18 +21,23 @@ namespace Ek_spedycja {
 
         public MainPanel() {
             InitializeComponent();
-            numericUpDownRouteLength.Maximum = decimal.MaxValue;
-            numericUpDownRouteLength.Minimum = 0;
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            FormConfiguration();
+        }
 
+        private void FormConfiguration() {
+            numericUpDownRouteLength.Maximum = decimal.MaxValue;
+            numericUpDownRouteLength.Minimum = 0;
         }
 
         #region DRIVER
 
         private void tabPageDriver_Enter(object sender, EventArgs e) {
             dataGridViewDriver.DataSource = driverDataAccess.GetData();
+            dataGridViewDriver.Columns[0].Visible = false;
         }
 
         private void buttonDriverAdd_Click(object sender, EventArgs e) {
@@ -65,10 +72,7 @@ namespace Ek_spedycja {
 
         private void tabPageVehicle_Enter(object sender, EventArgs e) {
             dataGridViewVehicle.DataSource = vehicleDataAccess.GetData();
-        }
-
-        private void dataGridViewVehicle_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
+            dataGridViewVehicle.Columns[0].Visible = false;
         }
 
         private void buttonVehicleAdd_Click(object sender, EventArgs e) {
@@ -112,6 +116,9 @@ namespace Ek_spedycja {
             dataGridViewRoute.DataSource = routeDataAccess.GetData();
             comboBoxRouteDriver.DataSource = driverDataAccess.GetDrivers();
             comboBoxRouteVehicle.DataSource = vehicleDataAccess.GetVehicles();
+            dataGridViewRoute.Columns[0].Visible = false;
+            dataGridViewRoute.Columns[8].Visible = false;
+            dataGridViewRoute.Columns[9].Visible = false;
         }
 
         private void buttonRouteCost_Click(object sender, EventArgs e) {

@@ -20,8 +20,7 @@ namespace Ek_spedycja {
         private void CostsPanel_Load(object sender, EventArgs e) {
             dataGridViewCost.DataSource = costDataAccess.GetData(new Cost(route));
             comboBoxCostType.DataSource = costDataAccess.GetCostTypes();
-            comboBoxCostType.ValueMember = "id_cost_type";
-            comboBoxCostType.DisplayMember = "name";
+            FormConfiguration();
         }
 
         private void buttonCostAdd_Click(object sender, EventArgs e) {
@@ -46,6 +45,14 @@ namespace Ek_spedycja {
                 richTextBoxCostDescription.Text = dataGridViewCost.SelectedRows[0].Cells[2].Value.ToString();
                 numericUpDownCostValue.Value = decimal.Parse(dataGridViewCost.SelectedRows[0].Cells[3].Value.ToString());
             }
+        }
+
+        private void FormConfiguration() {
+            dataGridViewCost.Columns[0].Visible = false;
+            dataGridViewCost.Columns[1].Width = 75;
+            dataGridViewCost.Columns[3].Width = 75;
+            comboBoxCostType.ValueMember = "id_cost_type";
+            comboBoxCostType.DisplayMember = "name";
         }
     }
 }

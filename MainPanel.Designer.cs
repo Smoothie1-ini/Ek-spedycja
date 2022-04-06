@@ -339,7 +339,6 @@ namespace Ek_spedycja {
             this.dataGridViewVehicle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewVehicle.Size = new System.Drawing.Size(839, 612);
             this.dataGridViewVehicle.TabIndex = 32;
-            this.dataGridViewVehicle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVehicle_CellContentClick);
             this.dataGridViewVehicle.SelectionChanged += new System.EventHandler(this.dataGridViewVehicle_SelectionChanged);
             // 
             // radioButtonVehicleNotAvailable
