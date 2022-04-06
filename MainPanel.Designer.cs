@@ -696,11 +696,13 @@ namespace Ek_spedycja {
             // 
             // comboBoxSalaryYear
             // 
+            this.comboBoxSalaryYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSalaryYear.FormattingEnabled = true;
             this.comboBoxSalaryYear.Location = new System.Drawing.Point(888, 287);
             this.comboBoxSalaryYear.Name = "comboBoxSalaryYear";
             this.comboBoxSalaryYear.Size = new System.Drawing.Size(297, 28);
             this.comboBoxSalaryYear.TabIndex = 76;
+            this.comboBoxSalaryYear.SelectedIndexChanged += new System.EventHandler(this.comboBoxSalaryYear_SelectedIndexChanged);
             // 
             // label15
             // 
@@ -713,19 +715,23 @@ namespace Ek_spedycja {
             // 
             // comboBoxSalaryMonth
             // 
+            this.comboBoxSalaryMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSalaryMonth.FormattingEnabled = true;
             this.comboBoxSalaryMonth.Location = new System.Drawing.Point(888, 224);
             this.comboBoxSalaryMonth.Name = "comboBoxSalaryMonth";
             this.comboBoxSalaryMonth.Size = new System.Drawing.Size(297, 28);
             this.comboBoxSalaryMonth.TabIndex = 67;
+            this.comboBoxSalaryMonth.SelectedIndexChanged += new System.EventHandler(this.comboBoxSalaryMonth_SelectedIndexChanged);
             // 
             // comboBoxSalaryDriver
             // 
+            this.comboBoxSalaryDriver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSalaryDriver.FormattingEnabled = true;
             this.comboBoxSalaryDriver.Location = new System.Drawing.Point(888, 161);
             this.comboBoxSalaryDriver.Name = "comboBoxSalaryDriver";
             this.comboBoxSalaryDriver.Size = new System.Drawing.Size(297, 28);
             this.comboBoxSalaryDriver.TabIndex = 66;
+            this.comboBoxSalaryDriver.SelectedIndexChanged += new System.EventHandler(this.comboBoxSalaryDriver_SelectedIndexChanged);
             // 
             // label23
             // 

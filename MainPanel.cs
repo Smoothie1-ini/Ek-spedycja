@@ -1,6 +1,8 @@
 ﻿using Ek_spedycja.DBAccess;
 using Ek_spedycja.Model;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Ek_spedycja {
@@ -18,6 +20,8 @@ namespace Ek_spedycja {
         int selectedRouteId;
         Driver selectedDriver;
         Vehicle selectedVehicle;
+        int selectedMonth;
+        int selectedYear;
 
         public MainPanel() {
             InitializeComponent();
@@ -26,6 +30,7 @@ namespace Ek_spedycja {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            ComboBoxHandlers();
 
         }
 
@@ -174,10 +179,45 @@ namespace Ek_spedycja {
         #region SALARY
 
         private void tabPageSalary_Enter(object sender, EventArgs e) {
+            
+            dataGridViewSalary.DataSource = routeDataAccess.GetSalaries();
+            comboBoxSalaryDriver.Items.Clear();
+            comboBoxSalaryMonth.Items.Clear();
+            comboBoxSalaryYear.Items.Clear();
 
+            routeDataAccess.GetRange("MONTH").ForEach(i => comboBoxSalaryMonth.Items.Add(i));
+            routeDataAccess.GetRange("YEAR").ForEach(i => comboBoxSalaryYear.Items.Add(i));
+            driverDataAccess.GetDrivers().ForEach(driver => comboBoxSalaryDriver.Items.Add(driver));
+        }
+        private void ComboBoxHandlers() {
+            List<ComboBox> cbs = new List<ComboBox>() { comboBoxSalaryDriver, comboBoxSalaryMonth, comboBoxSalaryYear };
+
+            foreach (ComboBox cb in cbs) {
+                cb.SelectedIndexChanged += new EventHandler(ComboHandler);
+            }
         }
 
-        #endregion
+        private void ComboHandler(object sender, EventArgs e) {
+            dataGridViewSalary.DataSource = routeDataAccess.GetSalaries(selectedDriver, selectedMonth, selectedYear);
+        }
 
+        private void comboBoxSalaryDriver_SelectedIndexChanged(object sender, EventArgs e) {
+            if (comboBoxSalaryDriver.Items.Count > 0) {
+                selectedDriver = (Driver)comboBoxSalaryDriver.SelectedItem;
+            }
+        }
+
+        private void comboBoxSalaryMonth_SelectedIndexChanged(object sender, EventArgs e) {
+            if (comboBoxSalaryMonth.Items.Count > 0) {
+                selectedMonth = (int)comboBoxSalaryMonth.SelectedItem;
+            }
+        }
+
+        private void comboBoxSalaryYear_SelectedIndexChanged(object sender, EventArgs e) {
+            if (comboBoxSalaryYear.Items.Count > 0) {
+                selectedYear = (int)comboBoxSalaryYear.SelectedItem;
+            }
+        }
+        #endregion
     }
 }

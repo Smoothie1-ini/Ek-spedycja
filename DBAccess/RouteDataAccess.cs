@@ -158,5 +158,51 @@ namespace Ek_spedycja.DBAccess {
             }
             return true;
         }
+
+        public List<int> GetRange(string param) {
+            string select = $"select MIN({param}(departure_date)), MAX({param}(departure_date)) from [spedycja].[route]";
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
+            dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            DataTable routeView = new DataTable();
+            dataAdapter.Fill(routeView);
+
+            int start_range = (int)routeView.Rows[0][0];
+            int end_range = (int)routeView.Rows[0][1];
+            return Enumerable.Range(start_range, end_range - start_range +1).ToList<int>();
+        }
+
+        public DataTable GetSalaries(Driver driver = null, int month = 0, int year = 0) {
+
+
+            string str_driver = driver != null ? $" AND route.id_driver = {driver.Id} " : " ";
+            string str_month = month != 0 ? $" AND MONTH(route.departure_date) = {month} " : " ";
+            string str_year = month != 0 ? $" AND YEAR(route.departure_date) = {year} " : " ";
+
+
+            string select = $@"SELECT 
+                            driver.name + N' ' + driver.surname as 'Driver',
+                            MONTH(route.departure_date) as 'Month',
+                            YEAR(route.departure_date) as 'Year',
+                            SUM(route.bid) as 'Salary'
+                            FROM spedycja.route
+                            INNER JOIN spedycja.driver ON spedycja.route.id_driver = spedycja.driver.id_driver
+                            WHERE (driver.name + N' ' + driver.surname) <> ''
+                            {str_driver}
+                            {str_month}
+                            {str_year}
+                            GROUP BY driver.name + N' ' + driver.surname, MONTH(route.departure_date), YEAR(route.departure_date) ";
+
+            try {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
+                dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                DataTable routeView = new DataTable();
+                dataAdapter.Fill(routeView);
+                return routeView;
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
+            return new DataTable();
+        }
     }
 }

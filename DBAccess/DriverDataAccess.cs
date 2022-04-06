@@ -141,9 +141,8 @@ namespace Ek_spedycja.DBAccess {
             Func(driver);
             return GetData();
         }
-
         public List<Driver> GetDrivers() {
-             DataTable driverTable = GetData();
+            DataTable driverTable = GetData();
             List<Driver> drivers = new List<Driver>();
             for (int i = 0; i < driverTable.Rows.Count; i++) {
                 drivers.Add(new Driver(
