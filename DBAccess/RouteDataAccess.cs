@@ -161,15 +161,18 @@ namespace Ek_spedycja.DBAccess {
 
         public List<int> GetRange(string param) {
             string select = $"select MIN({param}(departure_date)), MAX({param}(departure_date)) from [spedycja].[route]";
-
             SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
             dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
             DataTable routeView = new DataTable();
             dataAdapter.Fill(routeView);
 
-            int start_range = (int)routeView.Rows[0][0];
-            int end_range = (int)routeView.Rows[0][1];
-            return Enumerable.Range(start_range, end_range - start_range +1).ToList<int>();
+
+            if (routeView.Rows.Count > 0) {
+                int start_range = (int)routeView.Rows[0][0];
+                int end_range = (int)routeView.Rows[0][1];
+                return Enumerable.Range(start_range, end_range - start_range + 1).ToList<int>();
+            }
+            return new List<int>();
         }
 
         public DataTable GetSalaries(Driver driver = null, int month = 0, int year = 0) {

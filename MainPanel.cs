@@ -174,15 +174,17 @@ namespace Ek_spedycja {
         #region SALARY
 
         private void tabPageSalary_Enter(object sender, EventArgs e) {
-            
-            dataGridViewSalary.DataSource = routeDataAccess.GetSalaries();
-            comboBoxSalaryDriver.Items.Clear();
-            comboBoxSalaryMonth.Items.Clear();
-            comboBoxSalaryYear.Items.Clear();
 
-            routeDataAccess.GetRange("MONTH").ForEach(i => comboBoxSalaryMonth.Items.Add(i));
-            routeDataAccess.GetRange("YEAR").ForEach(i => comboBoxSalaryYear.Items.Add(i));
-            driverDataAccess.GetDrivers().ForEach(driver => comboBoxSalaryDriver.Items.Add(driver));
+            if (dataGridViewRoute.SelectedRows.Count > 0) {
+                dataGridViewSalary.DataSource = routeDataAccess.GetSalaries();
+                comboBoxSalaryDriver.Items.Clear();
+                comboBoxSalaryMonth.Items.Clear();
+                comboBoxSalaryYear.Items.Clear();
+
+                routeDataAccess.GetRange("MONTH").ForEach(i => comboBoxSalaryMonth.Items.Add(i));
+                routeDataAccess.GetRange("YEAR").ForEach(i => comboBoxSalaryYear.Items.Add(i));
+                driverDataAccess.GetDrivers().ForEach(driver => comboBoxSalaryDriver.Items.Add(driver));
+            }
         }
         private void ComboBoxHandlers() {
             List<ComboBox> cbs = new List<ComboBox>() { comboBoxSalaryDriver, comboBoxSalaryMonth, comboBoxSalaryYear };

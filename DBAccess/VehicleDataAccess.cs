@@ -37,6 +37,10 @@ namespace Ek_spedycja.DBAccess {
             return true;
         }
 
+
+
+
+
         public override bool InsertData(Vehicle vehicle) {
             string insert = @"INSERT INTO spedycja.vehicle 
                             (brand, model, number, service_date, is_available) 

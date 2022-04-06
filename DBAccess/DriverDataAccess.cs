@@ -122,8 +122,8 @@ namespace Ek_spedycja.DBAccess {
                             name as Name, 
                             surname as Surname, 
                             pesel as PESEL, 
-                            hire_date as 'Date of hire' , 
-                            birth_date as 'Date of birth' 
+                            birth_date as 'Date of birth',
+                            hire_date as 'Date of hire' 
                             FROM spedycja.driver";
             try {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
@@ -139,7 +139,7 @@ namespace Ek_spedycja.DBAccess {
 
         public override DataTable RunMethodAndRefresh(Func<Driver, bool> Func, Driver driver) {
             Func(driver);
-            return GetData(driver);
+            return GetData();
         }
         public List<Driver> GetDrivers() {
             DataTable driverTable = GetData();
