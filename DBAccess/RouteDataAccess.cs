@@ -177,7 +177,7 @@ namespace Ek_spedycja.DBAccess {
 
             string str_driver = driver != null ? $" AND route.id_driver = {driver.Id} " : " ";
             string str_month = month != 0 ? $" AND MONTH(route.departure_date) = {month} " : " ";
-            string str_year = month != 0 ? $" AND YEAR(route.departure_date) = {year} " : " ";
+            string str_year = year != 0 ? $" AND YEAR(route.departure_date) = {year} " : " ";
 
 
             string select = $@"SELECT 

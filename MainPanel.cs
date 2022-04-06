@@ -21,7 +21,6 @@ namespace Ek_spedycja {
         Route route;
         int selectedRouteId;
         Driver selectedDriver;
-        Vehicle selectedVehicle;
         int selectedMonth;
         int selectedYear;
 
