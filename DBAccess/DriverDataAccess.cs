@@ -122,15 +122,15 @@ namespace Ek_spedycja.DBAccess {
                             name as Name, 
                             surname as Surname, 
                             pesel as PESEL, 
-                            hire_date as 'Date of employment' , 
+                            hire_date as 'Date of hire' , 
                             birth_date as 'Date of birth' 
                             FROM spedycja.driver";
             try {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
                 dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                DataTable driverView = new DataTable();
-                dataAdapter.Fill(driverView);
-                return driverView;
+                DataTable dtDrivers = new DataTable();
+                dataAdapter.Fill(dtDrivers);
+                return dtDrivers;
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error");
             }
@@ -139,7 +139,7 @@ namespace Ek_spedycja.DBAccess {
 
         public override DataTable RunMethodAndRefresh(Func<Driver, bool> Func, Driver driver) {
             Func(driver);
-            return GetData();
+            return GetData(driver);
         }
         public List<Driver> GetDrivers() {
             DataTable driverTable = GetData();

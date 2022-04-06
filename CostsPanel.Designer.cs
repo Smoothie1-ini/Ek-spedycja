@@ -75,14 +75,10 @@ namespace Ek_spedycja {
             // 
             this.comboBoxCostType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.comboBoxCostType.FormattingEnabled = true;
-            this.comboBoxCostType.Items.AddRange(new object[] {
-            "X",
-            "y"});
             this.comboBoxCostType.Location = new System.Drawing.Point(118, 184);
             this.comboBoxCostType.Name = "comboBoxCostType";
             this.comboBoxCostType.Size = new System.Drawing.Size(197, 28);
             this.comboBoxCostType.TabIndex = 48;
-            this.comboBoxCostType.SelectedIndexChanged += new System.EventHandler(this.comboBoxCostType_SelectedIndexChanged);
             // 
             // label1
             // 

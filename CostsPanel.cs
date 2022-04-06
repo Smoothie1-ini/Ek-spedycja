@@ -9,7 +9,6 @@ namespace Ek_spedycja {
         Cost cost;
         Route route;
         int selectedCostId;
-        string selectedCostType;
 
         public CostsPanel(Route route) {
             InitializeComponent();
@@ -19,28 +18,24 @@ namespace Ek_spedycja {
         }
 
         private void CostsPanel_Load(object sender, EventArgs e) {
-            dataGridViewCost.DataSource = costDataAccess.GetData();
+            dataGridViewCost.DataSource = costDataAccess.GetData(new Cost(route));
+            comboBoxCostType.DataSource = costDataAccess.GetCostTypes();
+            FormConfiguration();
         }
 
         private void buttonCostAdd_Click(object sender, EventArgs e) {
-            cost = new Cost(route, comboBoxCostType.SelectedItem.ToString(), richTextBoxCostDescription.Text, numericUpDownCostValue.Value);
+            cost = new Cost(route, (int)comboBoxCostType.SelectedValue, richTextBoxCostDescription.Text, numericUpDownCostValue.Value);
             dataGridViewCost.DataSource = costDataAccess.RunMethodAndRefresh(costDataAccess.InsertData, cost);
         }
 
         private void buttonCostEdit_Click(object sender, EventArgs e) {
-            cost = new Cost(selectedCostId, route, comboBoxCostType.SelectedItem.ToString(), richTextBoxCostDescription.Text, numericUpDownCostValue.Value);
+            cost = new Cost(selectedCostId, route, (int)comboBoxCostType.SelectedValue, richTextBoxCostDescription.Text, numericUpDownCostValue.Value);
             dataGridViewCost.DataSource = costDataAccess.RunMethodAndRefresh(costDataAccess.UpdateData, cost);
         }
 
         private void buttonCostDelete_Click(object sender, EventArgs e) {
-            cost = new Cost(selectedCostId);
+            cost = new Cost(selectedCostId, route);
             dataGridViewCost.DataSource = costDataAccess.RunMethodAndRefresh(costDataAccess.DeleteData, cost);
-        }
-
-        private void comboBoxCostType_SelectedIndexChanged(object sender, EventArgs e) {
-            if (comboBoxCostType.Items.Count > 0) {
-                selectedCostType = comboBoxCostType.SelectedItem.ToString();
-            }
         }
 
         private void dataGridViewCost_SelectionChanged(object sender, EventArgs e) {
@@ -50,6 +45,14 @@ namespace Ek_spedycja {
                 richTextBoxCostDescription.Text = dataGridViewCost.SelectedRows[0].Cells[2].Value.ToString();
                 numericUpDownCostValue.Value = decimal.Parse(dataGridViewCost.SelectedRows[0].Cells[3].Value.ToString());
             }
+        }
+
+        private void FormConfiguration() {
+            dataGridViewCost.Columns[0].Visible = false;
+            dataGridViewCost.Columns[1].Width = 75;
+            dataGridViewCost.Columns[3].Width = 75;
+            comboBoxCostType.ValueMember = "id_cost_type";
+            comboBoxCostType.DisplayMember = "name";
         }
     }
 }

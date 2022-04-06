@@ -3,6 +3,8 @@ using Ek_spedycja.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Ek_spedycja {
@@ -25,19 +27,25 @@ namespace Ek_spedycja {
 
         public MainPanel() {
             InitializeComponent();
-            numericUpDownRouteLength.Maximum = decimal.MaxValue;
-            numericUpDownRouteLength.Minimum = 0;
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            FormConfiguration();
             ComboBoxHandlers();
+        }
+            
 
+        private void FormConfiguration() {
+            numericUpDownRouteLength.Maximum = decimal.MaxValue;
+            numericUpDownRouteLength.Minimum = 0;
         }
 
         #region DRIVER
 
         private void tabPageDriver_Enter(object sender, EventArgs e) {
             dataGridViewDriver.DataSource = driverDataAccess.GetData();
+            dataGridViewDriver.Columns[0].Visible = false;
         }
 
         private void buttonDriverAdd_Click(object sender, EventArgs e) {
@@ -72,10 +80,7 @@ namespace Ek_spedycja {
 
         private void tabPageVehicle_Enter(object sender, EventArgs e) {
             dataGridViewVehicle.DataSource = vehicleDataAccess.GetData();
-        }
-
-        private void dataGridViewVehicle_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
+            dataGridViewVehicle.Columns[0].Visible = false;
         }
 
         private void buttonVehicleAdd_Click(object sender, EventArgs e) {
@@ -119,6 +124,9 @@ namespace Ek_spedycja {
             dataGridViewRoute.DataSource = routeDataAccess.GetData();
             comboBoxRouteDriver.DataSource = driverDataAccess.GetDrivers();
             comboBoxRouteVehicle.DataSource = vehicleDataAccess.GetVehicles();
+            dataGridViewRoute.Columns[0].Visible = false;
+            dataGridViewRoute.Columns[8].Visible = false;
+            dataGridViewRoute.Columns[9].Visible = false;
         }
 
         private void buttonRouteCost_Click(object sender, EventArgs e) {
@@ -127,30 +135,18 @@ namespace Ek_spedycja {
         }
 
         private void buttonRouteAdd_Click(object sender, EventArgs e) {
-            route = new Route(selectedDriver, selectedVehicle, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
+            route = new Route((Driver)comboBoxRouteDriver.SelectedItem, (Vehicle)comboBoxRouteVehicle.SelectedItem, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
             dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.InsertData, route);
         }
 
         private void buttonRouteEdit_Click(object sender, EventArgs e) {
-            route = new Route(selectedRouteId, selectedDriver, selectedVehicle, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
+            route = new Route(selectedRouteId, (Driver)comboBoxRouteDriver.SelectedItem, (Vehicle)comboBoxRouteVehicle.SelectedItem, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
             dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.UpdateData, route);
         }
 
         private void buttonRouteDelete_Click(object sender, EventArgs e) {
             route = new Route(selectedRouteId);
             dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.DeleteData, route);
-        }
-
-        private void comboBoxRouteDriver_SelectedIndexChanged(object sender, EventArgs e) {
-            if (comboBoxRouteDriver.Items.Count > 0) {
-                selectedDriver = (Driver)comboBoxRouteDriver.SelectedItem;
-            }
-        }
-
-        private void comboBoxRouteVehicle_SelectedIndexChanged(object sender, EventArgs e) {
-            if (comboBoxRouteVehicle.Items.Count > 0) {
-                selectedVehicle = (Vehicle)comboBoxRouteVehicle.SelectedItem;
-            }
         }
 
         private void dataGridViewRoute_SelectionChanged(object sender, EventArgs e) {

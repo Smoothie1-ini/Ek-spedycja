@@ -1,17 +1,8 @@
 ﻿using Ek_spedycja.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-/// <summary>
-/// do cost type trzeba zbudować słownik id:value na podstawie danych pobranych z bazy - GetCostTypes()
-/// metody napisane z palca, nic nie jest przetestowane
-/// </summary>
 
 namespace Ek_spedycja.DBAccess {
     internal class CostDataAccess : DataAccess<Cost> {
@@ -36,29 +27,30 @@ namespace Ek_spedycja.DBAccess {
                     if (dataSet.HasErrors)
                         dataSet.RejectChanges();
                     else
-                        dataAdapter.Update(dataSet, Driver.TABLE_NAME);
+                        dataAdapter.Update(dataSet, Cost.TABLE_NAME);
                 }
-            } catch (Exception ex) {
+        } catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error");
                 return false;
             }
             return true;
         }
 
-        public override DataTable GetData() {
-            string select = @"SELECT id_cost as id_cost,
+        public override DataTable GetData(Cost cost) {
+            string select = $@"SELECT id_cost as id_cost,
                               CT.name as 'Cost Type',
                               description as Description,
                               amount as Amount
                               FROM spedycja.cost AS C
                               INNER JOIN spedycja.cost_type AS CT
-                              ON C.id_cost_type = CT.id_cost_type";
+                              ON C.id_cost_type = CT.id_cost_type
+                              WHERE id_route = {cost.Route.Id}";
             try {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
                 dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                DataTable costView = new DataTable();
-                dataAdapter.Fill(costView);
-                return costView;
+                DataTable dtCost = new DataTable();
+                dataAdapter.Fill(dtCost);
+                return dtCost;
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error");
             }
@@ -103,7 +95,7 @@ namespace Ek_spedycja.DBAccess {
 
         public override DataTable RunMethodAndRefresh(Func<Cost, bool> Func, Cost cost) {
             Func(cost);
-            return GetData();
+            return GetData(cost);
         }
 
         public override bool UpdateData(Cost cost) {
@@ -138,7 +130,6 @@ namespace Ek_spedycja.DBAccess {
                     else
                         dataAdapter.Update(dataSet, Cost.TABLE_NAME);
                 }
-
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error");
                 return false;
@@ -146,8 +137,18 @@ namespace Ek_spedycja.DBAccess {
             return true;
         }
 
-        public List<Cost> GetCostTypes() {
-            return new List<Cost>();
+        public DataTable GetCostTypes() {
+            string select = @"SELECT id_cost_type, name
+                            FROM spedycja.cost_type";
+            DataTable dtCostTypes = new DataTable();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
+            dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            dataAdapter.Fill(dtCostTypes);
+            return dtCostTypes;
+        }
+
+        public override DataTable GetData() {
+            throw new NotImplementedException();
         }
     }
 }
