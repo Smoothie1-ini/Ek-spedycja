@@ -212,7 +212,6 @@ namespace Ek_spedycja {
             this.comboBoxRouteVehicle.Name = "comboBoxRouteVehicle";
             this.comboBoxRouteVehicle.Size = new System.Drawing.Size(297, 28);
             this.comboBoxRouteVehicle.TabIndex = 49;
-            this.comboBoxRouteVehicle.SelectedIndexChanged += new System.EventHandler(this.comboBoxRouteVehicle_SelectedIndexChanged);
             // 
             // comboBoxRouteDriver
             // 
@@ -221,7 +220,6 @@ namespace Ek_spedycja {
             this.comboBoxRouteDriver.Name = "comboBoxRouteDriver";
             this.comboBoxRouteDriver.Size = new System.Drawing.Size(297, 28);
             this.comboBoxRouteDriver.TabIndex = 48;
-            this.comboBoxRouteDriver.SelectedIndexChanged += new System.EventHandler(this.comboBoxRouteDriver_SelectedIndexChanged);
             // 
             // label13
             // 

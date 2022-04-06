@@ -16,8 +16,6 @@ namespace Ek_spedycja {
         private RouteDataAccess routeDataAccess = new RouteDataAccess();
         Route route;
         int selectedRouteId;
-        Driver selectedDriver;
-        Vehicle selectedVehicle;
 
         public MainPanel() {
             InitializeComponent();
@@ -122,30 +120,18 @@ namespace Ek_spedycja {
         }
 
         private void buttonRouteAdd_Click(object sender, EventArgs e) {
-            route = new Route(selectedDriver, selectedVehicle, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
+            route = new Route((Driver)comboBoxRouteDriver.SelectedItem, (Vehicle)comboBoxRouteVehicle.SelectedItem, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
             dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.InsertData, route);
         }
 
         private void buttonRouteEdit_Click(object sender, EventArgs e) {
-            route = new Route(selectedRouteId, selectedDriver, selectedVehicle, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
+            route = new Route(selectedRouteId, (Driver)comboBoxRouteDriver.SelectedItem, (Vehicle)comboBoxRouteVehicle.SelectedItem, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
             dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.UpdateData, route);
         }
 
         private void buttonRouteDelete_Click(object sender, EventArgs e) {
             route = new Route(selectedRouteId);
             dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.DeleteData, route);
-        }
-
-        private void comboBoxRouteDriver_SelectedIndexChanged(object sender, EventArgs e) {
-            if (comboBoxRouteDriver.Items.Count > 0) {
-                selectedDriver = (Driver)comboBoxRouteDriver.SelectedItem;
-            }
-        }
-
-        private void comboBoxRouteVehicle_SelectedIndexChanged(object sender, EventArgs e) {
-            if (comboBoxRouteVehicle.Items.Count > 0) {
-                selectedVehicle = (Vehicle)comboBoxRouteVehicle.SelectedItem;
-            }
         }
 
         private void dataGridViewRoute_SelectionChanged(object sender, EventArgs e) {

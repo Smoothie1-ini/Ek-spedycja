@@ -128,9 +128,9 @@ namespace Ek_spedycja.DBAccess {
             try {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
                 dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                DataTable driverView = new DataTable();
-                dataAdapter.Fill(driverView);
-                return driverView;
+                DataTable dtDrivers = new DataTable();
+                dataAdapter.Fill(dtDrivers);
+                return dtDrivers;
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error");
             }
@@ -139,11 +139,11 @@ namespace Ek_spedycja.DBAccess {
 
         public override DataTable RunMethodAndRefresh(Func<Driver, bool> Func, Driver driver) {
             Func(driver);
-            return GetData();
+            return GetData(driver);
         }
 
         public List<Driver> GetDrivers() {
-             DataTable driverTable = GetData();
+            DataTable driverTable = GetData();
             List<Driver> drivers = new List<Driver>();
             for (int i = 0; i < driverTable.Rows.Count; i++) {
                 drivers.Add(new Driver(

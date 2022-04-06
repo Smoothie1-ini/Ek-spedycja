@@ -99,9 +99,9 @@ namespace Ek_spedycja.DBAccess {
             try {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
                 dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                DataTable routeView = new DataTable();
-                dataAdapter.Fill(routeView);
-                return routeView;
+                DataTable dtRoute = new DataTable();
+                dataAdapter.Fill(dtRoute);
+                return dtRoute;
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error");
             }
