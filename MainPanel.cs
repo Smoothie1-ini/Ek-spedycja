@@ -2,7 +2,6 @@
 using Ek_spedycja.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -16,10 +15,13 @@ namespace Ek_spedycja {
         private VehicleDataAccess vehicleDataAccess = new VehicleDataAccess();
         Vehicle vehicle;
         int selectedVehicleId;
+        bool vehicleAvailability;
 
         private RouteDataAccess routeDataAccess = new RouteDataAccess();
         Route route;
         int selectedRouteId;
+
+        //nie da się na tej samej zmiennej zrobić? (driver)
         Driver selectedDriver;
         int selectedMonth;
         int selectedYear;
@@ -33,33 +35,79 @@ namespace Ek_spedycja {
             FormConfiguration();
             ComboBoxHandlers();
         }
-            
+
+        #region PRIVATE METHODS
 
         private void FormConfiguration() {
             numericUpDownRouteLength.Maximum = decimal.MaxValue;
             numericUpDownRouteLength.Minimum = 0;
         }
 
+        private void resetControlsDriver() {
+            textBoxDriverName.Text = "";
+            textBoxDriverSurname.Text = "";
+            textBoxDriverPesel.Text = "";
+            dateTimePickerDriverBirthDate.Value = DateTime.Now;
+            dateTimePickerDriverHireDate.Value = DateTime.Now;
+        }
+
+        private void resetControlsVehicle() {
+            textBoxVehicleBrand.Text = "";
+            textBoxVehicleModel.Text = "";
+            textBoxVehicleNumber.Text = "";
+            dateTimePickerVehicleService.Value = DateTime.Now;
+        }
+
+        private void resetControlsRoute() {
+            comboBoxRouteDriver.SelectedIndex = 0;
+            comboBoxRouteVehicle.SelectedIndex = 0;
+            dateTimePickerRouteDeparture.Value = DateTime.Now;
+            dateTimePickerRoutePlannedArrival.Value = DateTime.Now;
+            dateTimePickerRouteActualArrival.Value = DateTime.Now;
+            numericUpDownRouteLength.Value = 0;
+        }
+
+        private void checkVehicleAvailability() {
+            if (dateTimePickerVehicleService.Value.AddYears(1) > DateTime.Now)
+                vehicleAvailability = true;
+            else
+                vehicleAvailability = false;
+        }
+
+        #endregion
+
         #region DRIVER
 
         private void tabPageDriver_Enter(object sender, EventArgs e) {
             dataGridViewDriver.DataSource = driverDataAccess.GetData();
             dataGridViewDriver.Columns[0].Visible = false;
+            resetControlsDriver();
         }
 
         private void buttonDriverAdd_Click(object sender, EventArgs e) {
-            driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
-            dataGridViewDriver.DataSource = driverDataAccess.RunMethodAndRefresh(driverDataAccess.InsertData, driver);
+            try {
+                driver = new Driver(textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
+                dataGridViewDriver.DataSource = driverDataAccess.RunMethodAndRefresh(driverDataAccess.InsertData, driver);
+                resetControlsDriver();
+            } catch (ArgumentException ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void buttonDriverEdit_Click(object sender, EventArgs e) {
-            driver = new Driver(selectedDriverId, textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
-            dataGridViewDriver.DataSource = driverDataAccess.RunMethodAndRefresh(driverDataAccess.UpdateData, driver);
+            try {
+                driver = new Driver(selectedDriverId, textBoxDriverName.Text, textBoxDriverSurname.Text, textBoxDriverPesel.Text, dateTimePickerDriverBirthDate.Value, dateTimePickerDriverHireDate.Value);
+                dataGridViewDriver.DataSource = driverDataAccess.RunMethodAndRefresh(driverDataAccess.UpdateData, driver);
+                resetControlsDriver();
+            } catch (ArgumentException ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void buttonDriverDelete_Click(object sender, EventArgs e) {
             driver = new Driver(selectedDriverId);
             dataGridViewDriver.DataSource = driverDataAccess.RunMethodAndRefresh(driverDataAccess.DeleteData, driver);
+            resetControlsDriver();
         }
 
         private void dataGridViewDriver_SelectionChanged(object sender, EventArgs e) {
@@ -80,21 +128,27 @@ namespace Ek_spedycja {
         private void tabPageVehicle_Enter(object sender, EventArgs e) {
             dataGridViewVehicle.DataSource = vehicleDataAccess.GetData();
             dataGridViewVehicle.Columns[0].Visible = false;
+            resetControlsVehicle();
         }
 
         private void buttonVehicleAdd_Click(object sender, EventArgs e) {
-            vehicle = new Vehicle(textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, radioButtonVehicleAvailable.Checked);
+            checkVehicleAvailability();
+            vehicle = new Vehicle(textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, vehicleAvailability);
             dataGridViewVehicle.DataSource = vehicleDataAccess.RunMethodAndRefresh(vehicleDataAccess.InsertData, vehicle);
+            resetControlsVehicle();
         }
 
         private void buttonVehicleEdit_Click(object sender, EventArgs e) {
-            vehicle = new Vehicle(selectedVehicleId, textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, radioButtonVehicleAvailable.Checked);
+            checkVehicleAvailability();
+            vehicle = new Vehicle(selectedVehicleId, textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, vehicleAvailability);
             dataGridViewVehicle.DataSource = vehicleDataAccess.RunMethodAndRefresh(vehicleDataAccess.UpdateData, vehicle);
+            resetControlsVehicle();
         }
 
         private void buttonVehicleDelete_Click(object sender, EventArgs e) {
             vehicle = new Vehicle(selectedVehicleId);
             dataGridViewVehicle.DataSource = vehicleDataAccess.RunMethodAndRefresh(vehicleDataAccess.DeleteData, vehicle);
+            resetControlsVehicle();
         }
 
         private void dataGridViewVehicle_SelectionChanged(object sender, EventArgs e) {
@@ -104,14 +158,6 @@ namespace Ek_spedycja {
                 textBoxVehicleModel.Text = dataGridViewVehicle.SelectedRows[0].Cells[2].Value.ToString();
                 textBoxVehicleNumber.Text = dataGridViewVehicle.SelectedRows[0].Cells[3].Value.ToString();
                 dateTimePickerVehicleService.Value = DateTime.Parse(dataGridViewVehicle.SelectedRows[0].Cells[4].Value.ToString());
-
-                if ((bool)(dataGridViewVehicle.SelectedRows[0].Cells[5].Value)) {
-                    radioButtonVehicleAvailable.Checked = true;
-                    radioButtonVehicleNotAvailable.Checked = false;
-                } else {
-                    radioButtonVehicleAvailable.Checked = false;
-                    radioButtonVehicleNotAvailable.Checked = true;
-                }
             }
         }
 
@@ -126,6 +172,7 @@ namespace Ek_spedycja {
             dataGridViewRoute.Columns[0].Visible = false;
             dataGridViewRoute.Columns[8].Visible = false;
             dataGridViewRoute.Columns[9].Visible = false;
+            resetControlsRoute();
         }
 
         private void buttonRouteCost_Click(object sender, EventArgs e) {
@@ -134,23 +181,35 @@ namespace Ek_spedycja {
         }
 
         private void buttonRouteAdd_Click(object sender, EventArgs e) {
-            route = new Route((Driver)comboBoxRouteDriver.SelectedItem, (Vehicle)comboBoxRouteVehicle.SelectedItem, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
-            dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.InsertData, route);
+            try {
+                route = new Route((Driver)comboBoxRouteDriver.SelectedItem, (Vehicle)comboBoxRouteVehicle.SelectedItem, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
+                dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.InsertData, route);
+                resetControlsRoute();
+            } catch (ArgumentException ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void buttonRouteEdit_Click(object sender, EventArgs e) {
-            route = new Route(selectedRouteId, (Driver)comboBoxRouteDriver.SelectedItem, (Vehicle)comboBoxRouteVehicle.SelectedItem, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
-            dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.UpdateData, route);
+            try {
+                route = new Route(selectedRouteId, (Driver)comboBoxRouteDriver.SelectedItem, (Vehicle)comboBoxRouteVehicle.SelectedItem, dateTimePickerRouteDeparture.Value, dateTimePickerRoutePlannedArrival.Value, dateTimePickerRouteActualArrival.Value, numericUpDownRouteLength.Value);
+                dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.UpdateData, route);
+                resetControlsRoute();
+            } catch (ArgumentException ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void buttonRouteDelete_Click(object sender, EventArgs e) {
             route = new Route(selectedRouteId);
             dataGridViewRoute.DataSource = routeDataAccess.RunMethodAndRefresh(routeDataAccess.DeleteData, route);
+            resetControlsRoute();
         }
 
         private void dataGridViewRoute_SelectionChanged(object sender, EventArgs e) {
             if (dataGridViewRoute.SelectedRows.Count > 0) {
                 selectedRouteId = int.Parse(dataGridViewRoute.SelectedRows[0].Cells[0].Value.ToString());
+                buttonRouteCost.Enabled = true;
 
                 foreach (Driver driver in comboBoxRouteDriver.Items) {
                     if (driver.Id == int.Parse(dataGridViewRoute.SelectedRows[0].Cells[8].Value.ToString()))
@@ -174,7 +233,6 @@ namespace Ek_spedycja {
         #region SALARY
 
         private void tabPageSalary_Enter(object sender, EventArgs e) {
-
             if (dataGridViewRoute.SelectedRows.Count > 0) {
                 dataGridViewSalary.DataSource = routeDataAccess.GetSalaries();
                 comboBoxSalaryDriver.Items.Clear();
@@ -188,7 +246,6 @@ namespace Ek_spedycja {
         }
         private void ComboBoxHandlers() {
             List<ComboBox> cbs = new List<ComboBox>() { comboBoxSalaryDriver, comboBoxSalaryMonth, comboBoxSalaryYear };
-
             foreach (ComboBox cb in cbs) {
                 cb.SelectedIndexChanged += new EventHandler(ComboHandler);
             }
@@ -215,6 +272,7 @@ namespace Ek_spedycja {
                 selectedYear = (int)comboBoxSalaryYear.SelectedItem;
             }
         }
+
         #endregion
     }
 }

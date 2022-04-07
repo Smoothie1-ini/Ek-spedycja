@@ -1,12 +1,12 @@
 ﻿namespace Ek_spedycja.Model {
     class Cost {
+        public const string TABLE_NAME = "cost";
+
         public int Id { get; set; }
         public Route Route { get; set; }
         public int CostType { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
-
-        public const string TABLE_NAME = "cost";
 
         //ADD
         public Cost(Route route, int costType, string description, decimal amount) {

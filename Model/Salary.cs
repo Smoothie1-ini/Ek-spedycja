@@ -8,8 +8,6 @@ namespace Ek_spedycja.Model {
         int Year { get; set; }
         decimal Amount { get; set; }
 
-        static List<Salary> salaries { get; set; }
-
         public Salary(Driver driver, int month, int year, decimal amount) {
             Driver = driver;
             Month = month;

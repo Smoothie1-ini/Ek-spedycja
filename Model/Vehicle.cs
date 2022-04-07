@@ -3,16 +3,24 @@ using System.Collections.Generic;
 
 namespace Ek_spedycja.Model {
     public class Vehicle {
+        private DateTime _serviceDate;
+
+        public const string TABLE_NAME = "vehicle";
+
         public int Id { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Number { get; set; }
-        public DateTime ServiceDate { get; set; }
+        public DateTime ServiceDate {
+            get { return _serviceDate; }
+            set {
+                if (value > DateTime.Now)
+                    throw new ArgumentException("Wprowadzona data serwisowania pojazdu jest niepoprawna.");
+                else
+                    _serviceDate = value;
+            }
+        }
         public bool IsAvailable { get; set; }
-
-        public const string TABLE_NAME = "vehicle";
-
-        static List<Vehicle> Vehicles { get; set; }
 
         // ADD VEHICLE
         public Vehicle(string brand, string model, string number, DateTime serviceDate, bool isAvailable) {

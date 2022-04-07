@@ -44,18 +44,10 @@ namespace Ek_spedycja {
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tabPageVehicle = new System.Windows.Forms.TabPage();
-            this.dataGridViewVehicle = new System.Windows.Forms.DataGridView();
-            this.radioButtonVehicleNotAvailable = new System.Windows.Forms.RadioButton();
-            this.radioButtonVehicleAvailable = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
-            this.buttonVehicleDelete = new System.Windows.Forms.Button();
-            this.buttonVehicleEdit = new System.Windows.Forms.Button();
-            this.buttonVehicleAdd = new System.Windows.Forms.Button();
             this.textBoxVehicleNumber = new System.Windows.Forms.TextBox();
             this.textBoxVehicleModel = new System.Windows.Forms.TextBox();
             this.textBoxVehicleBrand = new System.Windows.Forms.TextBox();
             this.dateTimePickerVehicleService = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -86,16 +78,21 @@ namespace Ek_spedycja {
             this.label23 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
+            this.buttonVehicleEdit = new System.Windows.Forms.Button();
+            this.buttonVehicleAdd = new System.Windows.Forms.Button();
+            this.buttonVehicleDelete = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dataGridViewVehicle = new System.Windows.Forms.DataGridView();
             this.tabPageRoute.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRouteLength)).BeginInit();
             this.tabPageVehicle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).BeginInit();
             this.tabPageDriver.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageSalary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalary)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPageRoute
@@ -140,15 +137,16 @@ namespace Ek_spedycja {
             this.dataGridViewRoute.RowHeadersVisible = false;
             this.dataGridViewRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewRoute.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewRoute.TabIndex = 57;
+            this.dataGridViewRoute.TabIndex = 69;
             this.dataGridViewRoute.SelectionChanged += new System.EventHandler(this.dataGridViewRoute_SelectionChanged);
             // 
             // buttonRouteCost
             // 
+            this.buttonRouteCost.Enabled = false;
             this.buttonRouteCost.Location = new System.Drawing.Point(860, 505);
             this.buttonRouteCost.Name = "buttonRouteCost";
             this.buttonRouteCost.Size = new System.Drawing.Size(354, 44);
-            this.buttonRouteCost.TabIndex = 56;
+            this.buttonRouteCost.TabIndex = 62;
             this.buttonRouteCost.Text = "Zarządzaj kosztami kursu";
             this.buttonRouteCost.UseVisualStyleBackColor = true;
             this.buttonRouteCost.Click += new System.EventHandler(this.buttonRouteCost_Click);
@@ -158,7 +156,7 @@ namespace Ek_spedycja {
             this.numericUpDownRouteLength.Location = new System.Drawing.Point(888, 473);
             this.numericUpDownRouteLength.Name = "numericUpDownRouteLength";
             this.numericUpDownRouteLength.Size = new System.Drawing.Size(297, 26);
-            this.numericUpDownRouteLength.TabIndex = 55;
+            this.numericUpDownRouteLength.TabIndex = 60;
             // 
             // label14
             // 
@@ -176,7 +174,7 @@ namespace Ek_spedycja {
             this.dateTimePickerRouteActualArrival.Location = new System.Drawing.Point(888, 411);
             this.dateTimePickerRouteActualArrival.Name = "dateTimePickerRouteActualArrival";
             this.dateTimePickerRouteActualArrival.Size = new System.Drawing.Size(297, 26);
-            this.dateTimePickerRouteActualArrival.TabIndex = 53;
+            this.dateTimePickerRouteActualArrival.TabIndex = 58;
             // 
             // label20
             // 
@@ -194,7 +192,7 @@ namespace Ek_spedycja {
             this.dateTimePickerRoutePlannedArrival.Location = new System.Drawing.Point(888, 350);
             this.dateTimePickerRoutePlannedArrival.Name = "dateTimePickerRoutePlannedArrival";
             this.dateTimePickerRoutePlannedArrival.Size = new System.Drawing.Size(297, 26);
-            this.dateTimePickerRoutePlannedArrival.TabIndex = 51;
+            this.dateTimePickerRoutePlannedArrival.TabIndex = 56;
             // 
             // label19
             // 
@@ -207,19 +205,21 @@ namespace Ek_spedycja {
             // 
             // comboBoxRouteVehicle
             // 
+            this.comboBoxRouteVehicle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRouteVehicle.FormattingEnabled = true;
             this.comboBoxRouteVehicle.Location = new System.Drawing.Point(888, 224);
             this.comboBoxRouteVehicle.Name = "comboBoxRouteVehicle";
             this.comboBoxRouteVehicle.Size = new System.Drawing.Size(297, 28);
-            this.comboBoxRouteVehicle.TabIndex = 49;
+            this.comboBoxRouteVehicle.TabIndex = 52;
             // 
             // comboBoxRouteDriver
             // 
+            this.comboBoxRouteDriver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRouteDriver.FormattingEnabled = true;
             this.comboBoxRouteDriver.Location = new System.Drawing.Point(888, 161);
             this.comboBoxRouteDriver.Name = "comboBoxRouteDriver";
             this.comboBoxRouteDriver.Size = new System.Drawing.Size(297, 28);
-            this.comboBoxRouteDriver.TabIndex = 48;
+            this.comboBoxRouteDriver.TabIndex = 50;
             // 
             // label13
             // 
@@ -236,7 +236,7 @@ namespace Ek_spedycja {
             this.buttonRouteDelete.Location = new System.Drawing.Point(1100, 555);
             this.buttonRouteDelete.Name = "buttonRouteDelete";
             this.buttonRouteDelete.Size = new System.Drawing.Size(114, 44);
-            this.buttonRouteDelete.TabIndex = 44;
+            this.buttonRouteDelete.TabIndex = 68;
             this.buttonRouteDelete.Text = "Usuń";
             this.buttonRouteDelete.UseVisualStyleBackColor = true;
             this.buttonRouteDelete.Click += new System.EventHandler(this.buttonRouteDelete_Click);
@@ -246,7 +246,7 @@ namespace Ek_spedycja {
             this.buttonRouteEdit.Location = new System.Drawing.Point(980, 555);
             this.buttonRouteEdit.Name = "buttonRouteEdit";
             this.buttonRouteEdit.Size = new System.Drawing.Size(114, 44);
-            this.buttonRouteEdit.TabIndex = 43;
+            this.buttonRouteEdit.TabIndex = 66;
             this.buttonRouteEdit.Text = "Edytuj";
             this.buttonRouteEdit.UseVisualStyleBackColor = true;
             this.buttonRouteEdit.Click += new System.EventHandler(this.buttonRouteEdit_Click);
@@ -256,7 +256,7 @@ namespace Ek_spedycja {
             this.buttonRouteAdd.Location = new System.Drawing.Point(860, 555);
             this.buttonRouteAdd.Name = "buttonRouteAdd";
             this.buttonRouteAdd.Size = new System.Drawing.Size(114, 44);
-            this.buttonRouteAdd.TabIndex = 42;
+            this.buttonRouteAdd.TabIndex = 64;
             this.buttonRouteAdd.Text = "Dodaj";
             this.buttonRouteAdd.UseVisualStyleBackColor = true;
             this.buttonRouteAdd.Click += new System.EventHandler(this.buttonRouteAdd_Click);
@@ -268,7 +268,7 @@ namespace Ek_spedycja {
             this.dateTimePickerRouteDeparture.Location = new System.Drawing.Point(888, 288);
             this.dateTimePickerRouteDeparture.Name = "dateTimePickerRouteDeparture";
             this.dateTimePickerRouteDeparture.Size = new System.Drawing.Size(297, 26);
-            this.dateTimePickerRouteDeparture.TabIndex = 40;
+            this.dateTimePickerRouteDeparture.TabIndex = 54;
             // 
             // label16
             // 
@@ -300,8 +300,6 @@ namespace Ek_spedycja {
             // tabPageVehicle
             // 
             this.tabPageVehicle.Controls.Add(this.dataGridViewVehicle);
-            this.tabPageVehicle.Controls.Add(this.radioButtonVehicleNotAvailable);
-            this.tabPageVehicle.Controls.Add(this.radioButtonVehicleAvailable);
             this.tabPageVehicle.Controls.Add(this.label7);
             this.tabPageVehicle.Controls.Add(this.buttonVehicleDelete);
             this.tabPageVehicle.Controls.Add(this.buttonVehicleEdit);
@@ -310,7 +308,6 @@ namespace Ek_spedycja {
             this.tabPageVehicle.Controls.Add(this.textBoxVehicleModel);
             this.tabPageVehicle.Controls.Add(this.textBoxVehicleBrand);
             this.tabPageVehicle.Controls.Add(this.dateTimePickerVehicleService);
-            this.tabPageVehicle.Controls.Add(this.label8);
             this.tabPageVehicle.Controls.Add(this.label9);
             this.tabPageVehicle.Controls.Add(this.label10);
             this.tabPageVehicle.Controls.Add(this.label11);
@@ -325,105 +322,26 @@ namespace Ek_spedycja {
             this.tabPageVehicle.UseVisualStyleBackColor = true;
             this.tabPageVehicle.Enter += new System.EventHandler(this.tabPageVehicle_Enter);
             // 
-            // dataGridViewVehicle
-            // 
-            this.dataGridViewVehicle.AllowUserToAddRows = false;
-            this.dataGridViewVehicle.AllowUserToDeleteRows = false;
-            this.dataGridViewVehicle.AllowUserToResizeRows = false;
-            this.dataGridViewVehicle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVehicle.Location = new System.Drawing.Point(6, 6);
-            this.dataGridViewVehicle.Name = "dataGridViewVehicle";
-            this.dataGridViewVehicle.ReadOnly = true;
-            this.dataGridViewVehicle.RowHeadersVisible = false;
-            this.dataGridViewVehicle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewVehicle.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewVehicle.TabIndex = 32;
-            this.dataGridViewVehicle.SelectionChanged += new System.EventHandler(this.dataGridViewVehicle_SelectionChanged);
-            // 
-            // radioButtonVehicleNotAvailable
-            // 
-            this.radioButtonVehicleNotAvailable.AutoSize = true;
-            this.radioButtonVehicleNotAvailable.Location = new System.Drawing.Point(888, 438);
-            this.radioButtonVehicleNotAvailable.Name = "radioButtonVehicleNotAvailable";
-            this.radioButtonVehicleNotAvailable.Size = new System.Drawing.Size(117, 24);
-            this.radioButtonVehicleNotAvailable.TabIndex = 31;
-            this.radioButtonVehicleNotAvailable.TabStop = true;
-            this.radioButtonVehicleNotAvailable.Text = "Not available";
-            this.radioButtonVehicleNotAvailable.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonVehicleAvailable
-            // 
-            this.radioButtonVehicleAvailable.AutoSize = true;
-            this.radioButtonVehicleAvailable.Checked = true;
-            this.radioButtonVehicleAvailable.Location = new System.Drawing.Point(888, 408);
-            this.radioButtonVehicleAvailable.Name = "radioButtonVehicleAvailable";
-            this.radioButtonVehicleAvailable.Size = new System.Drawing.Size(90, 24);
-            this.radioButtonVehicleAvailable.TabIndex = 30;
-            this.radioButtonVehicleAvailable.TabStop = true;
-            this.radioButtonVehicleAvailable.Text = "Available";
-            this.radioButtonVehicleAvailable.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(882, 62);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(318, 33);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Zarządzanie pojazdami";
-            // 
-            // buttonVehicleDelete
-            // 
-            this.buttonVehicleDelete.Location = new System.Drawing.Point(1100, 519);
-            this.buttonVehicleDelete.Name = "buttonVehicleDelete";
-            this.buttonVehicleDelete.Size = new System.Drawing.Size(114, 44);
-            this.buttonVehicleDelete.TabIndex = 28;
-            this.buttonVehicleDelete.Text = "Usuń";
-            this.buttonVehicleDelete.UseVisualStyleBackColor = true;
-            this.buttonVehicleDelete.Click += new System.EventHandler(this.buttonVehicleDelete_Click);
-            // 
-            // buttonVehicleEdit
-            // 
-            this.buttonVehicleEdit.Location = new System.Drawing.Point(980, 519);
-            this.buttonVehicleEdit.Name = "buttonVehicleEdit";
-            this.buttonVehicleEdit.Size = new System.Drawing.Size(114, 44);
-            this.buttonVehicleEdit.TabIndex = 27;
-            this.buttonVehicleEdit.Text = "Edytuj";
-            this.buttonVehicleEdit.UseVisualStyleBackColor = true;
-            this.buttonVehicleEdit.Click += new System.EventHandler(this.buttonVehicleEdit_Click);
-            // 
-            // buttonVehicleAdd
-            // 
-            this.buttonVehicleAdd.Location = new System.Drawing.Point(860, 519);
-            this.buttonVehicleAdd.Name = "buttonVehicleAdd";
-            this.buttonVehicleAdd.Size = new System.Drawing.Size(114, 44);
-            this.buttonVehicleAdd.TabIndex = 26;
-            this.buttonVehicleAdd.Text = "Dodaj";
-            this.buttonVehicleAdd.UseVisualStyleBackColor = true;
-            this.buttonVehicleAdd.Click += new System.EventHandler(this.buttonVehicleAdd_Click);
-            // 
             // textBoxVehicleNumber
             // 
             this.textBoxVehicleNumber.Location = new System.Drawing.Point(888, 286);
             this.textBoxVehicleNumber.Name = "textBoxVehicleNumber";
             this.textBoxVehicleNumber.Size = new System.Drawing.Size(297, 26);
-            this.textBoxVehicleNumber.TabIndex = 25;
+            this.textBoxVehicleNumber.TabIndex = 26;
             // 
             // textBoxVehicleModel
             // 
             this.textBoxVehicleModel.Location = new System.Drawing.Point(888, 224);
             this.textBoxVehicleModel.Name = "textBoxVehicleModel";
             this.textBoxVehicleModel.Size = new System.Drawing.Size(297, 26);
-            this.textBoxVehicleModel.TabIndex = 22;
+            this.textBoxVehicleModel.TabIndex = 24;
             // 
             // textBoxVehicleBrand
             // 
             this.textBoxVehicleBrand.Location = new System.Drawing.Point(888, 161);
             this.textBoxVehicleBrand.Name = "textBoxVehicleBrand";
             this.textBoxVehicleBrand.Size = new System.Drawing.Size(297, 26);
-            this.textBoxVehicleBrand.TabIndex = 21;
+            this.textBoxVehicleBrand.TabIndex = 22;
             // 
             // dateTimePickerVehicleService
             // 
@@ -431,16 +349,7 @@ namespace Ek_spedycja {
             this.dateTimePickerVehicleService.Location = new System.Drawing.Point(888, 347);
             this.dateTimePickerVehicleService.Name = "dateTimePickerVehicleService";
             this.dateTimePickerVehicleService.Size = new System.Drawing.Size(297, 26);
-            this.dateTimePickerVehicleService.TabIndex = 23;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(884, 385);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 20);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Status";
+            this.dateTimePickerVehicleService.TabIndex = 28;
             // 
             // label9
             // 
@@ -548,23 +457,24 @@ namespace Ek_spedycja {
             // textBoxDriverPesel
             // 
             this.textBoxDriverPesel.Location = new System.Drawing.Point(888, 284);
+            this.textBoxDriverPesel.MaxLength = 11;
             this.textBoxDriverPesel.Name = "textBoxDriverPesel";
             this.textBoxDriverPesel.Size = new System.Drawing.Size(297, 26);
-            this.textBoxDriverPesel.TabIndex = 10;
+            this.textBoxDriverPesel.TabIndex = 6;
             // 
             // textBoxDriverSurname
             // 
             this.textBoxDriverSurname.Location = new System.Drawing.Point(888, 222);
             this.textBoxDriverSurname.Name = "textBoxDriverSurname";
             this.textBoxDriverSurname.Size = new System.Drawing.Size(297, 26);
-            this.textBoxDriverSurname.TabIndex = 7;
+            this.textBoxDriverSurname.TabIndex = 4;
             // 
             // textBoxDriverName
             // 
             this.textBoxDriverName.Location = new System.Drawing.Point(888, 161);
             this.textBoxDriverName.Name = "textBoxDriverName";
             this.textBoxDriverName.Size = new System.Drawing.Size(297, 26);
-            this.textBoxDriverName.TabIndex = 6;
+            this.textBoxDriverName.TabIndex = 2;
             // 
             // dateTimePickerDriverHireDate
             // 
@@ -572,7 +482,7 @@ namespace Ek_spedycja {
             this.dateTimePickerDriverHireDate.Location = new System.Drawing.Point(888, 408);
             this.dateTimePickerDriverHireDate.Name = "dateTimePickerDriverHireDate";
             this.dateTimePickerDriverHireDate.Size = new System.Drawing.Size(297, 26);
-            this.dateTimePickerDriverHireDate.TabIndex = 9;
+            this.dateTimePickerDriverHireDate.TabIndex = 10;
             // 
             // dateTimePickerDriverBirthDate
             // 
@@ -641,7 +551,7 @@ namespace Ek_spedycja {
             this.dataGridViewDriver.RowHeadersVisible = false;
             this.dataGridViewDriver.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDriver.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewDriver.TabIndex = 0;
+            this.dataGridViewDriver.TabIndex = 14;
             this.dataGridViewDriver.SelectionChanged += new System.EventHandler(this.dataGridViewDriver_SelectionChanged);
             // 
             // tabControl
@@ -689,7 +599,7 @@ namespace Ek_spedycja {
             this.dataGridViewSalary.RowHeadersVisible = false;
             this.dataGridViewSalary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewSalary.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewSalary.TabIndex = 77;
+            this.dataGridViewSalary.TabIndex = 75;
             // 
             // comboBoxSalaryYear
             // 
@@ -698,7 +608,7 @@ namespace Ek_spedycja {
             this.comboBoxSalaryYear.Location = new System.Drawing.Point(888, 287);
             this.comboBoxSalaryYear.Name = "comboBoxSalaryYear";
             this.comboBoxSalaryYear.Size = new System.Drawing.Size(297, 28);
-            this.comboBoxSalaryYear.TabIndex = 76;
+            this.comboBoxSalaryYear.TabIndex = 74;
             this.comboBoxSalaryYear.SelectedIndexChanged += new System.EventHandler(this.comboBoxSalaryYear_SelectedIndexChanged);
             // 
             // label15
@@ -717,7 +627,7 @@ namespace Ek_spedycja {
             this.comboBoxSalaryMonth.Location = new System.Drawing.Point(888, 224);
             this.comboBoxSalaryMonth.Name = "comboBoxSalaryMonth";
             this.comboBoxSalaryMonth.Size = new System.Drawing.Size(297, 28);
-            this.comboBoxSalaryMonth.TabIndex = 67;
+            this.comboBoxSalaryMonth.TabIndex = 72;
             this.comboBoxSalaryMonth.SelectedIndexChanged += new System.EventHandler(this.comboBoxSalaryMonth_SelectedIndexChanged);
             // 
             // comboBoxSalaryDriver
@@ -727,7 +637,7 @@ namespace Ek_spedycja {
             this.comboBoxSalaryDriver.Location = new System.Drawing.Point(888, 161);
             this.comboBoxSalaryDriver.Name = "comboBoxSalaryDriver";
             this.comboBoxSalaryDriver.Size = new System.Drawing.Size(297, 28);
-            this.comboBoxSalaryDriver.TabIndex = 66;
+            this.comboBoxSalaryDriver.TabIndex = 70;
             this.comboBoxSalaryDriver.SelectedIndexChanged += new System.EventHandler(this.comboBoxSalaryDriver_SelectedIndexChanged);
             // 
             // label23
@@ -758,6 +668,62 @@ namespace Ek_spedycja {
             this.label26.TabIndex = 58;
             this.label26.Text = "Kierowca";
             // 
+            // buttonVehicleEdit
+            // 
+            this.buttonVehicleEdit.Location = new System.Drawing.Point(980, 519);
+            this.buttonVehicleEdit.Name = "buttonVehicleEdit";
+            this.buttonVehicleEdit.Size = new System.Drawing.Size(114, 44);
+            this.buttonVehicleEdit.TabIndex = 36;
+            this.buttonVehicleEdit.Text = "Edytuj";
+            this.buttonVehicleEdit.UseVisualStyleBackColor = true;
+            this.buttonVehicleEdit.Click += new System.EventHandler(this.buttonVehicleEdit_Click);
+            // 
+            // buttonVehicleAdd
+            // 
+            this.buttonVehicleAdd.Location = new System.Drawing.Point(860, 519);
+            this.buttonVehicleAdd.Name = "buttonVehicleAdd";
+            this.buttonVehicleAdd.Size = new System.Drawing.Size(114, 44);
+            this.buttonVehicleAdd.TabIndex = 34;
+            this.buttonVehicleAdd.Text = "Dodaj";
+            this.buttonVehicleAdd.UseVisualStyleBackColor = true;
+            this.buttonVehicleAdd.Click += new System.EventHandler(this.buttonVehicleAdd_Click);
+            // 
+            // buttonVehicleDelete
+            // 
+            this.buttonVehicleDelete.Location = new System.Drawing.Point(1100, 519);
+            this.buttonVehicleDelete.Name = "buttonVehicleDelete";
+            this.buttonVehicleDelete.Size = new System.Drawing.Size(114, 44);
+            this.buttonVehicleDelete.TabIndex = 38;
+            this.buttonVehicleDelete.Text = "Usuń";
+            this.buttonVehicleDelete.UseVisualStyleBackColor = true;
+            this.buttonVehicleDelete.Click += new System.EventHandler(this.buttonVehicleDelete_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(882, 62);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(318, 33);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Zarządzanie pojazdami";
+            // 
+            // dataGridViewVehicle
+            // 
+            this.dataGridViewVehicle.AllowUserToAddRows = false;
+            this.dataGridViewVehicle.AllowUserToDeleteRows = false;
+            this.dataGridViewVehicle.AllowUserToResizeRows = false;
+            this.dataGridViewVehicle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVehicle.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewVehicle.Name = "dataGridViewVehicle";
+            this.dataGridViewVehicle.ReadOnly = true;
+            this.dataGridViewVehicle.RowHeadersVisible = false;
+            this.dataGridViewVehicle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewVehicle.Size = new System.Drawing.Size(839, 612);
+            this.dataGridViewVehicle.TabIndex = 39;
+            this.dataGridViewVehicle.SelectionChanged += new System.EventHandler(this.dataGridViewVehicle_SelectionChanged);
+            // 
             // MainPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -776,7 +742,6 @@ namespace Ek_spedycja {
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRouteLength)).EndInit();
             this.tabPageVehicle.ResumeLayout(false);
             this.tabPageVehicle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).EndInit();
             this.tabPageDriver.ResumeLayout(false);
             this.tabPageDriver.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).EndInit();
@@ -784,6 +749,7 @@ namespace Ek_spedycja {
             this.tabPageSalary.ResumeLayout(false);
             this.tabPageSalary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalary)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -809,17 +775,10 @@ namespace Ek_spedycja {
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TabPage tabPageVehicle;
-        private System.Windows.Forms.RadioButton radioButtonVehicleNotAvailable;
-        private System.Windows.Forms.RadioButton radioButtonVehicleAvailable;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button buttonVehicleDelete;
-        private System.Windows.Forms.Button buttonVehicleEdit;
-        private System.Windows.Forms.Button buttonVehicleAdd;
         private System.Windows.Forms.TextBox textBoxVehicleNumber;
         private System.Windows.Forms.TextBox textBoxVehicleModel;
         private System.Windows.Forms.TextBox textBoxVehicleBrand;
         private System.Windows.Forms.DateTimePicker dateTimePickerVehicleService;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
@@ -850,8 +809,12 @@ namespace Ek_spedycja {
         private System.Windows.Forms.ComboBox comboBoxSalaryYear;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DataGridView dataGridViewRoute;
-        private System.Windows.Forms.DataGridView dataGridViewVehicle;
         private System.Windows.Forms.DataGridView dataGridViewSalary;
+        private System.Windows.Forms.DataGridView dataGridViewVehicle;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button buttonVehicleDelete;
+        private System.Windows.Forms.Button buttonVehicleEdit;
+        private System.Windows.Forms.Button buttonVehicleAdd;
     }
 }
 

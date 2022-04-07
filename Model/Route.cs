@@ -1,25 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Ek_spedycja.Model {
     public class Route {
+        private Vehicle _vehicle;
+        private double _bid;
+
+        public const string TABLE_NAME = "route";
+        private const double BASE_BID = 23;
+        private const double BASE_PENALTY = 50;
+
         public int Id { get; set; }
         public Driver Driver { get; set; }
-        public Vehicle Vehicle { get; set; }
+        public Vehicle Vehicle {
+            get { return _vehicle; }
+            set {
+                if (value.IsAvailable == false)
+                    throw new ArgumentException("Wskazany pojazd nie jest w tej chwili dostępny.");
+                else
+                    _vehicle = value;
+            }
+        }
         public DateTime DepartureDate { get; set; }
         public DateTime PlannedArrivalDate { get; set; }
         public DateTime ActualArrivalDate { get; set; }
         public decimal Length { get; set; }
-        private double _bid;
         public double Bid { get { return _bid; } set { _bid = value; } }
-
-        public const string TABLE_NAME = "route";
-
-        private const double const_bid = 23;
-        private const double const_penalty = 50;
-
-        List<Cost> Costs { get; set; }
-        static List<Route> routes { get; set; }
 
         //ADD ROUTE
         public Route(Driver driver, Vehicle vehicle, DateTime departureDate, DateTime plannedArrivalDate, DateTime actualArrivalDate, decimal length) {
@@ -54,7 +59,7 @@ namespace Ek_spedycja.Model {
             double work_experience_bid = GetWorkExperienceRate();
             double hours_drived = GetDrivedHours();
             double penalty_hours = GetPenaltyHours();
-            return (const_bid * hours_drived) + ((double)Length * length_bid * work_experience_bid) - penalty_hours * const_penalty;
+            return (BASE_BID * hours_drived) + ((double)Length * length_bid * work_experience_bid) - penalty_hours * BASE_PENALTY;
         }
 
         private double GetLengthRate() {

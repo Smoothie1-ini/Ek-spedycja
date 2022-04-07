@@ -120,6 +120,7 @@ namespace Ek_spedycja {
             // 
             // richTextBoxCostDescription
             // 
+            this.richTextBoxCostDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.richTextBoxCostDescription.Location = new System.Drawing.Point(118, 220);
             this.richTextBoxCostDescription.Name = "richTextBoxCostDescription";
             this.richTextBoxCostDescription.Size = new System.Drawing.Size(670, 53);

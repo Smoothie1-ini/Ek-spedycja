@@ -21,21 +21,25 @@ namespace Ek_spedycja {
             dataGridViewCost.DataSource = costDataAccess.GetData(new Cost(route));
             comboBoxCostType.DataSource = costDataAccess.GetCostTypes();
             FormConfiguration();
+            resetControlsCost();
         }
 
         private void buttonCostAdd_Click(object sender, EventArgs e) {
             cost = new Cost(route, (int)comboBoxCostType.SelectedValue, richTextBoxCostDescription.Text, numericUpDownCostValue.Value);
             dataGridViewCost.DataSource = costDataAccess.RunMethodAndRefresh(costDataAccess.InsertData, cost);
+            resetControlsCost();
         }
 
         private void buttonCostEdit_Click(object sender, EventArgs e) {
             cost = new Cost(selectedCostId, route, (int)comboBoxCostType.SelectedValue, richTextBoxCostDescription.Text, numericUpDownCostValue.Value);
             dataGridViewCost.DataSource = costDataAccess.RunMethodAndRefresh(costDataAccess.UpdateData, cost);
+            resetControlsCost();
         }
 
         private void buttonCostDelete_Click(object sender, EventArgs e) {
             cost = new Cost(selectedCostId, route);
             dataGridViewCost.DataSource = costDataAccess.RunMethodAndRefresh(costDataAccess.DeleteData, cost);
+            resetControlsCost();
         }
 
         private void dataGridViewCost_SelectionChanged(object sender, EventArgs e) {
@@ -53,6 +57,12 @@ namespace Ek_spedycja {
             dataGridViewCost.Columns[3].Width = 75;
             comboBoxCostType.ValueMember = "id_cost_type";
             comboBoxCostType.DisplayMember = "name";
+        }
+
+        private void resetControlsCost() {
+            comboBoxCostType.SelectedIndex = 0;
+            numericUpDownCostValue.Value = 0;
+            richTextBoxCostDescription.Text = "";
         }
     }
 }

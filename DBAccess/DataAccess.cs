@@ -37,6 +37,6 @@ namespace Ek_spedycja.DBAccess {
         public abstract bool DeleteData(T value);
         public abstract DataTable RunMethodAndRefresh(Func<T, bool> Func, T value);
         public abstract DataTable GetData();
-        public virtual DataTable GetData(T value) { return new DataTable(); }
+        public virtual DataTable GetData(T value) { throw new NotImplementedException(); }
     }
 }
