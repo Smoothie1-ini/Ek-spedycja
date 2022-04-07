@@ -83,7 +83,7 @@ namespace Ek_spedycja.Model {
             int delay = (int)ActualArrivalDate.Subtract(PlannedArrivalDate).TotalMinutes;
             double allowed_delay = Math.Abs(DepartureDate.Subtract(PlannedArrivalDate).TotalMinutes) * .1;
 
-            if (delay < allowed_delay) {
+            if (delay < allowed_delay){
                 return 0;
             } else {
                 // /60 aby otrzymac godziny
