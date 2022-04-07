@@ -169,7 +169,7 @@ namespace Ek_spedycja.DBAccess {
             if (routeView.Rows.Count > 0 && start_range != "" && end_range != "") {
                 return Enumerable.Range(int.Parse(start_range), int.Parse(end_range) - int.Parse(start_range) + 1).ToList<int>();
             } else
-            return new List<int>();
+                return new List<int>();
         }
 
         public DataTable GetSalaries(Driver driver = null, int month = 0, int year = 0) {
