@@ -29,7 +29,7 @@ namespace Ek_spedycja.DBAccess {
                     else
                         dataAdapter.Update(dataSet, Cost.TABLE_NAME);
                 }
-        } catch (Exception ex) {
+            } catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error");
                 return false;
             }
@@ -38,9 +38,9 @@ namespace Ek_spedycja.DBAccess {
 
         public override DataTable GetData(Cost cost) {
             string select = $@"SELECT id_cost as id_cost,
-                              CT.name as 'Cost Type',
-                              description as Description,
-                              amount as Amount
+                              CT.name as 'Typ kosztu',
+                              description as Opis,
+                              amount as Kwota
                               FROM spedycja.cost AS C
                               INNER JOIN spedycja.cost_type AS CT
                               ON C.id_cost_type = CT.id_cost_type

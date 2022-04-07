@@ -22,7 +22,6 @@ namespace Ek_spedycja {
         int selectedRouteId;
 
         //nie da się na tej samej zmiennej zrobić? (driver)
-        Driver selectedDriver;
         int selectedMonth;
         int selectedYear;
 
@@ -59,8 +58,8 @@ namespace Ek_spedycja {
         }
 
         private void resetControlsRoute() {
-            comboBoxRouteDriver.SelectedIndex = 0;
-            comboBoxRouteVehicle.SelectedIndex = 0;
+            if (comboBoxRouteDriver.Items.Count > 0) comboBoxRouteDriver.SelectedIndex = 0;
+            if (comboBoxRouteVehicle.Items.Count > 0) comboBoxRouteVehicle.SelectedIndex = 0;
             dateTimePickerRouteDeparture.Value = DateTime.Now;
             dateTimePickerRoutePlannedArrival.Value = DateTime.Now;
             dateTimePickerRouteActualArrival.Value = DateTime.Now;
@@ -81,7 +80,6 @@ namespace Ek_spedycja {
         private void tabPageDriver_Enter(object sender, EventArgs e) {
             dataGridViewDriver.DataSource = driverDataAccess.GetData();
             dataGridViewDriver.Columns[0].Visible = false;
-            resetControlsDriver();
         }
 
         private void buttonDriverAdd_Click(object sender, EventArgs e) {
@@ -121,6 +119,10 @@ namespace Ek_spedycja {
             }
         }
 
+        private void textBoxDriverPesel_KeyPress(object sender, KeyPressEventArgs e) {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
         #endregion
 
         #region VEHICLE
@@ -128,21 +130,28 @@ namespace Ek_spedycja {
         private void tabPageVehicle_Enter(object sender, EventArgs e) {
             dataGridViewVehicle.DataSource = vehicleDataAccess.GetData();
             dataGridViewVehicle.Columns[0].Visible = false;
-            resetControlsVehicle();
         }
 
         private void buttonVehicleAdd_Click(object sender, EventArgs e) {
-            checkVehicleAvailability();
-            vehicle = new Vehicle(textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, vehicleAvailability);
-            dataGridViewVehicle.DataSource = vehicleDataAccess.RunMethodAndRefresh(vehicleDataAccess.InsertData, vehicle);
-            resetControlsVehicle();
+            try {
+                checkVehicleAvailability();
+                vehicle = new Vehicle(textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, vehicleAvailability);
+                dataGridViewVehicle.DataSource = vehicleDataAccess.RunMethodAndRefresh(vehicleDataAccess.InsertData, vehicle);
+                resetControlsVehicle();
+            } catch (ArgumentException ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void buttonVehicleEdit_Click(object sender, EventArgs e) {
-            checkVehicleAvailability();
-            vehicle = new Vehicle(selectedVehicleId, textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, vehicleAvailability);
-            dataGridViewVehicle.DataSource = vehicleDataAccess.RunMethodAndRefresh(vehicleDataAccess.UpdateData, vehicle);
-            resetControlsVehicle();
+            try {
+                checkVehicleAvailability();
+                vehicle = new Vehicle(selectedVehicleId, textBoxVehicleBrand.Text, textBoxVehicleModel.Text, textBoxVehicleNumber.Text, dateTimePickerVehicleService.Value, vehicleAvailability);
+                dataGridViewVehicle.DataSource = vehicleDataAccess.RunMethodAndRefresh(vehicleDataAccess.UpdateData, vehicle);
+                resetControlsVehicle();
+            } catch (ArgumentException ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void buttonVehicleDelete_Click(object sender, EventArgs e) {
@@ -161,6 +170,10 @@ namespace Ek_spedycja {
             }
         }
 
+        private void textBoxVehicleNumber_KeyPress(object sender, KeyPressEventArgs e) {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
         #endregion
 
         #region ROUTE
@@ -172,7 +185,6 @@ namespace Ek_spedycja {
             dataGridViewRoute.Columns[0].Visible = false;
             dataGridViewRoute.Columns[8].Visible = false;
             dataGridViewRoute.Columns[9].Visible = false;
-            resetControlsRoute();
         }
 
         private void buttonRouteCost_Click(object sender, EventArgs e) {
@@ -252,12 +264,12 @@ namespace Ek_spedycja {
         }
 
         private void ComboHandler(object sender, EventArgs e) {
-            dataGridViewSalary.DataSource = routeDataAccess.GetSalaries(selectedDriver, selectedMonth, selectedYear);
+            dataGridViewSalary.DataSource = routeDataAccess.GetSalaries(driver, selectedMonth, selectedYear);
         }
 
         private void comboBoxSalaryDriver_SelectedIndexChanged(object sender, EventArgs e) {
             if (comboBoxSalaryDriver.Items.Count > 0) {
-                selectedDriver = (Driver)comboBoxSalaryDriver.SelectedItem;
+                driver = (Driver)comboBoxSalaryDriver.SelectedItem;
             }
         }
 

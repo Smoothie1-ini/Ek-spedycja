@@ -44,6 +44,11 @@ namespace Ek_spedycja {
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tabPageVehicle = new System.Windows.Forms.TabPage();
+            this.dataGridViewVehicle = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
+            this.buttonVehicleDelete = new System.Windows.Forms.Button();
+            this.buttonVehicleEdit = new System.Windows.Forms.Button();
+            this.buttonVehicleAdd = new System.Windows.Forms.Button();
             this.textBoxVehicleNumber = new System.Windows.Forms.TextBox();
             this.textBoxVehicleModel = new System.Windows.Forms.TextBox();
             this.textBoxVehicleBrand = new System.Windows.Forms.TextBox();
@@ -78,21 +83,16 @@ namespace Ek_spedycja {
             this.label23 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.buttonVehicleEdit = new System.Windows.Forms.Button();
-            this.buttonVehicleAdd = new System.Windows.Forms.Button();
-            this.buttonVehicleDelete = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.dataGridViewVehicle = new System.Windows.Forms.DataGridView();
             this.tabPageRoute.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRouteLength)).BeginInit();
             this.tabPageVehicle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).BeginInit();
             this.tabPageDriver.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageSalary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalary)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPageRoute
@@ -322,12 +322,70 @@ namespace Ek_spedycja {
             this.tabPageVehicle.UseVisualStyleBackColor = true;
             this.tabPageVehicle.Enter += new System.EventHandler(this.tabPageVehicle_Enter);
             // 
+            // dataGridViewVehicle
+            // 
+            this.dataGridViewVehicle.AllowUserToAddRows = false;
+            this.dataGridViewVehicle.AllowUserToDeleteRows = false;
+            this.dataGridViewVehicle.AllowUserToResizeRows = false;
+            this.dataGridViewVehicle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVehicle.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewVehicle.Name = "dataGridViewVehicle";
+            this.dataGridViewVehicle.ReadOnly = true;
+            this.dataGridViewVehicle.RowHeadersVisible = false;
+            this.dataGridViewVehicle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewVehicle.Size = new System.Drawing.Size(839, 612);
+            this.dataGridViewVehicle.TabIndex = 39;
+            this.dataGridViewVehicle.SelectionChanged += new System.EventHandler(this.dataGridViewVehicle_SelectionChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(882, 62);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(318, 33);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Zarządzanie pojazdami";
+            // 
+            // buttonVehicleDelete
+            // 
+            this.buttonVehicleDelete.Location = new System.Drawing.Point(1100, 519);
+            this.buttonVehicleDelete.Name = "buttonVehicleDelete";
+            this.buttonVehicleDelete.Size = new System.Drawing.Size(114, 44);
+            this.buttonVehicleDelete.TabIndex = 38;
+            this.buttonVehicleDelete.Text = "Usuń";
+            this.buttonVehicleDelete.UseVisualStyleBackColor = true;
+            this.buttonVehicleDelete.Click += new System.EventHandler(this.buttonVehicleDelete_Click);
+            // 
+            // buttonVehicleEdit
+            // 
+            this.buttonVehicleEdit.Location = new System.Drawing.Point(980, 519);
+            this.buttonVehicleEdit.Name = "buttonVehicleEdit";
+            this.buttonVehicleEdit.Size = new System.Drawing.Size(114, 44);
+            this.buttonVehicleEdit.TabIndex = 36;
+            this.buttonVehicleEdit.Text = "Edytuj";
+            this.buttonVehicleEdit.UseVisualStyleBackColor = true;
+            this.buttonVehicleEdit.Click += new System.EventHandler(this.buttonVehicleEdit_Click);
+            // 
+            // buttonVehicleAdd
+            // 
+            this.buttonVehicleAdd.Location = new System.Drawing.Point(860, 519);
+            this.buttonVehicleAdd.Name = "buttonVehicleAdd";
+            this.buttonVehicleAdd.Size = new System.Drawing.Size(114, 44);
+            this.buttonVehicleAdd.TabIndex = 34;
+            this.buttonVehicleAdd.Text = "Dodaj";
+            this.buttonVehicleAdd.UseVisualStyleBackColor = true;
+            this.buttonVehicleAdd.Click += new System.EventHandler(this.buttonVehicleAdd_Click);
+            // 
             // textBoxVehicleNumber
             // 
             this.textBoxVehicleNumber.Location = new System.Drawing.Point(888, 286);
+            this.textBoxVehicleNumber.MaxLength = 4;
             this.textBoxVehicleNumber.Name = "textBoxVehicleNumber";
             this.textBoxVehicleNumber.Size = new System.Drawing.Size(297, 26);
             this.textBoxVehicleNumber.TabIndex = 26;
+            this.textBoxVehicleNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxVehicleNumber_KeyPress);
             // 
             // textBoxVehicleModel
             // 
@@ -461,6 +519,7 @@ namespace Ek_spedycja {
             this.textBoxDriverPesel.Name = "textBoxDriverPesel";
             this.textBoxDriverPesel.Size = new System.Drawing.Size(297, 26);
             this.textBoxDriverPesel.TabIndex = 6;
+            this.textBoxDriverPesel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDriverPesel_KeyPress);
             // 
             // textBoxDriverSurname
             // 
@@ -668,62 +727,6 @@ namespace Ek_spedycja {
             this.label26.TabIndex = 58;
             this.label26.Text = "Kierowca";
             // 
-            // buttonVehicleEdit
-            // 
-            this.buttonVehicleEdit.Location = new System.Drawing.Point(980, 519);
-            this.buttonVehicleEdit.Name = "buttonVehicleEdit";
-            this.buttonVehicleEdit.Size = new System.Drawing.Size(114, 44);
-            this.buttonVehicleEdit.TabIndex = 36;
-            this.buttonVehicleEdit.Text = "Edytuj";
-            this.buttonVehicleEdit.UseVisualStyleBackColor = true;
-            this.buttonVehicleEdit.Click += new System.EventHandler(this.buttonVehicleEdit_Click);
-            // 
-            // buttonVehicleAdd
-            // 
-            this.buttonVehicleAdd.Location = new System.Drawing.Point(860, 519);
-            this.buttonVehicleAdd.Name = "buttonVehicleAdd";
-            this.buttonVehicleAdd.Size = new System.Drawing.Size(114, 44);
-            this.buttonVehicleAdd.TabIndex = 34;
-            this.buttonVehicleAdd.Text = "Dodaj";
-            this.buttonVehicleAdd.UseVisualStyleBackColor = true;
-            this.buttonVehicleAdd.Click += new System.EventHandler(this.buttonVehicleAdd_Click);
-            // 
-            // buttonVehicleDelete
-            // 
-            this.buttonVehicleDelete.Location = new System.Drawing.Point(1100, 519);
-            this.buttonVehicleDelete.Name = "buttonVehicleDelete";
-            this.buttonVehicleDelete.Size = new System.Drawing.Size(114, 44);
-            this.buttonVehicleDelete.TabIndex = 38;
-            this.buttonVehicleDelete.Text = "Usuń";
-            this.buttonVehicleDelete.UseVisualStyleBackColor = true;
-            this.buttonVehicleDelete.Click += new System.EventHandler(this.buttonVehicleDelete_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(882, 62);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(318, 33);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Zarządzanie pojazdami";
-            // 
-            // dataGridViewVehicle
-            // 
-            this.dataGridViewVehicle.AllowUserToAddRows = false;
-            this.dataGridViewVehicle.AllowUserToDeleteRows = false;
-            this.dataGridViewVehicle.AllowUserToResizeRows = false;
-            this.dataGridViewVehicle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVehicle.Location = new System.Drawing.Point(6, 6);
-            this.dataGridViewVehicle.Name = "dataGridViewVehicle";
-            this.dataGridViewVehicle.ReadOnly = true;
-            this.dataGridViewVehicle.RowHeadersVisible = false;
-            this.dataGridViewVehicle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewVehicle.Size = new System.Drawing.Size(839, 612);
-            this.dataGridViewVehicle.TabIndex = 39;
-            this.dataGridViewVehicle.SelectionChanged += new System.EventHandler(this.dataGridViewVehicle_SelectionChanged);
-            // 
             // MainPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -742,6 +745,7 @@ namespace Ek_spedycja {
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRouteLength)).EndInit();
             this.tabPageVehicle.ResumeLayout(false);
             this.tabPageVehicle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).EndInit();
             this.tabPageDriver.ResumeLayout(false);
             this.tabPageDriver.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDriver)).EndInit();
@@ -749,7 +753,6 @@ namespace Ek_spedycja {
             this.tabPageSalary.ResumeLayout(false);
             this.tabPageSalary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalary)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicle)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -31,15 +31,11 @@ namespace Ek_spedycja.DBAccess {
                         dataAdapter.Update(dataSet, Vehicle.TABLE_NAME);
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show($"Wystąpił błąd podczas usuwania pojazdu z bazy danych. \n\n{ex.Message}", "Error");
                 return false;
             }
             return true;
         }
-
-
-
-
 
         public override bool InsertData(Vehicle vehicle) {
             string insert = @"INSERT INTO spedycja.vehicle 
@@ -81,11 +77,11 @@ namespace Ek_spedycja.DBAccess {
 
         public override DataTable GetData() {
             string select = @"SELECT id_vehicle as id_vehicle, 
-                            brand as Brand, 
+                            brand as Marka, 
                             model as Model, 
-                            number as Number, 
-                            service_date as 'Last service date', 
-                            is_available as 'Availability' 
+                            number as Numer, 
+                            service_date as 'Data serwisowania', 
+                            is_available as 'Dostępność' 
                             FROM spedycja.vehicle";
             try {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);

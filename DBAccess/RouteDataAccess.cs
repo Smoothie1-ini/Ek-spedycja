@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ek_spedycja.DBAccess {
@@ -84,13 +82,13 @@ namespace Ek_spedycja.DBAccess {
 
         public override DataTable GetData() {
             string select = @"SELECT spedycja.route.id_route as id_route, 
-                            spedycja.driver.name + N' ' + spedycja.driver.surname AS Driver, 
-                            spedycja.vehicle.brand + N' ' + spedycja.vehicle.model + N' ' + spedycja.vehicle.number AS Vehicle, 
-                            spedycja.route.departure_date as 'Departure date',
-                            spedycja.route.planed_arrival_date as 'Planed arrival date', 
-                            spedycja.route.actual_arrival_date as 'Actual arrival date', 
-                            spedycja.route.length as Length, 
-                            spedycja.route.bid as Bid,
+                            spedycja.driver.name + N' ' + spedycja.driver.surname AS Kierowca, 
+                            spedycja.vehicle.brand + N' ' + spedycja.vehicle.model + N' (' + spedycja.vehicle.number + N')' AS Pojazd, 
+                            spedycja.route.departure_date as 'Data wyjazdu',
+                            spedycja.route.planed_arrival_date as 'Planowana data przyjazdu', 
+                            spedycja.route.actual_arrival_date as 'Faktyczna data przyjazdu', 
+                            spedycja.route.length as 'Długość trasy (km)', 
+                            spedycja.route.bid as Należność,
                             spedycja.route.id_driver as id_driver,
                             spedycja.route.id_vehicle as id_vehicle
                             FROM spedycja.route 
@@ -107,13 +105,13 @@ namespace Ek_spedycja.DBAccess {
             }
             return new DataTable();
         }
-        
+
         public override DataTable RunMethodAndRefresh(Func<Route, bool> Func, Route route) {
             Func(route);
             return GetData();
         }
 
-        public override bool UpdateData(Route route) { 
+        public override bool UpdateData(Route route) {
             string update = @"UPDATE spedycja.route
                             SET id_driver = @id_driver, id_vehicle = @id_vehicle, departure_date = @departure_date, planed_arrival_date = @planed_arrival_date, actual_arrival_date = @actual_arrival_date, length = @length, bid = @bid
                             WHERE id_route = @id_route";
@@ -176,26 +174,22 @@ namespace Ek_spedycja.DBAccess {
         }
 
         public DataTable GetSalaries(Driver driver = null, int month = 0, int year = 0) {
-
-
             string str_driver = driver != null ? $" AND route.id_driver = {driver.Id} " : " ";
             string str_month = month != 0 ? $" AND MONTH(route.departure_date) = {month} " : " ";
             string str_year = year != 0 ? $" AND YEAR(route.departure_date) = {year} " : " ";
 
-
-            string select = $@"SELECT 
-                            driver.name + N' ' + driver.surname as 'Driver',
-                            MONTH(route.departure_date) as 'Month',
-                            YEAR(route.departure_date) as 'Year',
-                            SUM(route.bid) as 'Salary'
+            string select = $@"SET LANGUAGE polish
+							SELECT driver.name + N' ' + driver.surname AS 'Kierowca',
+                            DATENAME(month, Dateadd(month, MONTH(route.departure_date), -1)) AS 'Miesiąc',
+                            YEAR(route.departure_date) AS 'Rok',
+                            ROUND(SUM(route.bid), 2) AS 'Wypłata'
                             FROM spedycja.route
                             INNER JOIN spedycja.driver ON spedycja.route.id_driver = spedycja.driver.id_driver
                             WHERE (driver.name + N' ' + driver.surname) <> ''
                             {str_driver}
                             {str_month}
                             {str_year}
-                            GROUP BY driver.name + N' ' + driver.surname, MONTH(route.departure_date), YEAR(route.departure_date) ";
-
+                            GROUP BY driver.name + N' ' + driver.surname, MONTH(route.departure_date), YEAR(route.departure_date)";
             try {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);
                 dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;

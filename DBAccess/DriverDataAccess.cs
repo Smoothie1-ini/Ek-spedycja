@@ -119,11 +119,11 @@ namespace Ek_spedycja.DBAccess {
 
         public override DataTable GetData() {
             string select = @"SELECT id_driver as id_driver, 
-                            name as Name, 
-                            surname as Surname, 
+                            name as Imię, 
+                            surname as Nazwisko, 
                             pesel as PESEL, 
-                            birth_date as 'Date of birth',
-                            hire_date as 'Date of hire' 
+                            birth_date as 'Data urodzenia',
+                            hire_date as 'Data zatrudnienia' 
                             FROM spedycja.driver";
             try {
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(select, base.connection);

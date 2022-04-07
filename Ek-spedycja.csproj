@@ -83,7 +83,6 @@
     <Compile Include="Model\Cost.cs" />
     <Compile Include="Model\Driver.cs" />
     <Compile Include="Model\Route.cs" />
-    <Compile Include="Model\Salary.cs" />
     <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

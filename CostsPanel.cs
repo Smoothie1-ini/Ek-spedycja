@@ -27,6 +27,7 @@ namespace Ek_spedycja {
         private void buttonCostAdd_Click(object sender, EventArgs e) {
             cost = new Cost(route, (int)comboBoxCostType.SelectedValue, richTextBoxCostDescription.Text, numericUpDownCostValue.Value);
             dataGridViewCost.DataSource = costDataAccess.RunMethodAndRefresh(costDataAccess.InsertData, cost);
+            dataGridViewCost.Rows[0].Selected = true;
             resetControlsCost();
         }
 
