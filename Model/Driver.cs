@@ -29,7 +29,7 @@ namespace Ek_spedycja.Model {
         public string Pesel {
             get { return _pesel; }
             set {
-                if (value.Length < 11)
+                if (value.Length != 11)
                     throw new ArgumentException("Numer PESEL musi się składać z dokładnie 11 cyfr.");
                 else
                     _pesel = value;
