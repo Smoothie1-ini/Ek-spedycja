@@ -118,7 +118,7 @@ namespace Ek_spedycja.DBAccess {
         }
 
         public override DataTable GetData() {
-            string select = @"SELECT id_driver as id_driver, 
+            string select = @"SELECT id_driver, 
                             name as Name, 
                             surname as Surname, 
                             pesel as PESEL, 

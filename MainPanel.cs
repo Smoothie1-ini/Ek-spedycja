@@ -34,6 +34,9 @@ namespace Ek_spedycja {
         private void Form1_Load(object sender, EventArgs e) {
             FormConfiguration();
             ComboBoxHandlers();
+            dataGridViewRoute.DataSource = routeDataAccess.GetData();
+            comboBoxRouteDriver.DataSource = driverDataAccess.GetDrivers();
+            comboBoxRouteVehicle.DataSource = vehicleDataAccess.GetVehicles();
         }
 
         #region PRIVATE METHODS
@@ -59,8 +62,8 @@ namespace Ek_spedycja {
         }
 
         private void resetControlsRoute() {
-            comboBoxRouteDriver.SelectedIndex = 0;
-            comboBoxRouteVehicle.SelectedIndex = 0;
+            comboBoxRouteDriver.Text = "";
+            comboBoxRouteVehicle.Text = "";
             dateTimePickerRouteDeparture.Value = DateTime.Now;
             dateTimePickerRoutePlannedArrival.Value = DateTime.Now;
             dateTimePickerRouteActualArrival.Value = DateTime.Now;
@@ -166,9 +169,7 @@ namespace Ek_spedycja {
         #region ROUTE
 
         private void tabPageRoute_Enter(object sender, EventArgs e) {
-            dataGridViewRoute.DataSource = routeDataAccess.GetData();
-            comboBoxRouteDriver.DataSource = driverDataAccess.GetDrivers();
-            comboBoxRouteVehicle.DataSource = vehicleDataAccess.GetVehicles();
+
             dataGridViewRoute.Columns[0].Visible = false;
             dataGridViewRoute.Columns[8].Visible = false;
             dataGridViewRoute.Columns[9].Visible = false;
@@ -233,7 +234,6 @@ namespace Ek_spedycja {
         #region SALARY
 
         private void tabPageSalary_Enter(object sender, EventArgs e) {
-            if (dataGridViewRoute.SelectedRows.Count > 0) {
                 dataGridViewSalary.DataSource = routeDataAccess.GetSalaries();
                 comboBoxSalaryDriver.Items.Clear();
                 comboBoxSalaryMonth.Items.Clear();
@@ -242,7 +242,6 @@ namespace Ek_spedycja {
                 routeDataAccess.GetRange("MONTH").ForEach(i => comboBoxSalaryMonth.Items.Add(i));
                 routeDataAccess.GetRange("YEAR").ForEach(i => comboBoxSalaryYear.Items.Add(i));
                 driverDataAccess.GetDrivers().ForEach(driver => comboBoxSalaryDriver.Items.Add(driver));
-            }
         }
         private void ComboBoxHandlers() {
             List<ComboBox> cbs = new List<ComboBox>() { comboBoxSalaryDriver, comboBoxSalaryMonth, comboBoxSalaryYear };

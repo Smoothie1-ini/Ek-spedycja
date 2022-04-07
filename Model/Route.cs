@@ -6,7 +6,7 @@ namespace Ek_spedycja.Model {
         private double _bid;
 
         public const string TABLE_NAME = "route";
-        private const double BASE_BID = 23;
+        private const double BASE_BID = 19.7;
         private const double BASE_PENALTY = 50;
 
         public int Id { get; set; }
@@ -56,10 +56,11 @@ namespace Ek_spedycja.Model {
 
         private double CalculateBid() {
             double length_bid = GetLengthRate();
-            double work_experience_bid = GetWorkExperienceRate();
             double hours_drived = GetDrivedHours();
-            double penalty_hours = GetPenaltyHours();
-            return (BASE_BID * hours_drived) + ((double)Length * length_bid * work_experience_bid) - penalty_hours * BASE_PENALTY;
+            int penalty_hours = GetPenaltyHours();
+            double experience_rate = Math.Abs(Driver.HireDate.Subtract(DateTime.Now).TotalDays) / 365 * .02 + 1;
+
+            return ((BASE_BID * hours_drived + (double)Length * length_bid) * experience_rate) - penalty_hours * BASE_PENALTY;
         }
 
         private double GetLengthRate() {
@@ -74,30 +75,19 @@ namespace Ek_spedycja.Model {
             }
         }
 
-        private double GetWorkExperienceRate() {
-            double YearsExperience = DateTime.Today.Subtract(Driver.HireDate).TotalDays;
-
-            if (YearsExperience <= 2) {
-                return 0.8;
-            } else if (YearsExperience <= 5) {
-                return 0.9;
-            } else if (YearsExperience <= 10) {
-                return 1;
-            } else {
-                return 1.1;
-            }
-        }
-
         private double GetDrivedHours() {
             return Math.Abs(ActualArrivalDate.Subtract(DepartureDate).TotalHours);
         }
 
-        private double GetPenaltyHours() {
-            double penalty_hours = ActualArrivalDate.Subtract(PlannedArrivalDate).TotalHours;
-            if (penalty_hours < 0) {
+        private int GetPenaltyHours() {
+            int delay = (int)ActualArrivalDate.Subtract(PlannedArrivalDate).TotalMinutes;
+            double allowed_delay = Math.Abs(DepartureDate.Subtract(PlannedArrivalDate).TotalMinutes) * .1;
+
+            if (delay < allowed_delay){
                 return 0;
             } else {
-                return Math.Abs(penalty_hours);
+                // /60 aby otrzymac godziny
+                return Math.Abs(delay) / 60;
             }
         }
     }

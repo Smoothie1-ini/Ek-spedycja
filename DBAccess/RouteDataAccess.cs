@@ -165,13 +165,12 @@ namespace Ek_spedycja.DBAccess {
             dataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
             DataTable routeView = new DataTable();
             dataAdapter.Fill(routeView);
+            string start_range = routeView.Rows[0][0].ToString();
+            string end_range = routeView.Rows[0][1].ToString();
 
-
-            if (routeView.Rows.Count > 0) {
-                int start_range = (int)routeView.Rows[0][0];
-                int end_range = (int)routeView.Rows[0][1];
-                return Enumerable.Range(start_range, end_range - start_range + 1).ToList<int>();
-            }
+            if (routeView.Rows.Count > 0 && start_range != "" && end_range != "") {
+                return Enumerable.Range(int.Parse(start_range), int.Parse(end_range) - int.Parse(start_range) + 1).ToList<int>();
+            } else
             return new List<int>();
         }
 
